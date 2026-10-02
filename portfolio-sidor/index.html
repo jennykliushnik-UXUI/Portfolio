@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<script>(function(){var t=null,d=document.documentElement;try{t=localStorage.getItem("theme");}catch(e){}if(t!=="light"&&t!=="dark"){t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}d.setAttribute("data-theme",t);})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="alternate" hreflang="sv" href="https://jennykliushnik.netlify.app/">
+<link rel="alternate" hreflang="en" href="https://jennykliushnik.netlify.app/en/">
+<title>Jenny Kliushnik — UX-designer</title>
+<meta name="description" content="Portfolio för Jenny Kliushnik, UX-designer med fokus på tillgänglighet, vård och etisk design. Söker LIA-plats i Stockholm nov 2026 – apr 2027.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Jenny Kliushnik — UX-designer">
+<meta property="og:description" content="Portfolio för Jenny Kliushnik, UX-designer med fokus på tillgänglighet, vård och etisk design. Söker LIA-plats i Stockholm nov 2026 – apr 2027.">
+<meta property="og:url" content="https://jennykliushnik.netlify.app/">
+<meta property="og:image" content="https://jennykliushnik.netlify.app/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jenny Kliushnik, UX-designer — Gör det komplexa begripligt för fler">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ================= SKALAN =================
+       Snäckpaletten. De fem färgerna ur bilden ligger på steg 200–600.
+       Bilden innehåller ingen färg mörk nog för text — den mörkaste,
+       #777775, ger 3,76:1 mot bakgrunden. Steg 700–1000 fortsätter därför
+       nedåt i OKLab med sandtonens värme, och steg 100 är ett snäckvitt
+       ovanför de fem. Siffran anger mörkhet: 100 ljusast, 1000 mörkast. */
+    --b100:  #F8F8F7;  /* härledd — snäckvitt, kortytor */
+    --b200:  #EBEBEB;  /* palett — sidbakgrund */
+    --b300:  #E0E2E6;  /* palett — sval ljusgrå */
+    --b400:  #C4B3A9;  /* palett — sand */
+    --b500:  #98978E;  /* palett — gråsjögrön */
+    --b600:  #777775;  /* palett — den mörkaste i bilden */
+    --b700:  #605A53;  /* härledd */
+    --b800:  #48433C;  /* härledd */
+    --b900:  #332E28;  /* härledd */
+    --b1000: #221D17;  /* härledd — brödtext */
+
+    /* Sekundär text — steg 800 duger, men den får ett eget namn eftersom
+       rollen är text och inte yta. */
+    --neutral: #48433C;
+
+    /* ---- Accenten: sandtonen ur bilden, mörkad tills den bär text ----
+       #C4B3A9 är den enda kulören bland snäckorna. Ren är den alldeles för
+       ljus för text (1,7:1), så accenten är samma ton nedmörkad i två steg:
+       det ljusare bara över 24 px, det mörkare på allt under. */
+    --gold:      #C0256B;  /* magenta — 4,74:1 mot --paper, AAA över 24 px */
+    --gold-text: #8C1A4E;  /* samma kulör nedmörkad — 7,42:1 / 8,33:1 */
+
+    /* ================= ROLLER =================
+       Allt i stilmallen refererar till namnen nedan, aldrig till skalan
+       direkt. Vill du byta ton på hela sidan räcker det att flytta en roll
+       ett steg upp eller ner. Textfärgerna klarar WCAG AAA: minst 7:1 för
+       text under 24 px, minst 4,5:1 över. */
+    --surface:    var(--b100);   /* kortytor — ljusare än sidan */
+    --paper:      var(--b200);   /* sidbakgrund */
+    --line:       var(--b300);   /* hårfina linjer */
+    --line-strong:var(--b400);   /* tydligare ramar och avdelare */
+    --hover:      var(--b500);   /* kortets ram vid hover */
+    --blue:       var(--gold);      /* accent över 24 px */
+    --blue-text:  var(--gold-text); /* accent under 24 px */
+    --ink-deep:   var(--b900);   /* den mörka avslutningen längst ned */
+    --heading:    var(--b900);   /* rubriker */
+    --ink:        var(--b1000);  /* brödtext — 14,02:1 */
+    --ink-soft:   var(--neutral);/* sekundär text — 8,22:1 */
+
+    --accent: var(--blue-text);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    /* Grotesk för allt som är etikett, siffra eller metadata. Kontrasten mot
+       antikvan är det som gör att sidan läser som satt och inte som en mall. */
+    --font-meta: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'EB Garamond', Georgia, serif;
+    --measure: 640px;
+    --wide: 900px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:112px;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:19px;
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%; display:block;}
+  a{color:var(--ink); text-decoration:none;}
+  a:hover{text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px;}
+  a:hover{color:var(--accent);}
+  a:focus-visible, summary:focus-visible{outline:1.5px solid var(--accent); outline-offset:3px;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--ink); color:var(--paper);
+    padding:0.8rem 1.2rem; z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  h1,h2,h3,h4{
+    font-family:var(--font-display); font-weight:500; margin:0; text-wrap:balance;
+    color:var(--heading);
+    line-height:1.18; letter-spacing:0.003em;
+  }
+
+  .smallcaps{
+    font-family:var(--font-body); font-size:0.78rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--accent); font-weight:500;
+  }
+
+  .measure{max-width:var(--measure); margin-left:auto; margin-right:auto;}
+  .wide{max-width:var(--wide); margin-left:auto; margin-right:auto; padding:0 2rem;}
+  .center{text-align:center;}
+
+  hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
+  .ornament{
+    max-width:var(--wide); margin:0 auto; padding:0 2rem; height:1px;
+  }
+  .ornament::before{
+    content:""; display:block; height:1px; background:var(--line);
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    padding:1.6rem 2rem; text-align:center;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+    background:rgba(235,235,235,0.92); backdrop-filter:blur(6px);
+  }
+  .nav-name{
+    font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.02em;
+    color:var(--ink); text-decoration:none; display:block; margin-bottom:0.55rem;
+  }
+  nav.nav-links{display:flex; justify-content:center; flex-wrap:wrap;}
+  nav.nav-links a{
+    font-family:var(--font-body); font-size:0.76rem; letter-spacing:0.13em; text-transform:uppercase;
+    color:var(--ink-soft); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 180ms ease, color 180ms ease;
+    margin:0 0.8rem;
+  }
+  nav.nav-links a:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* ---------- ACCENT PER SEKTION ---------- */
+  /* Paletten har en enda accent, så alla case delar den. Vill du skilja dem
+     åt igen räcker det att sätta om --accent per id, t.ex.
+     #case-titra{--accent:var(--blue);} */
+
+  /* ---------- HERO ---------- */
+  .hero{padding:4.2rem 2rem 3.2rem; text-align:center;}
+  .hero-status{
+    display:inline-block; margin:1.8rem 0 0; padding:0.3rem 1rem;
+    font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--blue-text); border:1px solid var(--blue); border-radius:20px;
+  }
+  .hero-anim{animation:rise 800ms ease both;}
+  @keyframes rise{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);}}
+
+  .hero .smallcaps{display:block; margin-bottom:1.4rem;}
+  .hero h1{
+    font-size:clamp(2.5rem, 5.4vw, 4.1rem); font-weight:500;
+    max-width:21ch; margin:0 auto;
+  }
+  .hero h1 em{font-style:italic; font-weight:400; color:var(--blue);}
+  .hero .lede{
+    max-width:52ch; margin:1.6rem auto 0; color:var(--ink-soft); font-size:1.18rem;
+  }
+
+  .hero-links{margin-top:2rem; font-size:0.95rem;}
+  .hero-links a{margin:0 0.9rem;}
+  .hero-links .sep{color:var(--ink-soft);}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:3.4rem 0;}
+  .section-head{text-align:center; margin-bottom:3.4rem;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.5rem); font-weight:500;}
+  .section-head .smallcaps{display:block; margin-bottom:1rem;}
+  .section-head p{color:var(--ink-soft); max-width:56ch; margin:1.1rem auto 0;}
+
+  /* ---------- ABOUT ---------- */
+  #om-mig p{color:var(--ink-soft);}
+  #om-mig .measure > p:first-of-type::first-letter{
+    font-family:var(--font-display); font-size:3.6rem; float:left; line-height:0.78;
+    padding-right:0.12em; padding-top:0.06em; color:var(--accent); font-weight:500;
+  }
+  #om-mig h3{font-size:1.25rem; margin:2.2rem 0 0.7rem; font-weight:500;}
+
+  /* ---------- PROJECTS ---------- */
+  .case{padding:5.5rem 0;}
+  .case-intro{
+    text-align:left; margin-bottom:2.6rem;
+    max-width:var(--measure); margin-left:auto; margin-right:auto;
+  }
+  .case-kicker{display:block; margin-bottom:0.9rem;}
+  .case h3{font-size:2.5rem;}
+  .case h3 span.italic{font-style:italic; font-weight:400;}
+  .case-dek{
+    max-width:50ch; margin:1rem 0 0; color:var(--ink-soft); font-size:1.12rem; font-style:italic;
+  }
+
+  .case-body p{color:var(--ink-soft); margin:0 0 1.15rem;}
+  .case-body strong{color:var(--ink); font-weight:500;}
+
+  .case-figure{margin:1.8rem 0 2.2rem;}
+  .case-figure img{
+    width:100%; display:block; border:1px solid var(--line-strong); border-radius:2px;
+  }
+  .case-figure figcaption{
+    text-align:left; font-size:0.85rem; font-style:italic; color:var(--ink-soft);
+    margin-top:0.7rem;
+  }
+  .case-figure-wide{margin:0 0 2.4rem;}
+  .case-figure-wide figcaption{max-width:var(--measure); margin-left:auto; margin-right:auto; margin-top:0.7rem;}
+
+  /* ---------- PROJECT INDEX (SCAN CARDS) ---------- */
+  .project-index{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1.4rem;
+    margin:0 0 4.5rem;
+  }
+  .pi-card{
+    display:flex; flex-direction:column; gap:0.55rem;
+    padding:1.5rem 1.5rem 1.7rem; text-decoration:none;
+    border:1px solid var(--line); border-radius:14px;
+    background:var(--surface);
+    box-shadow:0 1px 2px rgba(34,29,23,0.05), 0 6px 16px -10px rgba(34,29,23,0.22);
+    transition:border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  }
+  .pi-card:hover, .pi-card:focus-visible{
+    border-color:var(--hover); transform:translateY(-4px);
+    box-shadow:0 2px 4px rgba(34,29,23,0.06), 0 16px 32px -14px rgba(34,29,23,0.32);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pi-card{transition:border-color 200ms ease;}
+    .pi-card:hover, .pi-card:focus-visible{transform:none;}
+  }
+  .pi-top{display:flex; justify-content:space-between; align-items:flex-start; gap:0.6rem;}
+  .pi-kicker{
+    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+  }
+  .pi-badge{
+    font-size:0.6rem; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap;
+    color:var(--ink-soft); border:1px solid var(--accent); border-radius:20px; padding:0.15rem 0.55rem;
+    flex-shrink:0;
+  }
+  .pi-title{
+    font-family:var(--font-display); font-size:1.5rem; color:var(--ink); font-weight:500;
+  }
+  .pi-dek{color:var(--ink-soft); font-size:0.92rem; line-height:1.5; flex-grow:1;}
+  .pi-tools{display:flex; flex-wrap:wrap; gap:0.35rem;}
+  .pi-tool{
+    font-size:0.68rem; color:var(--ink-soft); border:1px solid var(--line); border-radius:20px;
+    padding:0.1rem 0.55rem;
+  }
+  .pi-meta{
+    font-size:0.78rem; color:var(--ink); font-style:italic; padding-top:0.3rem;
+    border-top:1px solid var(--line);
+  }
+
+  .stat-line{
+    display:flex; justify-content:center; flex-wrap:wrap; margin:2.2rem 0;
+    padding:1.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .stat{text-align:center; margin:0 1.5rem;}
+  .stat .num{font-family:var(--font-display); font-size:2.3rem; color:var(--blue);}
+  .stat .lbl{font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:0.3rem;}
+
+  .role-note{
+    margin:2rem 0; padding-left:1.3rem; border-left:2px solid var(--accent);
+  }
+  .role-note .smallcaps{display:block; margin-bottom:0.5rem;}
+
+  /* Resultatraden under ingressen — stänger kedjan problem → lösning → effekt
+     redan innan läsaren har scrollat in i caset. */
+  .case-result{
+    margin:1.1rem 0 0; font-size:0.95rem; color:var(--ink-soft);
+    font-family:var(--font-body); font-style:normal;
+  }
+  .case-result span{
+    font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); margin-right:0.55rem;
+  }
+
+  /* Utlyft ur den hopfällda delen: det som annars aldrig blir läst. */
+  .insight{
+    margin:2.2rem 0 0; padding:1.4rem 0;
+    border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+  }
+  .insight .smallcaps{display:block; margin-bottom:0.55rem;}
+  .insight p{margin:0;}
+
+  .case-nav{
+    display:flex; justify-content:space-between; gap:1.5rem;
+    margin:2.6rem 0 0; font-size:0.8rem; letter-spacing:0.06em;
+  }
+  .case-nav a{text-decoration:none;}
+  .case-nav .spacer{flex:1;}
+
+
+  .index-label{text-align:center; margin:3rem 0 1.4rem;}
+  .more-divider{text-align:center; padding:1rem 2rem 0;}
+  .more-divider-title{
+    font-size:1.6rem; font-weight:500; color:var(--ink-soft);
+  }
+  .more-divider p{color:var(--ink-soft); font-size:0.95rem; margin:0.6rem 0 0;}
+  .role-note p{margin:0; color:var(--ink-soft); font-style:italic;}
+
+  details.more{margin-top:1.6rem; text-align:left;}
+  details.more summary{
+    cursor:pointer; font-family:var(--font-body); font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--accent); list-style:none; text-align:left;
+  }
+  details.more summary::-webkit-details-marker{display:none;}
+  details.more[open] summary{margin-bottom:1.4rem;}
+  details.more .more-inner{border-top:1px solid var(--line); padding-top:1.6rem;}
+  details.more h4{font-size:1.15rem; font-weight:500; margin:1.5rem 0 0.5rem; font-family:var(--font-display);}
+  details.more h4:first-child{margin-top:0;}
+  details.more p, details.more li{color:var(--ink-soft);}
+  details.more ul{margin:0.4rem 0 1rem; padding-left:1.3rem;}
+
+  .case-links{text-align:left; margin-top:1.8rem; font-size:0.85rem; letter-spacing:0.06em;}
+
+  /* ---------- SKILLS ---------- */
+  #kompetens{border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);}
+  .skills-cols{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2.6rem 3rem; max-width:var(--wide); margin:0 auto;
+  }
+  .skill-group{padding:0;}
+  .skill-group > .smallcaps{
+    display:block; padding-bottom:0.7rem; border-bottom:2px solid var(--blue);
+  }
+  .skill-item{padding:1.1rem 0; border-top:1px solid var(--line);}
+  .skill-item:first-of-type{border-top:none; padding-top:1.1rem;}
+  .skill-item h4{font-size:1.05rem; font-weight:600; margin-bottom:0.35rem;}
+  .skill-item p{margin:0; font-size:0.92rem; color:var(--ink-soft); font-family:var(--font-body);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-cols{
+    display:grid; grid-template-columns:1fr 1fr; gap:0 4rem; max-width:var(--wide); margin:0 auto;
+  }
+  .timeline-cols > div > .smallcaps{display:block; margin-bottom:1.3rem; text-align:center;}
+  .tl-item{
+    display:flex; justify-content:space-between; gap:1rem; padding:0.95rem 0;
+    border-top:1px solid var(--line); font-size:0.95rem;
+  }
+  .tl-main .tl-role{color:var(--ink); font-style:italic;}
+  .tl-main .tl-org{color:var(--ink-soft); font-size:0.88rem;}
+  .tl-date{color:var(--ink-soft); font-size:0.82rem; white-space:nowrap; padding-top:0.1rem;}
+
+  /* ---------- CONTACT ---------- */
+  /* Mörk avslutning. Alla värden nedan är steg ur samma ramp, kontrollerade
+     mot --b900: b100 ger 12,65:1, b200 11,28:1, sanden b400 6,64:1. */
+  #kontakt{background:var(--ink-deep); color:var(--b200); text-align:center;}
+  #kontakt .smallcaps{color:var(--b400);}
+  #kontakt h2{color:var(--b100); font-size:clamp(2rem,4.2vw,3rem); max-width:24ch; margin:1.2rem auto 0;}
+  #kontakt p.lede{color:var(--b300); max-width:48ch; margin:1.4rem auto 0; font-size:1.1rem;}
+  #kontakt .contact-links{margin-top:2.4rem; font-size:1.05rem;}
+  #kontakt .contact-links a{color:var(--b100); margin:0 1rem;}
+  #kontakt .contact-links a:hover{color:var(--b400);}
+  #kontakt .sep{color:var(--b500);}
+  footer.site-footer{
+    padding:2.4rem 0 0.5rem; font-size:0.78rem; color:var(--b300); letter-spacing:0.06em;
+  }
+
+
+  /* ---------- CASE-SIDA ---------- */
+  .case-page{padding:3.5rem 2rem 0;}
+  .case-back{
+    max-width:var(--wide); margin:0 auto 2.4rem; font-size:0.82rem; letter-spacing:0.06em;
+  }
+  .case-back a{text-decoration:none;}
+  .case-cta{
+    margin-top:5rem; padding:3.4rem 2rem 1rem;
+    background:var(--ink-deep); color:var(--b200);
+  }
+  .case-cta .measure{margin:0 auto; text-align:center;}
+  .case-cta .smallcaps{display:block; margin-bottom:0.9rem; color:var(--b400);}
+  .case-cta p{margin:0; color:var(--b300);}
+  .case-cta a{color:var(--b100);}
+  .case-cta a:hover{color:var(--b400);}
+
+
+  /* ---------- METATYPOGRAFI ---------- */
+  .smallcaps, .pi-kicker, .pi-badge, .pi-tool, .pi-meta, .stat .lbl,
+  .case-result span, .case-nav, .tl-date, .hero-status, nav.nav-links a,
+  .skip-link, footer.site-footer, .case-back, .index-label, .more-divider p{
+    font-family:var(--font-meta);
+    font-feature-settings:"tnum" 1;
+  }
+  .smallcaps{font-weight:500; letter-spacing:0.14em; font-size:0.72rem;}
+  .pi-kicker{font-weight:500; font-size:0.63rem; letter-spacing:0.12em;}
+  .pi-badge, .pi-tool{font-weight:500; font-size:0.62rem; letter-spacing:0.08em;}
+  .pi-meta{font-style:normal; font-size:0.72rem; letter-spacing:0.02em;}
+  .stat .lbl{font-weight:500; font-size:0.66rem; letter-spacing:0.1em;}
+  .case-result span{font-weight:600;}
+  nav.nav-links a{font-size:0.72rem; letter-spacing:0.1em; font-weight:500;}
+  .tl-date{font-size:0.74rem; letter-spacing:0.02em;}
+  .case-nav{font-size:0.72rem; letter-spacing:0.06em;}
+  .case-back{font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;}
+
+  /* ---------- ASYMMETRISKT RUTNÄT PÅ CASE ----------
+     Textspalten ligger vänsterställd i den breda ytan i stället för centrerad.
+     Den tomma högermarginalen är avsiktlig — där ligger numret, och dit
+     sträcker sig de breda bilderna. */
+  .case > .wide{position:relative;}
+  .case > .wide > *{max-width:var(--measure); margin-left:0; margin-right:auto;}
+  .case > .wide > .case-figure-wide{max-width:none; margin-right:0;}
+  .case .measure{max-width:var(--measure); margin-left:0; margin-right:auto;}
+  .case-figure-wide figcaption{
+    max-width:var(--measure); margin-left:0; margin-right:auto;
+  }
+
+
+
+  @media (max-width:860px){
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    html{scroll-padding-top:96px;}
+    body{font-size:17.5px;}
+    nav.nav-links{gap:1rem;}
+    .skills-cols{grid-template-columns:1fr 1fr;}
+    .timeline-cols{grid-template-columns:1fr; gap:3rem 0;}
+    .stat-line{gap:1.8rem;}
+    .case h3{font-size:2rem;}
+    .project-index{grid-template-columns:1fr 1fr; gap:1rem;}
+  }
+  @media (max-width:520px){
+    .skills-cols{grid-template-columns:1fr;}
+    .wide{padding:0 1.4rem;}
+    .hero{padding:3rem 1.4rem 2.4rem;}
+    .project-index{grid-template-columns:1fr;}
+  }
+
+  /* ---------- OMDÖMEN ----------
+     Platshållare: byt texten inom [ ] mot riktiga citat innan sidan publiceras. */
+  .quotes{display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-top:2.6rem;}
+  .quote{margin:0; padding:2rem 2rem 1.6rem; background:var(--surface); border:1px solid var(--line); border-radius:4px; position:relative;}
+  .quote::before{
+    content:"\201C"; position:absolute; top:0.7rem; left:1.6rem;
+    font-family:var(--font-display); font-size:4.2rem; line-height:1; color:var(--blue);
+  }
+  .quote blockquote{margin:1.9rem 0 0; font-family:var(--font-display); font-style:italic; font-size:1.35rem; line-height:1.45; color:var(--heading);}
+  .quote figcaption{margin-top:1.4rem; font-family:var(--font-meta); font-size:0.78rem; letter-spacing:0.02em; color:var(--ink-soft);}
+  .quote figcaption strong{display:block; font-weight:600; color:var(--ink); margin-bottom:0.15rem;}
+  @media (max-width:760px){ .quotes{grid-template-columns:1fr;} }
+
+  /* ---------- KOPIERA E-POST ---------- */
+  .copy-mail{
+    font:inherit; font-family:var(--font-meta); font-size:0.78rem; letter-spacing:0.06em;
+    color:var(--b100); background:transparent; border:1px solid var(--b500); border-radius:20px;
+    padding:0.35rem 1rem; margin:1.4rem auto 0; display:inline-block; cursor:pointer;
+  }
+  .copy-mail:hover{border-color:var(--b300);}
+  .copy-mail:focus-visible{outline:1.5px solid var(--b300); outline-offset:3px;}
+  .copy-status{display:block; min-height:1.4em; margin-top:0.5rem; font-family:var(--font-meta); font-size:0.78rem; color:var(--b300);}
+
+
+  /* ---------- MINIATYRER PÅ PROJEKTKORTEN ---------- */
+  .pi-thumb{
+    display:block; margin:-1.5rem -1.5rem 0.9rem; aspect-ratio:16/9; overflow:hidden;
+    border-radius:13px 13px 0 0; background:var(--b300); border-bottom:1px solid var(--line);
+  }
+  .pi-thumb img{width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform 400ms ease;}
+  .pi-card:hover .pi-thumb img, .pi-card:focus-visible .pi-thumb img{transform:scale(1.03);}
+
+  /* ---------- PORTRÄTT I OM MIG ---------- */
+  .about-grid{display:grid; grid-template-columns:220px minmax(0,var(--measure)); gap:3.2rem; justify-content:center; align-items:start;}
+  .about-grid .measure{margin:0;}
+  .about-photo{margin:0.4rem 0 0; position:relative;}
+  .about-photo img{width:100%; height:auto; aspect-ratio:3/4; object-fit:cover; border-radius:110px 110px 12px 12px; border:1px solid var(--line-strong);}
+  .about-photo figcaption{margin-top:0.8rem; font-family:var(--font-meta); font-size:0.72rem; letter-spacing:0.04em; color:var(--ink-soft); text-align:center;}
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr; gap:2rem;}
+    .about-photo{max-width:180px; margin:0 auto;}
+  }
+
+  /* ================= v33: BIBLIOTEKET I NATUREN =================
+     Ett lager ovanpå v32: handritade föremål som navigation, en
+     linjeteckning av berg och skog, och en levande rad med tiden i
+     Stockholm. Allt innehåll och alla kontrastnivåer från v32 är orörda. */
+  :root{
+    color-scheme:light;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    /* Mossgrön — bara för linjeteckningen, aldrig för text. */
+    --moss:#6E7A5F;
+    --moss-soft:#A9B29C;
+  }
+  html{scroll-padding-top:calc(112px + env(safe-area-inset-top,0px));}
+  header.site-nav{top:env(safe-area-inset-top,0px);}
+
+  .hero{position:relative; padding:4.5rem 2rem 0; overflow:hidden;}
+  .hero-stage{
+    display:grid; grid-template-columns:1fr minmax(0,660px) 1fr;
+    align-items:center; gap:1rem; max-width:1240px; margin:0 auto;
+  }
+  .hero-center{grid-column:2;}
+  .hero-objects{display:flex; flex-direction:column; justify-content:space-around; gap:5rem; align-self:stretch; padding:2rem 0;}
+  .hero-objects.left{grid-column:1; grid-row:1; align-items:flex-start;}
+  .hero-objects.right{grid-column:3; grid-row:1; align-items:flex-end;}
+  .hero-objects.left .obj:nth-child(2){margin-left:3.5rem;}
+  .hero-objects.right .obj:nth-child(1){margin-right:3rem;}
+
+  .obj{
+    display:flex; flex-direction:column; align-items:center; gap:0.6rem;
+    text-decoration:none; color:var(--ink-soft); width:7.5rem;
+  }
+  .obj svg{
+    width:72px; height:72px; color:var(--b800);
+    transition:transform 260ms cubic-bezier(.3,1.6,.5,1), color 180ms ease;
+  }
+  .obj .obj-label{
+    font-size:0.95rem; font-style:italic; color:var(--ink-soft);
+    border-bottom:1px solid transparent; transition:border-color 180ms ease, color 180ms ease;
+  }
+  .obj:hover svg, .obj:focus-visible svg{transform:translateY(-4px) rotate(-7deg); color:var(--b1000);}
+  .obj:hover .obj-label, .obj:focus-visible .obj-label{color:var(--accent); border-color:var(--accent);}
+  .obj:focus-visible{outline:1.5px solid var(--accent); outline-offset:6px; border-radius:8px;}
+  .obj:nth-child(2) svg{transform:rotate(4deg);}
+  .obj:nth-child(2):hover svg, .obj:nth-child(2):focus-visible svg{transform:translateY(-4px) rotate(-4deg);}
+
+  .hero-now{
+    margin:2.6rem auto 0; font-size:0.98rem; font-style:italic; color:var(--ink-soft);
+    max-width:44ch;
+  }
+
+  /* Landskapet: det enda som rör sig av sig självt — ritas en gång vid laddning. */
+  .landscape{display:block; width:100%; max-width:1240px; height:auto; margin:3.5rem auto 0; overflow:visible;}
+  .landscape path{
+    fill:none; stroke:var(--moss); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:1; stroke-dashoffset:1; animation:draw 2.8s cubic-bezier(.45,.05,.3,1) 400ms forwards;
+  }
+  .landscape .tree{fill:var(--paper);}
+  .landscape .soft{stroke:var(--moss-soft); stroke-width:2.2; animation-delay:200ms;}
+  .landscape .far{stroke:var(--moss-soft); stroke-width:2; animation-delay:150ms;}
+  .landscape .mask{fill:var(--paper); stroke:none; animation:none; stroke-dasharray:none;}
+  .landscape .pine{fill:var(--paper);}
+  .landscape .ground{stroke:var(--b500); stroke-width:1.5;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @media (prefers-reduced-motion: reduce){
+    .landscape path{animation:none; stroke-dashoffset:0; stroke-dasharray:none;}
+    .obj svg, .obj:nth-child(2) svg{transition:none;}
+  }
+
+  /* Små föremål ovanför sektionsrubrikerna */
+  .sec-doodle{display:block; margin:0 auto 1.1rem; width:52px; height:52px; color:var(--b700);}
+  .sec-doodle svg{width:100%; height:100%;}
+  #kontakt .sec-doodle{color:var(--b400);}
+
+  .pi-card.own{border-color:var(--line-strong);}
+
+  @media (max-width:900px){
+    .hero{padding-top:3.5rem;}
+    .hero-stage{grid-template-columns:1fr;}
+    .hero-center{grid-column:1; grid-row:1;}
+    .hero-objects{flex-direction:row; justify-content:center; gap:1rem; padding:0; align-self:auto;}
+    .hero-objects.left{grid-column:1; grid-row:2; align-items:center; margin-top:2.4rem;}
+    .hero-objects.right{grid-column:1; grid-row:3; align-items:center;}
+    .hero-objects.left .obj:nth-child(2), .hero-objects.right .obj:nth-child(1){margin:0;}
+    .obj{width:6.5rem;}
+    .obj svg{width:56px; height:56px;}
+  }
+  @media (max-width:520px){
+    .hero{padding:3rem 1.4rem 0;}
+    .hero-stage{gap:0.6rem;}
+    .hero-objects{gap:0.4rem;}
+    .obj{width:5.6rem;}
+    .landscape{width:125%; max-width:none; margin-left:-12.5%;}
+  }
+
+
+  /* ---------- SPRÅKFLAGGA & MÖRKT LÄGE ---------- */
+  .vh{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  nav.nav-links a.lang-switch, .theme-toggle{display:inline-flex; align-items:center;}
+  nav.nav-links a.lang-switch{border-left:1px solid var(--line-strong); padding-left:1.1rem; margin-left:0.2rem; border-bottom:none;}
+  .flag{width:22px; height:14px; display:block; border-radius:2px; box-shadow:0 0 0 1px var(--line-strong);}
+  .theme-toggle{
+    background:none; border:0; padding:0.2rem; margin:0; cursor:pointer; color:var(--ink-soft);
+    border-radius:6px; line-height:0;
+  }
+  .theme-toggle .ico{width:20px; height:20px;}
+  .theme-toggle:hover{color:var(--accent);}
+  .theme-toggle:focus-visible{outline:1.5px solid var(--accent); outline-offset:3px;}
+  .theme-toggle .sun{display:none;}
+  :root[data-theme="dark"] .theme-toggle .sun{display:block;}
+  :root[data-theme="dark"] .theme-toggle .moon{display:none;}
+
+  /* Mörkt läge: bara rollerna byts. Skalan (b100–b1000) lämnas orörd, så att
+     det mörka kontaktblocket fortsätter att ha ljus text. Kontrast mot --paper:
+     brödtext 14:1, sekundär text 9,6:1, accenttext 9,1:1, accent över 24 px 5,9:1. */
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --surface:#2A2621; --paper:#1E1B17; --line:#3A352F; --line-strong:#5A534A; --hover:#8A8176;
+    --heading:#F4F1EC; --ink:#ECE8E2; --neutral:#C9C1B6; --ink-deep:#131110;
+    --gold:#E76FA6; --gold-text:#F2A7C8;
+    --moss:#9AA888; --moss-soft:#737E66;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface:#2A2621; --paper:#1E1B17; --line:#3A352F; --line-strong:#5A534A; --hover:#8A8176;
+    --heading:#F4F1EC; --ink:#ECE8E2; --neutral:#C9C1B6; --ink-deep:#131110;
+    --gold:#E76FA6; --gold-text:#F2A7C8;
+    --moss:#9AA888; --moss-soft:#737E66;
+    }
+  }
+  :root[data-theme="dark"] header.site-nav{background:rgba(30,27,23,0.92);}
+  :root[data-theme="dark"] .obj svg, :root[data-theme="dark"] .sec-doodle{color:var(--ink-soft);}
+  :root[data-theme="dark"] .obj:hover svg, :root[data-theme="dark"] .obj:focus-visible svg{color:var(--ink);}
+  :root[data-theme="dark"] .pi-thumb{background:var(--line);}
+  :root[data-theme="dark"] .pi-card{box-shadow:0 1px 2px rgba(0,0,0,0.3), 0 6px 16px -10px rgba(0,0,0,0.6);}
+  :root[data-theme="dark"] .landscape .ground{stroke:var(--line-strong);}
+  :root[data-theme="dark"] img{filter:brightness(0.92);}
+
+  /* ================= TURKOS PALETT (från Jennys Figma-skiss) =================
+     Vit bakgrund, gråskala #FFFFFF–#242424 och turkos #CDF9FD–#051E1F.
+     Kontrast mot vitt: brödtext 15,5:1, sekundär text 9,9:1, accenttext 8:1,
+     stor accent 7:1. I mörkt läge används de mörkaste turkosa stegen som yta. */
+  :root{
+    --b100:#FFFFFF; --b200:#FFFFFF; --b300:#D6D6D6; --b400:#AFAFAF; --b500:#898989;
+    --b600:#656565; --b700:#434343; --b800:#343434; --b900:#242424; --b1000:#1B1B1B;
+    --surface:#F4FEFF; --paper:#FFFFFF; --line:#D6D6D6; --line-strong:#AFAFAF; --hover:#42B1B8;
+    --heading:#242424; --ink:#242424; --neutral:#434343; --ink-deep:#123E41;
+    --gold:#216266; --gold-text:#194F52;
+    --tint:#CDF9FD; --tint-strong:#53DBE4; --flower:#656565;
+  }
+  header.site-nav{background:rgba(205,249,253,0.94);}
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --surface:#0E2C2E; --paper:#051E1F; --line:#123E41; --line-strong:#216266; --hover:#42B1B8;
+    --heading:#F0FDFE; --ink:#E6F4F5; --neutral:#B9CFD1; --ink-deep:#020F10;
+    --gold:#53DBE4; --gold-text:#8AE8EE; --tint:#123E41; --flower:#4F8A8E;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --surface:#0E2C2E; --paper:#051E1F; --line:#123E41; --line-strong:#216266; --hover:#42B1B8;
+      --heading:#F0FDFE; --ink:#E6F4F5; --neutral:#B9CFD1; --ink-deep:#020F10;
+      --gold:#53DBE4; --gold-text:#8AE8EE; --tint:#123E41; --flower:#4F8A8E;
+    }
+  }
+  :root[data-theme="dark"] header.site-nav{background:rgba(5,30,31,0.94);}
+  :root[data-theme="dark"] img{filter:none;}
+  #kontakt .smallcaps, .case-cta .smallcaps{color:#53DBE4;}
+  #kontakt .contact-links a:hover, .case-cta a:hover{color:#CDF9FD;}
+  .pi-card:hover, .pi-card:focus-visible{border-color:var(--hover);}
+
+  /* ---------- BLOMMOR ----------
+     Bilderna används som mask, så linjerna får färg från --flower och byter
+     färg automatiskt i mörkt läge. Rent dekorativa. */
+  .flower{
+    position:absolute; pointer-events:none; z-index:0;
+    background:var(--flower);
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-size:contain; mask-size:contain;
+  }
+  .flower.left{top:0; left:0; width:clamp(120px,16vw,250px); aspect-ratio:700/827;
+    -webkit-mask-image:url("bilder/blommor-vanster.webp"); mask-image:url("bilder/blommor-vanster.webp"); -webkit-mask-position:top left; mask-position:top left;}
+  .flower.right{bottom:0; right:0; width:clamp(120px,16vw,250px); aspect-ratio:700/1006;
+    -webkit-mask-image:url("bilder/blommor-hoger.webp"); mask-image:url("bilder/blommor-hoger.webp"); -webkit-mask-position:bottom right; mask-position:bottom right;}
+  .hero-stage, .case-page > *:not(.flower){position:relative; z-index:1;}
+  .case-page{position:relative; overflow:hidden;}
+
+  /* ---------- NAMNET I SKRIVSTIL ---------- */
+  .hero-script{
+    display:block; font-family:'Alex Brush', 'Segoe Script', cursive; font-weight:400;
+    font-size:clamp(2.4rem,5vw,3.4rem); line-height:1.1; color:var(--heading); margin:0 0 0.6rem;
+  }
+
+  /* ---------- KOPIERA-KNAPPAR ---------- */
+  .copy-btn{
+    display:inline-grid; place-items:center; width:34px; height:34px; margin:0 0.2rem 0 -0.5rem;
+    border:0; border-radius:10px; background:transparent; color:inherit; cursor:pointer; vertical-align:middle;
+    transition:background-color 160ms ease;
+  }
+  .copy-btn svg{width:18px; height:18px; grid-area:1/1;}
+  .copy-btn .i-ok{display:none;}
+  .copy-btn:hover{background:rgba(255,255,255,0.14);}
+  .copy-btn:focus-visible{outline:1.5px solid #CDF9FD; outline-offset:2px;}
+  .copy-btn.is-copied{background:#53DBE4; color:#051E1F;}
+  .copy-btn.is-copied .i-copy{display:none;}
+  .copy-btn.is-copied .i-ok{display:block;}
+
+
+  /* ---------- HERO v3: föremålen runt texten, blommorna små i ytterkanten ----------
+     Blommorna hålls smala (max 170 px) så att de ryms utanför föremålen,
+     och lite genomskinliga så att de inte konkurrerar med innehållet. */
+  .hero{padding-bottom:4.4rem;}
+  /* Som nabiu: sex föremål i en cirkel runt texten — de mittersta längst ut,
+     de övre och nedre indragna, så att raden bildar en båge på varje sida. */
+  @media (min-width:901px){
+    .hero-objects{gap:0; justify-content:space-between; padding:0.5rem 0 0.5rem;}
+    .hero-objects.left{align-items:flex-start; padding-left:0.5rem;}
+    .hero-objects.right{align-items:flex-end; padding-right:0.5rem;}
+    .hero-objects.left .obj:nth-child(1), .hero-objects.left .obj:nth-child(3){margin-left:4.5rem;}
+    .hero-objects.right .obj:nth-child(1), .hero-objects.right .obj:nth-child(3){margin-right:4.5rem;}
+    .hero-objects.left .obj:nth-child(2), .hero-objects.right .obj:nth-child(2){margin:0;}
+    .hero-objects.left .obj:nth-child(1) svg{transform:rotate(-4deg);}
+    .hero-objects.left .obj:nth-child(3) svg{transform:rotate(3deg);}
+    .hero-objects.right .obj:nth-child(2) svg{transform:rotate(4deg);}
+  }
+  @media (max-width:900px){
+    .hero-objects.left, .hero-objects.right{flex-wrap:wrap;}
+  }
+  .obj svg{width:68px; height:68px; color:var(--ink-soft);}
+  .flower{opacity:0.72;}
+  .flower.left, .flower.right{width:clamp(100px,11vw,170px);}
+  @media (max-width:1100px){ .flower.left, .flower.right{width:92px;} }
+  @media (max-width:900px){
+    .hero-objects.left .obj:nth-child(2), .hero-objects.right .obj:nth-child(1){margin:0;}
+    .obj svg{width:54px; height:54px;}
+  }
+  @media (max-width:520px){ .flower.left, .flower.right{width:70px;} .hero{padding-bottom:7rem;} }
+
+  /* ---------- SKOGEN (i samma gravyrstil som blommorna) ----------
+     Kontur 1,3 px, skuggning med tunna streck. Bakre raden i en ljusare ton,
+     ytorna fylls med bakgrundsfärgen så att träden täcker varandra. */
+  .forest{display:block; width:100%; max-width:1240px; height:auto; margin:3.2rem auto 0; color:var(--flower);}
+  .forest path{fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round;}
+  .forest .o{stroke-width:1.3;}
+  .forest .h{stroke-width:0.6;}
+  .forest .fill{fill:var(--paper);}
+  .forest .b, .forest .far{stroke:var(--flower-soft);}
+  :root{--flower-soft:#AFAFAF;}
+  :root[data-theme="dark"]{--flower:#6FAAB0; --flower-soft:#2F6A6E;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--flower:#6FAAB0; --flower-soft:#2F6A6E;} }
+  .hero{padding-bottom:0;}
+  @media (max-width:520px){ .forest{width:125%; max-width:none; margin-left:-12.5%;} .hero{padding-bottom:0;} }
+
+  /* ---------- HOVER-FIXAR ----------
+     1) Inga dubbla understrykningar: kort och föremål har redan egen markering.
+     2) Alla sex föremål rör sig vid hover, även de som har en grundlutning. */
+  .obj:hover, .obj:focus-visible, .pi-card:hover, .pi-card:focus-visible{text-decoration:none;}
+  .hero-objects.left .obj:hover svg, .hero-objects.left .obj:focus-visible svg,
+  .hero-objects.right .obj:hover svg, .hero-objects.right .obj:focus-visible svg{
+    transform:translateY(-5px) rotate(-7deg);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-objects.left .obj:hover svg, .hero-objects.left .obj:focus-visible svg,
+    .hero-objects.right .obj:hover svg, .hero-objects.right .obj:focus-visible svg{transform:none;}
+  }
+
+  /* Inga avdelarlinjer i projektkorten */
+  .pi-meta{border-top:none; padding-top:0.2rem;}
+
+  /* ---------- SIDHUVUD: namnet i vänstra hörnet, menyn till höger ---------- */
+  header.site-nav{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap; text-align:left; padding:1.1rem 2.2rem;}
+  .nav-name{margin:0; white-space:nowrap;}
+  nav.nav-links{justify-content:flex-end; align-items:center; row-gap:0.4rem;}
+  nav.nav-links a:first-child{margin-left:0;}
+  @media (max-width:860px){
+    header.site-nav{flex-direction:column; align-items:flex-start; gap:0.5rem; padding:0.9rem 1.2rem;}
+    nav.nav-links{justify-content:flex-start; gap:0.35rem 0;}
+    nav.nav-links a{margin:0 1.1rem 0 0;}
+  }
+
+  /* Hälsningen i Om mig: hela ordet stort i stället för en anfang */
+  #om-mig .measure > p:first-of-type::first-letter{all:unset;}
+  .greet{
+    font-family:var(--font-display); font-size:3.1em; line-height:0.9; color:var(--blue);
+    float:left; margin:0.08em 0.3em 0 0; font-weight:500;
+  }
+
+  /* ---------- MAPPEN MED FOTON (Om mig) ----------
+     En handritad mapp i samma gravyrstil som skogen. Porträttet och två
+     små skisser sticker upp i en solfjäder och fläktar ut mer vid hover. */
+  :root{--polaroid:#FFFFFF;}
+  :root[data-theme="dark"]{--polaroid:#0E2C2E;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--polaroid:#0E2C2E;} }
+  .about-grid{grid-template-columns:270px minmax(0,var(--measure));}
+  .folder{margin:0;}
+  .folder-stage{position:relative; width:260px; height:300px; margin:0 auto; color:var(--ink-soft);}
+  .folder-back, .folder-front{position:absolute; left:0; top:100px; width:260px; height:200px; overflow:visible;}
+  .folder-back{top:62px;}
+  .folder-back .fb{fill:var(--tint);}
+  .folder-front .ff{fill:var(--tint);}
+  .folder-front .flabel{font-family:'Alex Brush','Segoe Script',cursive; font-size:24px; fill:currentColor; stroke:none;}
+  .folder-front path[d^="M80 118"]{fill:var(--polaroid);}
+  .folder .ph{
+    position:absolute; display:block; background:var(--polaroid); padding:6px 6px 16px;
+    border:1px solid var(--line-strong); border-radius:3px;
+    box-shadow:0 6px 14px -8px rgba(0,0,0,0.35);
+    transition:transform 380ms cubic-bezier(.3,1.4,.5,1);
+  }
+  .folder .ph svg{display:block; width:100%; height:100%; color:var(--flower); background:var(--surface);}
+  .folder .ph-l, .folder .ph-r{width:104px; height:130px; top:46px;}
+  .folder .ph-l{left:20px; transform:rotate(-17deg); transform-origin:bottom right;}
+  .folder .ph-r{right:20px; transform:rotate(16deg); transform-origin:bottom left;}
+  .folder img.ph-c{
+    left:68px; top:18px; width:124px; height:164px; object-fit:cover; object-position:top center;
+    border-radius:3px; aspect-ratio:auto; transform:rotate(-2deg);
+  }
+  .folder:hover .ph-l{transform:rotate(-26deg) translate(-10px,-8px);}
+  .folder:hover .ph-r{transform:rotate(25deg) translate(10px,-8px);}
+  .folder:hover img.ph-c{transform:rotate(0deg) translateY(-10px);}
+  @media (prefers-reduced-motion: reduce){ .folder .ph{transition:none;} }
+  .folder figcaption{margin-top:0.6rem;}
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo.folder{max-width:none;}
+  }
+
+  /* Mina egna naturfoton i solfjädern (fem stycken, porträttet längst fram) */
+  .folder .ph-n{
+    width:96px; height:120px; padding:5px 5px 14px; left:82px; top:52px; object-fit:cover;
+    transform-origin:50% 150%; box-sizing:border-box;
+  }
+  .folder .n1{transform:rotate(-36deg);}
+  .folder .n2{transform:rotate(-19deg);}
+  .folder .n3{transform:rotate(5deg) translateY(-18px);}
+  .folder .n4{transform:rotate(20deg);}
+  .folder .n5{transform:rotate(36deg);}
+  .folder:hover .n1{transform:rotate(-44deg) translateY(-8px);}
+  .folder:hover .n2{transform:rotate(-24deg) translateY(-10px);}
+  .folder:hover .n3{transform:rotate(7deg) translateY(-30px);}
+  .folder:hover .n4{transform:rotate(25deg) translateY(-10px);}
+  .folder:hover .n5{transform:rotate(44deg) translateY(-8px);}
+  .folder img.ph-c{z-index:1;}
+  .folder-front{z-index:2;}
+
+  /* Justering av solfjädern: högre mapp, mindre porträtt, bredare solfjäder */
+  .folder-stage{height:340px;}
+  .folder-back{top:102px;} .folder-front{top:140px;}
+  .folder img.ph-c{left:80px; top:44px; width:100px; height:134px; transform:rotate(-2deg);}
+  .folder .ph-n{width:92px; height:115px; left:84px; top:40px; transform-origin:50% 175%;}
+  .folder .n1{transform:rotate(-42deg);}
+  .folder .n2{transform:rotate(-22deg) translateY(-6px);}
+  .folder .n3{transform:rotate(-4deg) translateY(-40px);}
+  .folder .n4{transform:rotate(22deg) translateY(-6px);}
+  .folder .n5{transform:rotate(42deg);}
+  .folder:hover .n1{transform:rotate(-50deg) translateY(-10px);}
+  .folder:hover .n2{transform:rotate(-28deg) translateY(-16px);}
+  .folder:hover .n3{transform:rotate(-4deg) translateY(-58px);}
+  .folder:hover .n4{transform:rotate(28deg) translateY(-16px);}
+  .folder:hover .n5{transform:rotate(50deg) translateY(-10px);}
+  .folder:hover img.ph-c{transform:rotate(0deg) translateY(-6px);}
+
+  /* ---------- Om mig: porträtt till vänster, fotomappen till höger ---------- */
+  .about-grid{grid-template-columns:220px minmax(0,var(--measure));}
+  .about-grid.rev{grid-template-columns:minmax(0,var(--measure)) 270px; margin-top:1rem; align-items:center;}
+  .folder-fig{margin:0;}
+  .folder-fig figcaption{margin-top:0.6rem; font-family:var(--font-meta); font-size:0.72rem; letter-spacing:0.04em; color:var(--ink-soft); text-align:center;}
+  .folder .n3{transform:rotate(0deg) translateY(-34px);}
+  .folder:hover .n3{transform:rotate(0deg) translateY(-50px);}
+  @media (max-width:860px){
+    .about-grid, .about-grid.rev{grid-template-columns:1fr;}
+    .about-grid.rev .folder-fig{margin:0 auto;}
+  }
+
+  /* Fotona sitter djupare i mappen */
+  .folder .ph-n{top:78px;}
+  .folder .n2{transform:rotate(-22deg);}
+  .folder .n3{transform:rotate(0deg) translateY(-18px);}
+  .folder .n4{transform:rotate(22deg);}
+  .folder:hover .n2{transform:rotate(-28deg) translateY(-10px);}
+  .folder:hover .n3{transform:rotate(0deg) translateY(-36px);}
+  .folder:hover .n4{transform:rotate(28deg) translateY(-10px);}
+  .folder-stage{height:320px;}
+  .folder-back{top:88px;} .folder-front{top:120px;}
+  .folder .ph-n{top:66px;}
+
+  /* Ett enda omdöme: bredare och centrerat */
+  .quotes.solo{grid-template-columns:1fr; max-width:720px; margin-left:auto; margin-right:auto;}
+  .quotes.solo .quote blockquote{font-size:1.3rem;}
+
+  .quote figcaption a{color:inherit; text-decoration:underline; text-underline-offset:3px;}
+  .quote figcaption a:hover{color:var(--accent);}
+
+  /* Kompetens kopplad till projekt */
+  .skill-proof{margin:0.35rem 0 0; font-family:var(--font-meta); font-size:0.74rem; letter-spacing:0.02em; color:var(--ink-soft);}
+  .skill-proof a{color:var(--accent); text-decoration:underline; text-underline-offset:3px; text-decoration-thickness:1px;}
+  .skill-proof a:hover{color:var(--heading);}
+  .skill-tools{margin:2.2rem auto 0; max-width:var(--measure); text-align:center; font-size:0.95rem; color:var(--ink-soft);}
+
+  /* Skogen ritas fram en gång, som med blyerts: från vänster till höger,
+     konturer först och skuggstreck strax efter. */
+  .forest path{stroke-dasharray:1 2; stroke-dashoffset:1.5; animation:pencil var(--t,.6s) cubic-bezier(.4,.1,.3,1) var(--d,0s) forwards;}
+  .forest .fill{fill-opacity:0; animation:pencil var(--t,.6s) cubic-bezier(.4,.1,.3,1) var(--d,0s) forwards, fillin .4s ease calc(var(--d,0s) + var(--t,.6s)*.6) forwards;}
+  @keyframes pencil{to{stroke-dashoffset:0;}}
+  @keyframes fillin{to{fill-opacity:1;}}
+  @media (prefers-reduced-motion: reduce){
+    .forest path{animation:none; stroke-dasharray:none; stroke-dashoffset:0;}
+    .forest .fill{fill-opacity:1;}
+  }
+</style>
+</head>
+<body>
+<a href="#innehall" class="skip-link">Hoppa till innehåll</a>
+
+<header class="site-nav">
+  <a href="#innehall" class="nav-name">Jenny Kliushnik</a>
+  <nav class="nav-links" aria-label="Huvudnavigation">
+    <a href="#om-mig">Om mig</a>
+    <a href="#projekt">Projekt</a>
+    <a href="#kompetens">Kompetens</a>
+    <a href="#erfarenhet">Bakgrund</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="en/index.html" class="lang-switch" lang="en" hreflang="en" title="English"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true" focusable="false"><clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg><span class="vh">English</span></a>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Mörkt läge" hidden><svg class="ico moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.6c-1 .4-2.1.6-3.2.6-4.6 0-8.2-3.7-8.2-8.2 0-1.2.2-2.3.7-3.3C5.2 4.9 2.8 8.2 2.9 12.1c.1 5 4.2 9 9.2 9 3.4 0 6.3-1.9 7.4-6.5z"/><path d="M17 4.2l.4 1.2 1.2.4-1.2.4-.4 1.2-.4-1.2-1.2-.4 1.2-.4z"/></svg><svg class="ico sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2c2.8-.1 4.9 2 4.9 4.8s-2.1 4.9-4.9 4.9-4.8-2.2-4.8-4.9 2-4.7 4.8-4.8z"/><path d="M12 2.3v2M12 19.8v2M2.3 12h2M19.8 12h2M5.1 5.1l1.4 1.4M17.5 17.5l1.4 1.4M5.1 18.9l1.5-1.4M17.4 6.6l1.5-1.5"/></svg><span class="vh">Mörkt läge</span></button>
+  </nav>
+</header>
+
+<main id="innehall">
+  <section class="hero" aria-label="Introduktion">
+    <div class="hero-stage">
+      <div class="hero-center center hero-anim">
+      <p class="hero-script" aria-hidden="true">Jenny Kliushnik</p>
+      <span class="smallcaps">UX-designer</span>
+      <h1>Gör det komplexa <em>begripligt</em> för fler</h1>
+      <p class="lede">Jag designar tillgängliga, etiska och forskningsbaserade digitala upplevelser — med en lärares känsla för hur människor förstår, och en kärlek till färg och form.</p>
+      <p class="hero-status">Söker LIA i Stockholm, nov 2026 – apr 2027</p>
+      </div>
+      <nav class="hero-objects left" aria-label="Genvägar">
+        <a class="obj" href="#om-mig"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 28c0-1 1-2 2-2l30 .5c1.5 0 2 1 1.8 2.5-.8 11-4.8 21-16.8 21.5C17 50.8 13 41 12 28z"/><path d="M45.5 31c6.5-1.5 10 2 8.5 7-1.2 4-5.5 5.5-10.5 4.5"/><path d="M46 34c3.2-.8 5 1 4.3 3.4-.6 1.8-2.6 2.6-5.3 2.2"/><path d="M8 53.5c10 2.6 34 2.8 46-.4"/><path d="M13 51.5c8.5 1.6 26 1.7 36 0"/><path d="M14 29.5c9 1.2 21 1.2 30 .2"/><path d="M22 20c-3-3.5 3-6 0-10.5"/><path d="M30 21c-3-5 3-7.5 0-13.5"/><path d="M38 20c-3-3.5 3-6 0-10"/><g class="hatch" stroke-width="0.9"><path d="M40.5 33l-2 7"/><path d="M42.5 34l-2.4 8.5"/><path d="M38 36l-1.2 4.5"/><path d="M36.5 45.5l-3 2.5"/><path d="M39.5 44l-3.5 3.6"/></g></svg><span class="obj-label">Om mig</span></a>
+        <a class="obj" href="#projekt"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 19l1-7.5c.1-.9.9-1.5 1.8-1.4L52 12.8c1.1.1 1.8 1 1.7 2.1l-2.1 27.6c-.1 1.1-.9 1.8-2 1.7l-6.4-.6"/><path fill="var(--paper, #FFFFFF)" d="M10 22c0-1 1-1.8 2-1.8L40 19c1.2 0 2 .8 2 2l1 27-8 7.5-21.5 1c-1.2 0-2-.7-2-1.9z"/><path d="M43 48l-7 .5c-.7.1-1 .5-1 1.2v5.8"/><path d="M16 30l19-.7"/><path d="M16 36.5l21-.7"/><path d="M16 43l13-.4"/><g class="hatch" stroke-width="0.9"><path d="M37.5 50.5l2.5-.2"/><path d="M36.8 52.8l1.4-1.2"/><path d="M46 17l3 .3"/><path d="M47 21l3 .3"/><path d="M46.5 25l3 .3"/><path d="M46 29l2.8.2"/></g></svg><span class="obj-label">Projekt</span></a>
+        <a class="obj" href="Jenny_Kliushnik_CV.pdf" target="_blank" rel="noopener" id="obj-cv"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 9.5c0-1 .8-1.8 1.8-1.8l22.5-.2 9.7 9.8.2 36.5c0 1-.8 1.8-1.8 1.8l-30.5.3c-1 0-1.8-.8-1.8-1.8z"/><path d="M39.3 7.6l.1 8.3c0 .7.5 1.2 1.2 1.2l8.4.1"/><path d="M25.5 19.2c2.3 0 3.9 1.7 3.9 3.9s-1.7 3.9-3.9 3.9-3.9-1.8-3.9-3.9 1.6-3.9 3.9-3.9z"/><path d="M19.8 32.8c.9-2.8 3.1-4.2 5.7-4.2s4.8 1.4 5.7 4.2"/><path d="M33.5 22l8.5-.1"/><path d="M33.5 27l6-.1"/><path d="M20 38.5l22-.2"/><path d="M20 43.5l22-.2"/><path d="M20 48.5l14-.1"/><g class="hatch" stroke-width="0.9"><path d="M41 10.5l2.8 2.8"/><path d="M42.8 9.9l1.2 1.2"/><path d="M23 21.5l2.5 2.5"/><path d="M45.5 20v30"/></g></svg><span class="obj-label">CV</span></a>
+      </nav>
+      <nav class="hero-objects right" aria-label="Fler genvägar">
+        <a class="obj" href="#kompetens"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 38c-1-16 7-27 19-27.5C44 10 52.5 21 51.5 38"/><path d="M16.6 34.5c-.4-12.5 6-20.6 15.4-21 9.4-.3 16.2 8 15.6 21"/><path d="M10 36c0-2.5 2-3.5 4.5-3.2l2.5.2c2 .2 3 1.5 3 3.5V50c0 2.5-1.5 3.5-3.5 3.3L14 53c-2.5-.2-3.7-1.5-3.8-4z"/><path d="M54 36.2c0-2.5-2-3.6-4.5-3.3l-2.5.2c-2 .2-3 1.5-3 3.5l.2 13.4c0 2.4 1.4 3.5 3.4 3.3L50 53c2.5-.3 3.8-1.6 3.8-4z"/><g class="hatch" stroke-width="0.9"><path d="M12.5 37v11.5"/><path d="M14.8 36.2v13.6"/><path d="M47 37v12"/><path d="M49.2 36.5v13"/><path d="M22 18.5l2.5 2"/><path d="M25.5 15.8l1.8 2.3"/></g></svg><span class="obj-label">Kompetens</span></a>
+        <a class="obj" href="#erfarenhet"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 44.5c0-1 .8-1.8 1.8-1.8l38.5-.4c1 0 1.9.8 1.9 1.8v6.6c0 1-.8 1.8-1.8 1.8l-38.6.3c-1 0-1.8-.8-1.8-1.8z"/><path d="M13 42.6l-.1 9.8"/><path d="M45.5 42.4v10"/><path d="M14 33.8c0-1 .8-1.8 1.8-1.8L50 31.2c1 0 1.8.8 1.8 1.8v6.8c0 1-.8 1.8-1.8 1.8l-34.3.6c-1 0-1.7-.8-1.7-1.8z"/><path d="M18.5 32v9.8"/><path d="M46 31.5l.2 9.8"/><path d="M20 23.5c3.5-2.2 8.5-2.6 12.4-.4 3.9-2.2 8.9-1.8 12.4.4v6.3c-3.5-1.8-8.5-2.1-12.4.1-3.9-2.2-8.9-1.8-12.4-.1z"/><path d="M32.4 23.1v6.8"/><path d="M36 12l6 2.8-6 2.6-6-2.6z"/><path d="M33 16.2v2.6c1.8 1.2 4.2 1.2 6 0v-2.6"/><path d="M42 14.8v4.2"/><g class="hatch" stroke-width="0.9"><path d="M22 45.2v5.6"/><path d="M25 45.2v5.6"/><path d="M28 45.1v5.6"/><path d="M27 34.4v5.5"/><path d="M30 34.3v5.5"/><path d="M23.5 25l5 .6"/><path d="M36 25.5l5-.6"/></g></svg><span class="obj-label">Bakgrund</span></a>
+        <a class="obj" href="#kontakt"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9c0-1.5 1.2-2.5 2.7-2.5L42 6.8c1.6 0 2.6 1.1 2.6 2.6L45 55c0 1.6-1.1 2.6-2.7 2.6l-19.5.2c-1.6 0-2.6-1-2.6-2.6z"/><path d="M23.5 15.5l18-.1.3 30.3-18.1.2z"/><path d="M29 11.5l7-.1"/><circle cx="32.7" cy="52" r="1.6"/><path d="M26.5 27c0-2 1.5-3 3.1-3 1.3 0 2.3.8 2.9 2 .6-1.2 1.6-2 2.9-2 1.6 0 3.1 1 3.1 3 0 3.4-4.3 6.3-6 7.3-1.7-1-6-3.9-6-7.3z"/><g class="hatch" stroke-width="0.9"><path d="M41.8 9.5v3.5"/><path d="M42.6 20l-.1 20"/><path d="M22 20v22"/><path d="M34 38.5l4-.1"/><path d="M29 41.5l9-.1"/></g></svg><span class="obj-label">Kontakt</span></a>
+      </nav>
+    </div>
+    <svg class="forest" viewBox="0 0 1240 214" preserveAspectRatio="xMidYMax meet" aria-hidden="true" focusable="false"><path pathLength="1" class="o far" d="M0.0 150.0 C23.2 150.0 34.9 125.8 58.1 125.8 C88.9 125.8 104.3 120.6 135.1 120.6 C159.2 120.6 171.3 127.3 195.4 127.3 C214.3 127.3 223.8 123.2 242.8 123.2 C268.8 123.2 281.9 138.6 308.0 138.6 C325.5 138.6 334.2 111.7 351.7 111.7 C369.2 111.7 377.9 139.5 395.4 139.5 C422.4 139.5 436.0 97.3 463.1 97.3 C494.8 97.3 510.7 148.1 542.4 148.1 C568.8 148.1 582.1 128.9 608.5 128.9 C627.1 128.9 636.3 95.8 654.8 95.8 C679.3 95.8 691.5 98.3 716.0 98.3 C735.0 98.3 744.5 108.3 763.6 108.3 C780.1 108.3 788.3 120.5 804.8 120.5 C827.8 120.5 839.4 141.3 862.4 141.3 C886.7 141.3 898.9 130.2 923.2 130.2 C947.2 130.2 959.2 131.4 983.2 131.4 C1006.5 131.4 1018.1 110.3 1041.4 110.3 C1073.4 110.3 1089.4 149.8 1121.4 149.8 C1150.8 149.8 1165.5 133.9 1195.0 133.9 C1216.0 133.9 1226.5 107.6 1247.6 107.6" style="--d:0s;--t:2.4s"/><path pathLength="1" class="h far" d="M24.3 144.9 L22.8 148.9" style="--d:0.40s;--t:0.25s"/><path pathLength="1" class="h far" d="M39.0 135.9 L37.5 139.9" style="--d:0.42s;--t:0.25s"/><path pathLength="1" class="h far" d="M49.2 131.3 L47.7 135.3" style="--d:0.44s;--t:0.25s"/><path pathLength="1" class="h far" d="M59.9 129.8 L58.4 133.8" style="--d:0.46s;--t:0.25s"/><path pathLength="1" class="h far" d="M64.5 129.7 L63.0 133.7" style="--d:0.47s;--t:0.25s"/><path pathLength="1" class="h far" d="M78.3 128.9 L76.8 132.9" style="--d:0.50s;--t:0.25s"/><path pathLength="1" class="h far" d="M84.1 128.4 L82.6 132.4" style="--d:0.51s;--t:0.25s"/><path pathLength="1" class="h far" d="M89.7 127.9 L88.2 131.9" style="--d:0.52s;--t:0.25s"/><path pathLength="1" class="h far" d="M94.7 127.4 L93.2 131.4" style="--d:0.53s;--t:0.25s"/><path pathLength="1" class="h far" d="M111.6 125.8 L110.1 129.8" style="--d:0.56s;--t:0.25s"/><path pathLength="1" class="h far" d="M122.2 125.0 L120.7 129.0" style="--d:0.58s;--t:0.25s"/><path pathLength="1" class="h far" d="M128.7 124.7 L127.2 128.7" style="--d:0.59s;--t:0.25s"/><path pathLength="1" class="h far" d="M142.4 124.9 L140.9 128.9" style="--d:0.61s;--t:0.25s"/><path pathLength="1" class="h far" d="M147.8 125.4 L146.3 129.4" style="--d:0.62s;--t:0.25s"/><path pathLength="1" class="h far" d="M153.3 125.1 L151.3 135.1" style="--d:0.63s;--t:0.25s"/><path pathLength="1" class="h far" d="M158.5 125.9 L156.5 140.5" style="--d:0.64s;--t:0.25s"/><path pathLength="1" class="h far" d="M163.7 126.7 L161.7 138.3" style="--d:0.65s;--t:0.25s"/><path pathLength="1" class="h far" d="M169.8 127.7 L167.8 136.2" style="--d:0.66s;--t:0.25s"/><path pathLength="1" class="h far" d="M174.2 128.4 L172.2 142.7" style="--d:0.67s;--t:0.25s"/><path pathLength="1" class="h far" d="M180.3 130.3 L178.8 134.3" style="--d:0.68s;--t:0.25s"/><path pathLength="1" class="h far" d="M191.1 131.2 L189.6 135.2" style="--d:0.70s;--t:0.25s"/><path pathLength="1" class="h far" d="M207.2 130.7 L205.7 134.7" style="--d:0.73s;--t:0.25s"/><path pathLength="1" class="h far" d="M213.6 129.9 L212.1 133.9" style="--d:0.75s;--t:0.25s"/><path pathLength="1" class="h far" d="M230.2 127.9 L228.7 131.9" style="--d:0.78s;--t:0.25s"/><path pathLength="1" class="h far" d="M236.0 127.4 L234.5 131.4" style="--d:0.79s;--t:0.25s"/><path pathLength="1" class="h far" d="M251.4 126.9 L249.4 141.2" style="--d:0.82s;--t:0.25s"/><path pathLength="1" class="h far" d="M255.9 127.8 L253.9 134.9" style="--d:0.82s;--t:0.25s"/><path pathLength="1" class="h far" d="M260.6 129.0 L258.6 139.6" style="--d:0.83s;--t:0.25s"/><path pathLength="1" class="h far" d="M264.7 130.2 L262.7 138.6" style="--d:0.84s;--t:0.25s"/><path pathLength="1" class="h far" d="M269.6 131.9 L267.6 143.4" style="--d:0.85s;--t:0.25s"/><path pathLength="1" class="h far" d="M274.0 133.4 L272.0 143.3" style="--d:0.86s;--t:0.25s"/><path pathLength="1" class="h far" d="M280.2 135.6 L278.2 150.4" style="--d:0.87s;--t:0.25s"/><path pathLength="1" class="h far" d="M285.8 137.5 L283.8 150.0" style="--d:0.88s;--t:0.25s"/><path pathLength="1" class="h far" d="M291.3 139.1 L289.3 147.2" style="--d:0.89s;--t:0.25s"/><path pathLength="1" class="h far" d="M295.4 140.1 L293.4 147.3" style="--d:0.90s;--t:0.25s"/><path pathLength="1" class="h far" d="M308.1 142.6 L306.6 146.6" style="--d:0.92s;--t:0.25s"/><path pathLength="1" class="h far" d="M326.0 132.7 L324.5 136.7" style="--d:0.95s;--t:0.25s"/><path pathLength="1" class="h far" d="M355.4 115.2 L353.4 129.4" style="--d:1.01s;--t:0.25s"/><path pathLength="1" class="h far" d="M361.5 118.3 L359.5 128.6" style="--d:1.02s;--t:0.25s"/><path pathLength="1" class="h far" d="M367.5 123.0 L365.5 136.9" style="--d:1.03s;--t:0.25s"/><path pathLength="1" class="h far" d="M373.0 128.0 L371.0 140.0" style="--d:1.04s;--t:0.25s"/><path pathLength="1" class="h far" d="M377.9 132.7 L375.9 144.4" style="--d:1.05s;--t:0.25s"/><path pathLength="1" class="h far" d="M383.4 137.4 L381.4 145.1" style="--d:1.06s;--t:0.25s"/><path pathLength="1" class="h far" d="M389.0 140.9 L387.0 155.9" style="--d:1.07s;--t:0.25s"/><path pathLength="1" class="h far" d="M411.7 137.3 L410.2 141.3" style="--d:1.11s;--t:0.25s"/><path pathLength="1" class="h far" d="M417.6 132.8 L416.1 136.8" style="--d:1.12s;--t:0.25s"/><path pathLength="1" class="h far" d="M449.0 106.0 L447.5 110.0" style="--d:1.18s;--t:0.25s"/><path pathLength="1" class="h far" d="M470.9 101.7 L468.9 110.3" style="--d:1.22s;--t:0.25s"/><path pathLength="1" class="h far" d="M476.0 103.9 L474.0 117.4" style="--d:1.23s;--t:0.25s"/><path pathLength="1" class="h far" d="M482.3 107.8 L480.3 121.8" style="--d:1.24s;--t:0.25s"/><path pathLength="1" class="h far" d="M487.3 111.6 L485.3 123.2" style="--d:1.25s;--t:0.25s"/><path pathLength="1" class="h far" d="M492.1 115.7 L490.1 123.8" style="--d:1.26s;--t:0.25s"/><path pathLength="1" class="h far" d="M497.3 120.5 L495.3 134.2" style="--d:1.27s;--t:0.25s"/><path pathLength="1" class="h far" d="M503.4 126.3 L501.4 139.0" style="--d:1.28s;--t:0.25s"/><path pathLength="1" class="h far" d="M509.8 132.4 L507.8 141.6" style="--d:1.30s;--t:0.25s"/><path pathLength="1" class="h far" d="M514.2 136.4 L512.2 147.0" style="--d:1.30s;--t:0.25s"/><path pathLength="1" class="h far" d="M518.9 140.3 L516.9 149.1" style="--d:1.31s;--t:0.25s"/><path pathLength="1" class="h far" d="M523.9 144.1 L521.9 156.1" style="--d:1.32s;--t:0.25s"/><path pathLength="1" class="h far" d="M529.2 147.3 L527.2 156.8" style="--d:1.33s;--t:0.25s"/><path pathLength="1" class="h far" d="M535.3 149.9 L533.3 164.8" style="--d:1.34s;--t:0.25s"/><path pathLength="1" class="h far" d="M540.4 152.0 L538.9 156.0" style="--d:1.35s;--t:0.25s"/><path pathLength="1" class="h far" d="M560.0 148.7 L558.5 152.7" style="--d:1.39s;--t:0.25s"/><path pathLength="1" class="h far" d="M573.0 143.5 L571.5 147.5" style="--d:1.41s;--t:0.25s"/><path pathLength="1" class="h far" d="M603.2 133.2 L601.7 137.2" style="--d:1.47s;--t:0.25s"/><path pathLength="1" class="h far" d="M644.9 103.7 L643.4 107.7" style="--d:1.55s;--t:0.25s"/><path pathLength="1" class="h far" d="M689.2 101.3 L687.7 105.3" style="--d:1.63s;--t:0.25s"/><path pathLength="1" class="h far" d="M719.0 102.4 L717.5 106.4" style="--d:1.68s;--t:0.25s"/><path pathLength="1" class="h far" d="M724.1 102.1 L722.1 113.5" style="--d:1.69s;--t:0.25s"/><path pathLength="1" class="h far" d="M730.1 103.4 L728.1 114.3" style="--d:1.70s;--t:0.25s"/><path pathLength="1" class="h far" d="M734.1 104.5 L732.1 118.0" style="--d:1.71s;--t:0.25s"/><path pathLength="1" class="h far" d="M738.3 105.8 L736.3 119.2" style="--d:1.72s;--t:0.25s"/><path pathLength="1" class="h far" d="M742.7 107.2 L740.7 116.9" style="--d:1.73s;--t:0.25s"/><path pathLength="1" class="h far" d="M748.7 109.0 L746.7 117.1" style="--d:1.74s;--t:0.25s"/><path pathLength="1" class="h far" d="M753.1 110.1 L751.1 121.2" style="--d:1.75s;--t:0.25s"/><path pathLength="1" class="h far" d="M769.8 112.1 L767.8 126.7" style="--d:1.78s;--t:0.25s"/><path pathLength="1" class="h far" d="M774.0 113.3 L772.0 122.0" style="--d:1.79s;--t:0.25s"/><path pathLength="1" class="h far" d="M779.4 115.3 L777.4 124.6" style="--d:1.80s;--t:0.25s"/><path pathLength="1" class="h far" d="M785.2 117.9 L783.2 130.0" style="--d:1.81s;--t:0.25s"/><path pathLength="1" class="h far" d="M790.5 120.1 L788.5 133.9" style="--d:1.82s;--t:0.25s"/><path pathLength="1" class="h far" d="M795.9 122.1 L793.9 131.5" style="--d:1.83s;--t:0.25s"/><path pathLength="1" class="h far" d="M800.8 123.2 L798.8 137.0" style="--d:1.84s;--t:0.25s"/><path pathLength="1" class="h far" d="M807.1 124.6 L805.6 128.6" style="--d:1.85s;--t:0.25s"/><path pathLength="1" class="h far" d="M813.2 124.7 L811.2 139.5" style="--d:1.86s;--t:0.25s"/><path pathLength="1" class="h far" d="M818.5 126.5 L816.5 138.1" style="--d:1.87s;--t:0.25s"/><path pathLength="1" class="h far" d="M823.0 128.5 L821.0 139.7" style="--d:1.88s;--t:0.25s"/><path pathLength="1" class="h far" d="M828.3 131.1 L826.3 142.9" style="--d:1.89s;--t:0.25s"/><path pathLength="1" class="h far" d="M832.4 133.3 L830.4 148.0" style="--d:1.89s;--t:0.25s"/><path pathLength="1" class="h far" d="M837.6 136.1 L835.6 146.3" style="--d:1.90s;--t:0.25s"/><path pathLength="1" class="h far" d="M843.7 139.2 L841.7 150.7" style="--d:1.91s;--t:0.25s"/><path pathLength="1" class="h far" d="M848.9 141.4 L846.9 154.0" style="--d:1.92s;--t:0.25s"/><path pathLength="1" class="h far" d="M853.0 142.9 L851.0 154.2" style="--d:1.93s;--t:0.25s"/><path pathLength="1" class="h far" d="M858.1 144.0 L856.1 158.7" style="--d:1.94s;--t:0.25s"/><path pathLength="1" class="h far" d="M869.6 144.9 L868.1 148.9" style="--d:1.96s;--t:0.25s"/><path pathLength="1" class="h far" d="M885.7 141.7 L884.2 145.7" style="--d:1.99s;--t:0.25s"/><path pathLength="1" class="h far" d="M899.6 137.9 L898.1 141.9" style="--d:2.02s;--t:0.25s"/><path pathLength="1" class="h far" d="M914.5 134.8 L913.0 138.8" style="--d:2.05s;--t:0.25s"/><path pathLength="1" class="h far" d="M920.4 134.3 L918.9 138.3" style="--d:2.06s;--t:0.25s"/><path pathLength="1" class="h far" d="M944.7 134.6 L943.2 138.6" style="--d:2.10s;--t:0.25s"/><path pathLength="1" class="h far" d="M982.8 135.4 L981.3 139.4" style="--d:2.17s;--t:0.25s"/><path pathLength="1" class="h far" d="M993.6 133.6 L992.1 137.6" style="--d:2.19s;--t:0.25s"/><path pathLength="1" class="h far" d="M1018.8 121.4 L1017.3 125.4" style="--d:2.24s;--t:0.25s"/><path pathLength="1" class="h far" d="M1045.5 113.6 L1043.5 122.1" style="--d:2.29s;--t:0.25s"/><path pathLength="1" class="h far" d="M1049.6 114.5 L1047.6 122.3" style="--d:2.30s;--t:0.25s"/><path pathLength="1" class="h far" d="M1053.7 115.8 L1051.7 127.2" style="--d:2.30s;--t:0.25s"/><path pathLength="1" class="h far" d="M1059.0 118.2 L1057.0 129.7" style="--d:2.31s;--t:0.25s"/><path pathLength="1" class="h far" d="M1063.4 120.6 L1061.4 129.1" style="--d:2.32s;--t:0.25s"/><path pathLength="1" class="h far" d="M1067.9 123.4 L1065.9 137.1" style="--d:2.33s;--t:0.25s"/><path pathLength="1" class="h far" d="M1074.4 127.9 L1072.4 142.3" style="--d:2.34s;--t:0.25s"/><path pathLength="1" class="h far" d="M1078.6 131.0 L1076.6 138.5" style="--d:2.35s;--t:0.25s"/><path pathLength="1" class="h far" d="M1085.0 135.7 L1083.0 146.4" style="--d:2.36s;--t:0.25s"/><path pathLength="1" class="h far" d="M1090.9 139.9 L1088.9 149.5" style="--d:2.37s;--t:0.25s"/><path pathLength="1" class="h far" d="M1096.1 143.4 L1094.1 154.5" style="--d:2.38s;--t:0.25s"/><path pathLength="1" class="h far" d="M1101.1 146.5 L1099.1 158.3" style="--d:2.39s;--t:0.25s"/><path pathLength="1" class="h far" d="M1105.2 148.6 L1103.2 161.2" style="--d:2.40s;--t:0.25s"/><path pathLength="1" class="h far" d="M1111.3 151.0 L1109.3 159.5" style="--d:2.41s;--t:0.25s"/><path pathLength="1" class="h far" d="M1116.4 152.3 L1114.4 165.2" style="--d:2.42s;--t:0.25s"/><path pathLength="1" class="h far" d="M1121.4 153.8 L1119.9 157.8" style="--d:2.43s;--t:0.25s"/><path pathLength="1" class="h far" d="M1202.0 136.6 L1200.5 140.6" style="--d:2.58s;--t:0.25s"/><path pathLength="1" class="h far" d="M1212.5 131.1 L1211.0 135.1" style="--d:2.60s;--t:0.25s"/><path pathLength="1" class="b o fill" d="M60.0 121.0 Q64.1 138.0 71.9 151.9 Q68.9 155.3 65.9 152.1 Q63.0 155.8 60.0 151.4 Q57.0 155.1 54.1 152.1 Q51.1 154.4 48.1 151.8 Q55.9 138.0 60.0 121.0 Z" style="--d:0.80s;--t:0.90s"/><path pathLength="1" class="b h" d="M60.8 132.7 L62.2 135.4" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M63.0 136.5 L65.0 140.0" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M63.9 149.7 L68.3 153.5" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M61.3 146.8 L64.7 150.8" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M55.9 137.1 L54.6 139.6" style="--d:1.59s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M60.0 142.0 Q65.4 159.0 75.3 172.9 Q71.5 175.3 67.6 172.9 Q63.8 175.3 60.0 172.9 Q56.2 176.2 52.4 172.5 Q48.5 176.8 44.7 172.9 Q54.6 159.0 60.0 142.0 Z" style="--d:0.80s;--t:0.90s"/><path pathLength="1" class="b h" d="M63.8 162.6 L66.9 165.7" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M64.0 165.0 L67.3 168.9" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M60.9 158.3 L63.2 160.9" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M63.0 155.8 L65.1 160.1" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M61.5 166.7 L66.4 171.1" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M54.6 158.5 L53.0 161.0" style="--d:1.58s;--t:0.28s"/><path pathLength="1" class="b h" d="M54.8 163.5 L52.7 166.0" style="--d:1.58s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M60.0 163.1 Q66.6 177.7 78.7 189.6 Q74.0 193.6 69.4 189.4 Q64.7 192.7 60.0 190.1 Q55.3 193.1 50.6 189.6 Q46.0 193.6 41.3 190.0 Q53.4 177.7 60.0 163.1 Z" style="--d:0.80s;--t:0.90s"/><path pathLength="1" class="b h" d="M62.0 182.0 L66.6 185.4" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M61.1 175.6 L64.0 178.4" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M64.6 179.4 L68.3 182.5" style="--d:1.61s;--t:0.28s"/><path pathLength="1" class="b h" d="M63.8 181.7 L68.6 185.2" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M69.4 188.3 L75.8 191.3" style="--d:1.62s;--t:0.28s"/><path pathLength="1" class="b h" d="M63.9 174.2 L66.8 178.0" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M62.4 178.1 L66.1 181.7" style="--d:1.60s;--t:0.28s"/><path pathLength="1" class="b h" d="M52.1 183.4 L49.2 185.9" style="--d:1.58s;--t:0.28s"/><path pathLength="1" class="b h" d="M54.1 185.4 L51.0 187.9" style="--d:1.58s;--t:0.28s"/><path pathLength="1" class="b o" d="M58.4 189.6 L58.2 199.0 M61.6 189.6 L61.9 199.0" style="--d:0.79s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M112.0 103.0 Q116.7 118.7 125.5 131.5 Q122.2 134.0 118.8 132.0 Q115.4 135.3 112.0 131.9 Q108.6 133.6 105.2 131.1 Q101.8 134.1 98.5 131.4 Q107.3 118.7 112.0 103.0 Z" style="--d:0.92s;--t:0.90s"/><path pathLength="1" class="b h" d="M113.4 123.6 L116.7 126.3" style="--d:1.72s;--t:0.28s"/><path pathLength="1" class="b h" d="M114.2 114.5 L116.0 118.2" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M114.4 119.4 L116.6 122.6" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.1 125.7 L120.0 128.5" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M116.3 126.8 L120.4 129.7" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M108.2 122.7 L106.4 125.2" style="--d:1.71s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M112.0 122.4 Q117.8 138.1 128.7 150.9 Q124.5 154.6 120.4 150.8 Q116.2 154.2 112.0 151.4 Q107.8 153.6 103.6 151.0 Q99.5 154.4 95.3 151.4 Q106.2 138.1 112.0 122.4 Z" style="--d:0.92s;--t:0.90s"/><path pathLength="1" class="b h" d="M114.7 139.7 L117.4 144.0" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M112.9 133.8 L115.1 137.2" style="--d:1.72s;--t:0.28s"/><path pathLength="1" class="b h" d="M115.0 144.1 L119.6 146.8" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M115.2 136.1 L117.3 139.2" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.4 144.8 L121.2 147.6" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M116.0 138.5 L118.9 141.3" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M104.8 145.8 L102.0 148.3" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="b h" d="M101.7 148.5 L98.6 151.0" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M112.0 141.9 Q119.0 157.5 131.9 170.4 Q126.9 174.2 121.9 170.3 Q117.0 174.0 112.0 170.2 Q107.0 173.0 102.1 170.3 Q97.1 174.2 92.1 170.8 Q105.0 157.5 112.0 141.9 Z" style="--d:0.92s;--t:0.90s"/><path pathLength="1" class="b h" d="M114.6 156.1 L117.6 159.3" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M115.2 158.6 L118.5 162.2" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.6 165.5 L123.8 169.1" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M116.0 154.9 L119.5 157.9" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M114.4 152.2 L116.8 155.9" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M119.3 168.4 L126.1 171.0" style="--d:1.74s;--t:0.28s"/><path pathLength="1" class="b h" d="M118.1 161.2 L121.7 163.9" style="--d:1.74s;--t:0.28s"/><path pathLength="1" class="b h" d="M101.1 165.6 L97.8 168.1" style="--d:1.69s;--t:0.28s"/><path pathLength="1" class="b h" d="M106.1 157.2 L103.9 159.7" style="--d:1.71s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M112.0 161.3 Q120.1 175.7 135.0 187.5 Q129.3 189.8 123.5 187.7 Q117.8 190.8 112.0 187.2 Q106.2 189.9 100.5 187.7 Q94.7 190.5 89.0 187.7 Q103.9 175.7 112.0 161.3 Z" style="--d:0.92s;--t:0.90s"/><path pathLength="1" class="b h" d="M115.4 176.7 L120.7 180.5" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.1 178.2 L122.4 182.1" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.9 184.8 L125.6 188.7" style="--d:1.74s;--t:0.28s"/><path pathLength="1" class="b h" d="M121.2 183.9 L128.6 188.1" style="--d:1.74s;--t:0.28s"/><path pathLength="1" class="b h" d="M120.3 185.5 L127.3 189.4" style="--d:1.74s;--t:0.28s"/><path pathLength="1" class="b h" d="M117.5 183.1 L123.5 185.9" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M122.0 182.1 L127.6 184.9" style="--d:1.75s;--t:0.28s"/><path pathLength="1" class="b h" d="M115.2 173.7 L118.4 178.1" style="--d:1.73s;--t:0.28s"/><path pathLength="1" class="b h" d="M106.9 175.1 L104.4 177.6" style="--d:1.71s;--t:0.28s"/><path pathLength="1" class="b h" d="M104.9 175.7 L102.4 178.2" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="b h" d="M104.7 183.5 L100.8 186.0" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="b o" d="M110.4 187.5 L110.2 199.0 M113.6 187.5 L113.9 199.0" style="--d:0.92s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M175.0 129.0 Q178.7 144.2 185.6 156.7 Q183.0 158.8 180.3 156.7 Q177.7 159.9 175.0 157.1 Q172.3 158.8 169.7 156.3 Q167.0 159.1 164.4 156.4 Q171.3 144.2 175.0 129.0 Z" style="--d:1.07s;--t:0.90s"/><path pathLength="1" class="b h" d="M177.2 142.6 L179.0 145.6" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M176.1 141.8 L177.5 145.8" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M177.0 143.9 L179.1 147.3" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M177.7 143.0 L179.8 146.2" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M169.6 149.7 L168.0 152.2" style="--d:1.86s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M175.0 147.9 Q179.8 163.1 188.7 175.6 Q185.3 178.6 181.9 175.3 Q178.4 177.7 175.0 176.1 Q171.6 179.2 168.1 175.5 Q164.7 178.7 161.3 175.6 Q170.2 163.1 175.0 147.9 Z" style="--d:1.07s;--t:0.90s"/><path pathLength="1" class="b h" d="M178.9 162.2 L181.3 165.1" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M176.5 157.8 L178.0 161.9" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M179.0 169.5 L181.9 172.3" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M176.6 162.9 L179.4 166.5" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M180.5 168.2 L183.4 171.8" style="--d:1.89s;--t:0.28s"/><path pathLength="1" class="b h" d="M170.3 163.6 L168.7 166.1" style="--d:1.86s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M175.0 166.8 Q180.9 179.9 191.8 190.6 Q187.6 192.6 183.4 190.9 Q179.2 194.3 175.0 190.9 Q170.8 192.8 166.6 190.4 Q162.4 194.0 158.2 190.2 Q169.1 179.9 175.0 166.8 Z" style="--d:1.07s;--t:0.90s"/><path pathLength="1" class="b h" d="M178.3 182.0 L182.5 185.7" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M178.4 187.4 L183.8 190.7" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M177.1 188.2 L182.8 191.1" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M178.8 182.9 L181.9 187.0" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M177.2 179.6 L179.5 182.7" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M179.5 181.8 L182.7 185.7" style="--d:1.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M170.8 179.8 L168.9 182.3" style="--d:1.86s;--t:0.28s"/><path pathLength="1" class="b h" d="M166.8 183.6 L164.5 186.1" style="--d:1.85s;--t:0.28s"/><path pathLength="1" class="b o" d="M173.4 190.6 L173.2 199.0 M176.6 190.6 L176.9 199.0" style="--d:1.07s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M1010.0 119.0 Q1014.3 136.4 1022.2 150.7 Q1019.1 154.3 1016.1 150.8 Q1013.0 152.7 1010.0 150.6 Q1007.0 154.1 1003.9 150.4 Q1000.9 153.8 997.8 150.6 Q1005.7 136.4 1010.0 119.0 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="b h" d="M1012.4 130.3 L1014.0 133.2" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1012.0 141.8 L1014.7 145.4" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1011.6 135.8 L1013.6 139.6" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1011.2 135.0 L1013.4 138.1" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1004.1 148.3 L1001.8 150.8" style="--d:3.88s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1010.0 140.6 Q1015.5 158.0 1025.7 172.3 Q1021.8 175.7 1017.8 172.1 Q1013.9 175.9 1010.0 171.9 Q1006.1 174.6 1002.2 171.9 Q998.2 175.6 994.3 172.5 Q1004.5 158.0 1010.0 140.6 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="b h" d="M1012.0 155.1 L1014.7 158.8" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1011.3 153.4 L1013.0 156.1" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1011.2 159.4 L1014.9 162.8" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1014.0 161.4 L1017.8 165.5" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1012.3 159.0 L1015.1 161.5" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1013.8 159.3 L1017.5 163.4" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1003.2 165.8 L1000.7 168.3" style="--d:3.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M1006.6 156.7 L1005.0 159.2" style="--d:3.89s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1010.0 162.2 Q1016.7 177.2 1029.2 189.4 Q1024.4 192.1 1019.6 189.6 Q1014.8 191.6 1010.0 189.3 Q1005.2 192.4 1000.4 189.7 Q995.6 193.1 990.8 189.5 Q1003.3 177.2 1010.0 162.2 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="b h" d="M1013.8 174.3 L1017.1 177.9" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1013.5 177.5 L1016.4 181.4" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1016.0 187.8 L1022.5 192.0" style="--d:3.91s;--t:0.28s"/><path pathLength="1" class="b h" d="M1014.7 174.9 L1017.8 177.8" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1011.6 173.1 L1014.2 177.0" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1015.4 177.1 L1018.6 180.5" style="--d:3.91s;--t:0.28s"/><path pathLength="1" class="b h" d="M1014.4 173.7 L1016.6 178.0" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="b h" d="M1002.5 182.4 L999.6 184.9" style="--d:3.88s;--t:0.28s"/><path pathLength="1" class="b h" d="M1004.1 182.7 L1001.3 185.2" style="--d:3.88s;--t:0.28s"/><path pathLength="1" class="b o" d="M1008.4 189.4 L1008.2 199.0 M1011.6 189.4 L1011.9 199.0" style="--d:3.09s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M1062.0 99.0 Q1066.9 115.3 1076.1 128.7 Q1072.6 132.5 1069.1 129.2 Q1065.5 132.3 1062.0 128.8 Q1058.5 130.9 1055.0 129.0 Q1051.4 131.3 1047.9 129.1 Q1057.1 115.3 1062.0 99.0 Z" style="--d:3.22s;--t:0.90s"/><path pathLength="1" class="b h" d="M1064.5 113.7 L1067.1 116.6" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.3 119.2 L1065.7 122.0" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1068.9 127.0 L1073.6 130.1" style="--d:4.04s;--t:0.28s"/><path pathLength="1" class="b h" d="M1066.6 121.4 L1069.8 125.0" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.3 123.7 L1066.5 127.2" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1058.4 115.8 L1056.8 118.3" style="--d:4.01s;--t:0.28s"/><path pathLength="1" class="b h" d="M1058.1 121.5 L1055.9 124.0" style="--d:4.01s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1062.0 119.2 Q1068.1 135.6 1079.4 148.9 Q1075.0 152.0 1070.7 148.7 Q1066.3 152.1 1062.0 148.8 Q1057.7 152.2 1053.3 148.5 Q1048.9 152.3 1044.6 148.6 Q1055.9 135.6 1062.0 119.2 Z" style="--d:3.22s;--t:0.90s"/><path pathLength="1" class="b h" d="M1068.0 146.7 L1073.1 150.1" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1067.2 140.8 L1071.8 144.8" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1068.1 138.3 L1072.3 142.5" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1065.1 136.9 L1068.5 141.2" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1065.9 139.0 L1069.5 143.3" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.2 135.3 L1066.6 139.6" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1054.2 143.9 L1051.3 146.4" style="--d:4.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M1055.8 144.1 L1052.9 146.6" style="--d:4.00s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1062.0 139.5 Q1069.2 155.8 1082.7 169.2 Q1077.5 172.4 1072.3 168.7 Q1067.2 171.4 1062.0 169.1 Q1056.8 172.2 1051.6 169.1 Q1046.5 171.3 1041.3 169.4 Q1054.8 155.8 1062.0 139.5 Z" style="--d:3.22s;--t:0.90s"/><path pathLength="1" class="b h" d="M1064.9 159.3 L1068.9 162.5" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.3 154.1 L1067.3 158.5" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1069.6 161.7 L1074.5 165.8" style="--d:4.04s;--t:0.28s"/><path pathLength="1" class="b h" d="M1066.4 153.8 L1069.7 158.1" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1065.9 151.6 L1068.1 155.2" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.9 166.8 L1069.4 169.9" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1063.4 155.7 L1067.8 159.8" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1055.8 159.6 L1053.0 162.1" style="--d:4.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M1057.0 162.2 L1053.8 164.7" style="--d:4.01s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1062.0 159.7 Q1070.4 174.7 1086.0 187.0 Q1080.0 189.1 1074.0 187.4 Q1068.0 189.6 1062.0 187.0 Q1056.0 190.9 1050.0 187.5 Q1044.0 189.9 1038.0 186.7 Q1053.6 174.7 1062.0 159.7 Z" style="--d:3.22s;--t:0.90s"/><path pathLength="1" class="b h" d="M1068.5 174.1 L1073.4 177.0" style="--d:4.04s;--t:0.28s"/><path pathLength="1" class="b h" d="M1067.3 183.0 L1073.9 185.8" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1073.5 183.7 L1079.4 187.4" style="--d:4.05s;--t:0.28s"/><path pathLength="1" class="b h" d="M1067.5 172.4 L1070.4 175.1" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1066.5 181.1 L1073.8 185.4" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1065.0 180.9 L1071.6 185.3" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1064.0 176.6 L1068.2 179.7" style="--d:4.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M1065.5 180.9 L1070.7 183.9" style="--d:4.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M1070.2 180.1 L1075.7 184.0" style="--d:4.04s;--t:0.28s"/><path pathLength="1" class="b h" d="M1050.4 184.2 L1046.1 186.7" style="--d:3.99s;--t:0.28s"/><path pathLength="1" class="b h" d="M1055.9 176.2 L1053.0 178.7" style="--d:4.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M1049.5 184.7 L1045.1 187.2" style="--d:3.99s;--t:0.28s"/><path pathLength="1" class="b o" d="M1060.4 187.0 L1060.2 199.0 M1063.6 187.0 L1063.9 199.0" style="--d:3.22s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M1190.0 113.0 Q1194.2 127.0 1202.1 138.5 Q1199.1 141.1 1196.1 138.7 Q1193.0 140.7 1190.0 139.0 Q1187.0 141.4 1183.9 138.6 Q1180.9 141.6 1177.9 138.1 Q1185.8 127.0 1190.0 113.0 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="b h" d="M1192.0 131.1 L1194.4 135.2" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1191.1 123.3 L1192.9 126.3" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.2 126.2 L1193.9 130.5" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1191.3 137.1 L1195.0 141.1" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1184.5 130.2 L1182.9 132.7" style="--d:4.32s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1190.0 130.4 Q1195.2 144.5 1205.0 155.9 Q1201.2 158.9 1197.5 155.6 Q1193.7 159.1 1190.0 156.1 Q1186.3 158.7 1182.5 156.1 Q1178.8 159.5 1175.0 156.0 Q1184.8 144.5 1190.0 130.4 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="b h" d="M1194.7 147.1 L1198.1 150.6" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.5 153.9 L1197.5 156.8" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.2 148.7 L1195.6 152.7" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1195.6 151.4 L1199.1 154.9" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.6 142.7 L1195.0 145.3" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1183.3 150.0 L1181.0 152.5" style="--d:4.31s;--t:0.28s"/><path pathLength="1" class="b h" d="M1182.6 149.8 L1180.4 152.3" style="--d:4.31s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1190.0 147.8 Q1196.2 161.9 1207.8 173.4 Q1203.4 175.7 1198.9 173.0 Q1194.5 175.4 1190.0 173.4 Q1185.5 176.2 1181.1 173.3 Q1176.6 175.9 1172.2 173.7 Q1183.8 161.9 1190.0 147.8 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="b h" d="M1193.6 157.9 L1195.9 161.5" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1193.0 168.9 L1197.0 172.0" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1191.6 157.4 L1193.9 161.0" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1193.3 160.8 L1195.7 165.0" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1191.7 159.4 L1193.9 163.3" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1196.9 169.5 L1200.8 172.8" style="--d:4.35s;--t:0.28s"/><path pathLength="1" class="b h" d="M1185.4 164.8 L1183.1 167.3" style="--d:4.32s;--t:0.28s"/><path pathLength="1" class="b h" d="M1184.7 171.7 L1181.4 174.2" style="--d:4.32s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1190.0 165.2 Q1197.2 178.1 1210.6 188.7 Q1205.5 191.7 1200.3 188.9 Q1195.2 192.7 1190.0 188.3 Q1184.8 191.6 1179.7 188.9 Q1174.5 190.8 1169.4 188.4 Q1182.8 178.1 1190.0 165.2 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="b h" d="M1193.0 186.0 L1198.6 189.1" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1191.7 179.4 L1194.9 183.9" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1197.2 184.2 L1201.9 187.2" style="--d:4.35s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.9 181.2 L1197.4 185.6" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1193.0 178.6 L1197.6 182.3" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1192.2 174.0 L1194.9 176.6" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="b h" d="M1194.7 178.3 L1199.1 181.9" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="b h" d="M1181.0 186.3 L1177.3 188.8" style="--d:4.31s;--t:0.28s"/><path pathLength="1" class="b h" d="M1181.1 181.1 L1178.3 183.6" style="--d:4.31s;--t:0.28s"/><path pathLength="1" class="b o" d="M1188.4 188.7 L1188.2 199.0 M1191.6 188.7 L1191.9 199.0" style="--d:3.53s;--t:0.60s"/><path pathLength="1" class="b o fill" d="M1232.0 129.0 Q1235.7 144.2 1242.6 156.7 Q1240.0 159.5 1237.3 157.0 Q1234.7 159.2 1232.0 156.6 Q1229.3 159.1 1226.7 156.8 Q1224.0 159.0 1221.4 156.4 Q1228.3 144.2 1232.0 129.0 Z" style="--d:3.63s;--t:0.90s"/><path pathLength="1" class="b h" d="M1233.6 142.3 L1235.1 145.7" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1236.1 155.2 L1239.9 158.1" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="b h" d="M1232.8 145.1 L1235.0 148.3" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1232.6 143.3 L1234.1 146.3" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1227.2 147.8 L1225.7 150.3" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1232.0 147.9 Q1236.8 163.1 1245.7 175.6 Q1242.3 179.0 1238.9 175.4 Q1235.4 178.3 1232.0 175.3 Q1228.6 179.5 1225.1 175.5 Q1221.7 179.1 1218.3 175.8 Q1227.2 163.1 1232.0 147.9 Z" style="--d:3.63s;--t:0.90s"/><path pathLength="1" class="b h" d="M1233.3 172.7 L1237.0 175.9" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1234.7 159.0 L1236.4 163.0" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="b h" d="M1233.1 166.2 L1235.9 169.2" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1232.9 158.3 L1234.6 160.8" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1234.1 162.8 L1236.6 165.6" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="b h" d="M1227.5 170.6 L1225.2 173.1" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1232.0 166.8 Q1237.9 179.9 1248.8 190.6 Q1244.6 194.1 1240.4 190.8 Q1236.2 192.9 1232.0 190.3 Q1227.8 193.2 1223.6 190.8 Q1219.4 193.4 1215.2 190.5 Q1226.1 179.9 1232.0 166.8 Z" style="--d:3.63s;--t:0.90s"/><path pathLength="1" class="b h" d="M1234.9 187.5 L1239.2 190.7" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="b h" d="M1233.0 178.2 L1235.0 182.0" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1237.4 183.2 L1242.0 186.3" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="b h" d="M1238.5 184.7 L1242.1 188.6" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="b h" d="M1238.7 184.6 L1243.5 187.6" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="b h" d="M1233.7 184.2 L1237.6 187.4" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="b h" d="M1228.0 179.3 L1226.2 181.8" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="b h" d="M1226.6 182.2 L1224.4 184.7" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="b o" d="M1230.4 190.6 L1230.2 199.0 M1233.6 190.6 L1233.9 199.0" style="--d:3.63s;--t:0.60s"/><path pathLength="1" class="b o" d="M222.8 199.0 C223.0 188.1 222.0 166.5 219.0 160.1 M227.2 199.0 C227.0 188.1 228.0 166.5 232.0 162.1" style="--d:1.19s;--t:0.60s"/><path pathLength="1" class="b h" d="M225.5 191.9 L226.8 193.9" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M225.5 193.7 L226.8 195.7" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M225.5 190.1 L226.8 192.1" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M225.5 189.0 L226.8 191.0" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M225.0 138.9 Q230.7 136.7 234.2 143.6 Q240.7 144.3 240.7 151.6 Q245.8 156.6 241.7 163.1 Q244.3 170.7 238.7 173.8 Q236.7 180.4 230.1 178.8 Q225.1 183.9 220.1 179.7 Q214.1 180.8 212.4 173.6 Q206.4 170.6 208.6 163.1 Q204.1 156.5 208.8 151.5 Q208.9 144.1 215.7 143.2 Q219.2 136.5 225.0 138.9 Z" style="--d:1.19s;--t:0.90s"/><path pathLength="1" class="b h" d="M227.6 161.3 Q231.6 157.3 235.6 161.3" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M227.7 153.7 Q231.7 149.7 235.7 153.7" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="b h" d="M220.3 171.4 Q224.3 167.4 228.3 171.4" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="b h" d="M224.0 168.6 Q228.0 164.6 232.0 168.6" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="b h" d="M211.9 150.6 Q215.9 146.6 219.9 150.6" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="b h" d="M215.3 168.0 Q219.3 164.0 223.3 168.0" style="--d:1.97s;--t:0.28s"/><path pathLength="1" class="b h" d="M230.8 155.7 Q234.8 151.7 238.8 155.7" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="b h" d="M232.7 173.4 L230.2 177.2" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="b h" d="M235.7 165.9 L233.2 169.7" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M240.4 161.8 L237.9 165.6" style="--d:2.03s;--t:0.28s"/><path pathLength="1" class="b h" d="M224.7 173.7 L222.2 177.5" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="b h" d="M224.1 170.0 L221.6 173.8" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="b h" d="M237.2 156.3 L234.7 160.1" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M236.1 162.4 L233.6 166.2" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M222.5 170.8 L220.0 174.6" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="b h" d="M235.0 158.7 L232.5 162.5" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M229.6 170.8 L227.1 174.6" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="b h" d="M235.7 151.5 L233.2 155.3" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M234.5 164.6 L232.0 168.4" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M236.2 169.8 L233.7 173.6" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M234.8 171.3 L232.3 175.1" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M235.8 173.3 L233.3 177.1" style="--d:2.02s;--t:0.28s"/><path pathLength="1" class="b h" d="M222.3 172.7 L219.8 176.5" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="b o" d="M1122.8 199.0 C1123.0 187.1 1122.0 163.0 1119.0 156.1 M1127.2 199.0 C1127.0 187.1 1128.0 163.0 1132.0 158.1" style="--d:3.37s;--t:0.60s"/><path pathLength="1" class="b h" d="M1125.5 190.2 L1126.8 192.2" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1125.5 181.1 L1126.8 183.1" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1125.5 190.7 L1126.8 192.7" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1125.5 184.0 L1126.8 186.0" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b o fill" d="M1125.0 132.8 Q1131.8 129.5 1136.1 136.1 Q1142.4 137.6 1141.8 146.5 Q1147.9 152.0 1144.1 159.4 Q1146.2 167.4 1139.3 170.6 Q1137.4 178.8 1130.6 178.0 Q1125.2 182.7 1119.7 177.2 Q1112.8 178.2 1110.7 170.4 Q1103.8 167.1 1105.9 159.2 Q1102.1 152.4 1108.5 147.2 Q1108.3 138.1 1115.1 136.4 Q1118.9 129.7 1125.0 132.8 Z" style="--d:3.37s;--t:0.90s"/><path pathLength="1" class="b h" d="M1127.3 162.5 Q1131.3 158.5 1135.3 162.5" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="b h" d="M1122.2 146.0 Q1126.2 142.0 1130.2 146.0" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1127.5 168.6 Q1131.5 164.6 1135.5 168.6" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="b h" d="M1124.0 152.3 Q1128.0 148.3 1132.0 152.3" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1120.8 166.6 Q1124.8 162.6 1128.8 166.6" style="--d:4.16s;--t:0.28s"/><path pathLength="1" class="b h" d="M1123.2 147.3 Q1127.2 143.3 1131.2 147.3" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1119.6 148.7 Q1123.6 144.7 1127.6 148.7" style="--d:4.16s;--t:0.28s"/><path pathLength="1" class="b h" d="M1129.5 169.3 L1127.0 173.1" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="b h" d="M1140.8 160.6 L1138.3 164.4" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="b h" d="M1126.1 176.0 L1123.6 179.8" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1133.8 167.2 L1131.3 171.0" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1130.9 172.3 L1128.4 176.1" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1126.6 175.7 L1124.1 179.5" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="b h" d="M1137.0 151.9 L1134.5 155.7" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="b h" d="M1130.3 167.6 L1127.8 171.4" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="b h" d="M1133.9 154.6 L1131.4 158.4" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1136.7 172.3 L1134.2 176.1" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="b h" d="M1122.4 167.7 L1119.9 171.5" style="--d:4.17s;--t:0.28s"/><path pathLength="1" class="b h" d="M1130.6 169.8 L1128.1 173.6" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1132.1 168.5 L1129.6 172.3" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1122.0 177.6 L1119.5 181.4" style="--d:4.16s;--t:0.28s"/><path pathLength="1" class="b h" d="M1139.0 147.5 L1136.5 151.3" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="b h" d="M1133.8 152.8 L1131.3 156.6" style="--d:4.19s;--t:0.28s"/><path pathLength="1" class="b h" d="M1140.9 158.3 L1138.4 162.1" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="o fill" d="M30.0 93.0 Q35.5 111.3 45.8 126.3 Q41.8 130.3 37.9 125.9 Q33.9 128.9 30.0 125.8 Q26.1 129.3 22.1 126.2 Q18.2 129.0 14.2 126.1 Q24.5 111.3 30.0 93.0 Z" style="--d:0.97s;--t:0.90s"/><path pathLength="1" class="h" d="M36.3 120.6 L40.1 123.9" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M35.1 117.0 L39.6 120.3" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M34.2 118.5 L38.7 121.3" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M31.1 108.1 L33.9 111.1" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M31.6 114.4 L34.6 116.9" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M31.8 115.9 L35.5 119.0" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M25.3 113.0 L23.4 115.5" style="--d:1.51s;--t:0.28s"/><path pathLength="1" class="h" d="M25.8 115.1 L23.7 117.6" style="--d:1.51s;--t:0.28s"/><path pathLength="1" class="o fill" d="M30.0 115.7 Q36.8 134.0 49.5 148.9 Q44.6 151.0 39.7 148.5 Q34.9 152.7 30.0 148.7 Q25.1 151.1 20.3 148.6 Q15.4 151.9 10.5 149.4 Q23.2 134.0 30.0 115.7 Z" style="--d:0.97s;--t:0.90s"/><path pathLength="1" class="h" d="M34.5 131.3 L37.5 134.7" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M34.5 143.4 L38.7 147.0" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M35.5 140.4 L39.7 144.8" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M39.3 144.6 L44.6 148.7" style="--d:1.55s;--t:0.28s"/><path pathLength="1" class="h" d="M32.7 141.8 L36.6 144.6" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M31.1 129.7 L33.6 133.7" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.5 133.5 L36.1 136.4" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M24.5 146.7 L20.8 149.2" style="--d:1.51s;--t:0.28s"/><path pathLength="1" class="h" d="M21.0 140.2 L18.2 142.7" style="--d:1.50s;--t:0.28s"/><path pathLength="1" class="o fill" d="M30.0 138.3 Q38.1 156.6 53.2 171.6 Q47.4 175.2 41.6 171.8 Q35.8 174.4 30.0 171.9 Q24.2 175.3 18.4 171.9 Q12.6 175.6 6.8 171.2 Q21.9 156.6 30.0 138.3 Z" style="--d:0.97s;--t:0.90s"/><path pathLength="1" class="h" d="M36.0 168.9 L43.6 171.9" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M32.3 168.1 L39.3 171.1" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.6 157.7 L38.3 161.9" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M35.1 157.3 L39.1 160.3" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M35.1 168.0 L40.5 171.2" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.6 164.8 L40.3 168.4" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.2 163.6 L37.8 166.3" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.8 157.0 L37.1 160.5" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M23.2 161.0 L20.1 163.5" style="--d:1.51s;--t:0.28s"/><path pathLength="1" class="h" d="M18.3 163.0 L14.9 165.5" style="--d:1.49s;--t:0.28s"/><path pathLength="1" class="h" d="M21.0 158.0 L18.3 160.5" style="--d:1.50s;--t:0.28s"/><path pathLength="1" class="o fill" d="M30.0 161.0 Q39.4 177.8 56.9 191.6 Q50.2 194.2 43.4 191.8 Q36.7 193.8 30.0 192.0 Q23.3 194.4 16.6 192.0 Q9.8 194.0 3.1 191.5 Q20.6 177.8 30.0 161.0 Z" style="--d:0.97s;--t:0.90s"/><path pathLength="1" class="h" d="M33.7 184.6 L39.8 188.5" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M36.0 189.1 L42.9 192.3" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M34.2 189.8 L43.0 193.1" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M33.9 183.5 L40.6 187.8" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M38.9 187.4 L46.5 191.0" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M35.4 173.8 L39.3 177.2" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M35.8 183.9 L42.0 186.9" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M36.8 182.7 L43.1 185.3" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M35.9 183.2 L42.5 186.9" style="--d:1.54s;--t:0.28s"/><path pathLength="1" class="h" d="M34.1 188.8 L41.9 193.3" style="--d:1.53s;--t:0.28s"/><path pathLength="1" class="h" d="M20.5 186.4 L16.0 188.9" style="--d:1.50s;--t:0.28s"/><path pathLength="1" class="h" d="M14.4 186.4 L10.0 188.9" style="--d:1.48s;--t:0.28s"/><path pathLength="1" class="h" d="M18.2 181.8 L14.5 184.3" style="--d:1.49s;--t:0.28s"/><path pathLength="1" class="o" d="M28.4 191.6 L28.2 205.0 M31.6 191.6 L31.9 205.0" style="--d:0.97s;--t:0.60s"/><path pathLength="1" class="o fill" d="M88.0 65.0 Q94.9 87.9 107.7 106.6 Q102.8 108.8 97.9 107.1 Q92.9 109.6 88.0 106.3 Q83.1 110.3 78.1 106.7 Q73.2 110.5 68.3 106.9 Q81.1 87.9 88.0 65.0 Z" style="--d:1.11s;--t:0.90s"/><path pathLength="1" class="h" d="M93.4 99.5 L99.9 102.1" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M95.2 101.3 L100.2 105.4" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M92.2 90.9 L96.9 93.8" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M92.0 86.5 L94.7 90.1" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M93.2 99.2 L97.9 103.3" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M95.6 100.9 L101.3 105.2" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M90.8 99.4 L95.7 102.1" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M83.5 86.5 L81.5 89.0" style="--d:1.65s;--t:0.28s"/><path pathLength="1" class="h" d="M76.9 102.0 L73.4 104.5" style="--d:1.64s;--t:0.28s"/><path pathLength="1" class="o fill" d="M88.0 93.3 Q96.5 116.2 112.4 134.9 Q106.3 137.2 100.2 134.6 Q94.1 137.7 88.0 135.3 Q81.9 138.2 75.8 135.3 Q69.7 137.1 63.6 135.4 Q79.5 116.2 88.0 93.3 Z" style="--d:1.11s;--t:0.90s"/><path pathLength="1" class="h" d="M92.4 113.0 L96.8 117.0" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M92.6 112.8 L96.2 115.3" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M91.3 116.4 L95.9 119.4" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M95.2 122.9 L100.0 125.7" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M93.8 125.2 L98.8 127.9" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M96.3 131.4 L103.1 134.3" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M97.5 132.7 L105.8 135.9" style="--d:1.69s;--t:0.28s"/><path pathLength="1" class="h" d="M91.7 115.6 L95.3 119.4" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M94.9 118.5 L99.5 121.9" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M76.0 123.6 L72.5 126.1" style="--d:1.63s;--t:0.28s"/><path pathLength="1" class="h" d="M78.7 120.6 L75.5 123.1" style="--d:1.64s;--t:0.28s"/><path pathLength="1" class="h" d="M80.2 118.5 L77.2 121.0" style="--d:1.64s;--t:0.28s"/><path pathLength="1" class="o fill" d="M88.0 121.7 Q98.1 144.5 117.0 163.3 Q109.7 165.8 102.5 163.6 Q95.2 165.8 88.0 163.6 Q80.8 166.6 73.5 163.2 Q66.3 167.1 59.0 163.1 Q77.9 144.5 88.0 121.7 Z" style="--d:1.11s;--t:0.90s"/><path pathLength="1" class="h" d="M96.5 154.8 L103.9 157.4" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M91.9 146.7 L97.5 151.1" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M94.3 143.5 L99.6 146.5" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M90.8 146.5 L97.4 149.5" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M92.4 146.7 L98.9 150.9" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M95.1 151.0 L100.5 155.3" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M91.1 138.4 L94.7 142.4" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M93.5 152.9 L101.9 157.3" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M92.1 136.8 L95.4 140.0" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M92.4 147.8 L98.8 151.5" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M102.6 160.4 L113.3 163.7" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="h" d="M73.8 158.0 L68.8 160.5" style="--d:1.63s;--t:0.28s"/><path pathLength="1" class="h" d="M71.5 155.6 L66.8 158.1" style="--d:1.62s;--t:0.28s"/><path pathLength="1" class="h" d="M80.6 143.7 L77.5 146.2" style="--d:1.65s;--t:0.28s"/><path pathLength="1" class="h" d="M76.9 150.0 L73.0 152.5" style="--d:1.64s;--t:0.28s"/><path pathLength="1" class="o fill" d="M88.0 150.0 Q99.8 171.0 121.6 188.2 Q113.2 190.6 104.8 188.7 Q96.4 190.6 88.0 188.1 Q79.6 190.5 71.2 188.1 Q62.8 191.7 54.4 187.8 Q76.2 171.0 88.0 150.0 Z" style="--d:1.11s;--t:0.90s"/><path pathLength="1" class="h" d="M93.9 167.2 L99.1 171.2" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M95.8 169.2 L101.9 173.2" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M92.4 166.1 L96.0 170.3" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M103.5 185.0 L111.3 188.2" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="h" d="M95.7 175.7 L101.7 179.7" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M93.9 170.3 L98.6 173.9" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M90.0 166.3 L94.7 169.4" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M93.8 181.2 L102.4 183.8" style="--d:1.68s;--t:0.28s"/><path pathLength="1" class="h" d="M92.9 168.4 L98.3 171.8" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M92.2 182.9 L103.2 185.7" style="--d:1.67s;--t:0.28s"/><path pathLength="1" class="h" d="M98.5 185.6 L108.3 189.3" style="--d:1.69s;--t:0.28s"/><path pathLength="1" class="h" d="M103.6 183.2 L112.7 185.7" style="--d:1.70s;--t:0.28s"/><path pathLength="1" class="h" d="M76.0 171.7 L72.2 174.2" style="--d:1.63s;--t:0.28s"/><path pathLength="1" class="h" d="M71.7 181.7 L66.1 184.2" style="--d:1.62s;--t:0.28s"/><path pathLength="1" class="h" d="M78.2 171.8 L74.3 174.3" style="--d:1.64s;--t:0.28s"/><path pathLength="1" class="h" d="M82.1 169.6 L78.6 172.1" style="--d:1.65s;--t:0.28s"/><path pathLength="1" class="o" d="M86.4 188.2 L86.2 205.0 M89.6 188.2 L89.9 205.0" style="--d:1.11s;--t:0.60s"/><path pathLength="1" class="o fill" d="M146.0 107.0 Q150.8 123.0 159.8 136.1 Q156.4 138.7 152.9 136.6 Q149.5 139.4 146.0 136.5 Q142.5 138.2 139.1 136.0 Q135.6 138.3 132.2 135.9 Q141.2 123.0 146.0 107.0 Z" style="--d:1.25s;--t:0.90s"/><path pathLength="1" class="h" d="M149.0 119.1 L150.7 122.6" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M151.1 128.6 L155.1 132.2" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M150.6 125.9 L153.3 129.0" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M148.4 130.1 L151.7 133.5" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M148.3 125.5 L151.1 128.9" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M141.4 122.2 L140.0 124.7" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="o fill" d="M146.0 126.8 Q152.0 142.8 163.1 155.9 Q158.8 158.1 154.5 156.0 Q150.3 159.0 146.0 155.8 Q141.7 158.4 137.5 155.5 Q133.2 158.7 128.9 155.8 Q140.0 142.8 146.0 126.8 Z" style="--d:1.25s;--t:0.90s"/><path pathLength="1" class="h" d="M148.2 145.5 L152.2 148.9" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M147.7 137.2 L150.1 139.7" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M152.4 147.4 L156.1 151.1" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M148.3 143.5 L151.6 147.1" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M149.0 142.5 L152.0 146.5" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M146.9 137.9 L148.8 141.0" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M139.1 151.8 L136.2 154.3" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="h" d="M139.0 152.7 L136.0 155.2" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="o fill" d="M146.0 146.7 Q153.1 162.7 166.3 175.8 Q161.2 178.3 156.1 176.0 Q151.1 177.9 146.0 176.3 Q140.9 179.4 135.9 175.6 Q130.8 178.4 125.7 176.1 Q138.9 162.7 146.0 146.7 Z" style="--d:1.25s;--t:0.90s"/><path pathLength="1" class="h" d="M152.5 170.6 L156.8 174.7" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M148.9 157.7 L151.5 162.0" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M147.6 168.0 L153.4 172.0" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M147.5 167.0 L152.6 170.3" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M154.3 168.7 L160.3 171.4" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M151.0 170.5 L157.0 173.8" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M149.7 164.7 L153.1 167.8" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M140.5 170.8 L137.1 173.3" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="h" d="M138.9 162.7 L136.7 165.2" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="o fill" d="M146.0 166.5 Q154.2 181.2 169.5 193.2 Q163.6 196.6 157.8 193.3 Q151.9 195.5 146.0 192.9 Q140.1 195.9 134.2 193.7 Q128.4 196.4 122.5 193.7 Q137.8 181.2 146.0 166.5 Z" style="--d:1.25s;--t:0.90s"/><path pathLength="1" class="h" d="M149.2 179.2 L152.9 183.4" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M150.9 177.8 L154.1 180.4" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M149.9 182.8 L154.9 187.1" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M152.2 183.8 L156.9 187.8" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M150.2 177.6 L152.9 181.2" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M148.8 179.1 L151.9 182.3" style="--d:1.81s;--t:0.28s"/><path pathLength="1" class="h" d="M151.5 185.3 L156.6 189.0" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M151.3 189.4 L158.0 192.8" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M151.5 191.6 L159.3 194.6" style="--d:1.82s;--t:0.28s"/><path pathLength="1" class="h" d="M137.4 183.0 L134.5 185.5" style="--d:1.78s;--t:0.28s"/><path pathLength="1" class="h" d="M138.8 186.8 L135.2 189.3" style="--d:1.79s;--t:0.28s"/><path pathLength="1" class="h" d="M138.2 180.6 L135.7 183.1" style="--d:1.78s;--t:0.28s"/><path pathLength="1" class="o" d="M144.4 193.2 L144.2 205.0 M147.6 193.2 L147.9 205.0" style="--d:1.25s;--t:0.60s"/><path pathLength="1" class="o" d="M202.8 205.0 C203.0 187.3 202.0 149.6 199.0 139.3 M207.2 205.0 C207.0 187.3 208.0 149.6 212.0 141.3" style="--d:1.39s;--t:0.60s"/><path pathLength="1" class="h" d="M205.5 191.3 L206.8 193.3" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M205.5 181.7 L206.8 183.7" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M205.5 189.7 L206.8 191.7" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M205.5 184.5 L206.8 186.5" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="o fill" d="M205.0 103.4 Q215.3 99.9 221.8 111.0 Q232.3 113.2 231.8 125.8 Q241.0 133.7 235.2 143.9 Q237.7 156.7 226.8 162.5 Q223.3 174.2 212.8 172.6 Q204.6 179.8 196.6 172.0 Q186.2 172.8 183.2 160.4 Q171.8 155.7 174.0 144.3 Q168.0 134.1 177.0 126.0 Q177.2 113.9 188.4 111.9 Q194.8 100.4 205.0 103.4 Z" style="--d:1.40s;--t:0.90s"/><path pathLength="1" class="h" d="M205.4 154.6 Q209.4 150.6 213.4 154.6" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M195.0 133.6 Q199.0 129.6 203.0 133.6" style="--d:1.92s;--t:0.28s"/><path pathLength="1" class="h" d="M202.4 122.5 Q206.4 118.5 210.4 122.5" style="--d:1.94s;--t:0.28s"/><path pathLength="1" class="h" d="M217.0 125.9 Q221.0 121.9 225.0 125.9" style="--d:1.97s;--t:0.28s"/><path pathLength="1" class="h" d="M196.7 127.2 Q200.7 123.2 204.7 127.2" style="--d:1.93s;--t:0.28s"/><path pathLength="1" class="h" d="M217.0 133.5 Q221.0 129.5 225.0 133.5" style="--d:1.97s;--t:0.28s"/><path pathLength="1" class="h" d="M196.2 160.2 Q200.2 156.2 204.2 160.2" style="--d:1.92s;--t:0.28s"/><path pathLength="1" class="h" d="M211.0 158.1 L208.5 161.9" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="h" d="M218.8 139.7 L216.3 143.5" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="h" d="M217.7 152.7 L215.2 156.5" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="h" d="M222.1 141.9 L219.6 145.7" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="h" d="M225.0 133.0 L222.5 136.8" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="h" d="M222.7 141.0 L220.2 144.8" style="--d:1.99s;--t:0.28s"/><path pathLength="1" class="h" d="M226.0 141.6 L223.5 145.4" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="h" d="M204.8 157.5 L202.3 161.3" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M205.6 169.4 L203.1 173.2" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M218.1 159.1 L215.6 162.9" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="h" d="M212.1 162.6 L209.6 166.4" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="h" d="M218.6 166.4 L216.1 170.2" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="h" d="M209.0 158.7 L206.5 162.5" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="h" d="M229.6 125.2 L227.1 129.0" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="h" d="M229.1 148.1 L226.6 151.9" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="h" d="M225.3 138.9 L222.8 142.7" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="h" d="M228.1 148.3 L225.6 152.1" style="--d:2.00s;--t:0.28s"/><path pathLength="1" class="h" d="M201.1 163.0 L198.6 166.8" style="--d:1.94s;--t:0.28s"/><path pathLength="1" class="h" d="M217.8 154.9 L215.3 158.7" style="--d:1.98s;--t:0.28s"/><path pathLength="1" class="h" d="M232.7 138.7 L230.2 142.5" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="h" d="M231.2 129.3 L228.7 133.1" style="--d:2.01s;--t:0.28s"/><path pathLength="1" class="h" d="M212.3 153.7 L209.8 157.5" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="h" d="M203.7 156.5 L201.2 160.3" style="--d:1.94s;--t:0.28s"/><path pathLength="1" class="h" d="M215.5 152.0 L213.0 155.8" style="--d:1.97s;--t:0.28s"/><path pathLength="1" class="h" d="M199.6 159.1 L197.1 162.9" style="--d:1.93s;--t:0.28s"/><path pathLength="1" class="h" d="M204.9 155.8 L202.4 159.6" style="--d:1.95s;--t:0.28s"/><path pathLength="1" class="h" d="M212.0 153.9 L209.5 157.7" style="--d:1.96s;--t:0.28s"/><path pathLength="1" class="o fill" d="M258.0 125.0 Q262.2 142.4 270.0 156.7 Q267.0 158.7 264.0 156.8 Q261.0 160.6 258.0 156.9 Q255.0 160.4 252.0 157.0 Q249.0 159.7 246.0 156.3 Q253.8 142.4 258.0 125.0 Z" style="--d:1.52s;--t:0.90s"/><path pathLength="1" class="h" d="M259.5 146.1 L262.1 149.3" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M259.5 145.6 L262.3 148.9" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M259.0 145.3 L261.5 148.9" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M262.0 154.6 L265.0 157.7" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M253.4 145.6 L251.9 148.1" style="--d:2.06s;--t:0.28s"/><path pathLength="1" class="o fill" d="M258.0 146.6 Q263.4 164.0 273.5 178.3 Q269.6 182.1 265.8 178.7 Q261.9 182.2 258.0 178.7 Q254.1 182.0 250.2 178.7 Q246.4 180.3 242.5 178.3 Q252.6 164.0 258.0 146.6 Z" style="--d:1.52s;--t:0.90s"/><path pathLength="1" class="h" d="M262.5 168.9 L266.2 172.6" style="--d:2.09s;--t:0.28s"/><path pathLength="1" class="h" d="M260.0 175.4 L264.6 179.8" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M258.9 158.3 L261.0 162.7" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M258.6 158.1 L260.8 162.0" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M261.7 167.6 L265.4 171.7" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M255.5 162.4 L253.9 164.9" style="--d:2.07s;--t:0.28s"/><path pathLength="1" class="h" d="M248.8 173.8 L246.2 176.3" style="--d:2.05s;--t:0.28s"/><path pathLength="1" class="o fill" d="M258.0 168.2 Q264.6 183.2 277.0 195.4 Q272.2 199.1 267.5 195.3 Q262.8 198.1 258.0 195.2 Q253.2 197.4 248.5 195.7 Q243.8 197.9 239.0 195.5 Q251.3 183.2 258.0 168.2 Z" style="--d:1.52s;--t:0.90s"/><path pathLength="1" class="h" d="M261.2 186.3 L265.6 189.7" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M262.6 181.5 L265.2 184.3" style="--d:2.09s;--t:0.28s"/><path pathLength="1" class="h" d="M261.0 181.8 L264.5 185.0" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M261.7 181.6 L264.4 185.1" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M262.7 181.9 L265.4 184.8" style="--d:2.09s;--t:0.28s"/><path pathLength="1" class="h" d="M260.5 182.6 L264.1 186.5" style="--d:2.08s;--t:0.28s"/><path pathLength="1" class="h" d="M263.4 190.6 L267.5 194.6" style="--d:2.09s;--t:0.28s"/><path pathLength="1" class="h" d="M253.5 184.8 L251.2 187.3" style="--d:2.06s;--t:0.28s"/><path pathLength="1" class="h" d="M248.9 186.9 L246.3 189.4" style="--d:2.05s;--t:0.28s"/><path pathLength="1" class="o" d="M256.4 195.4 L256.2 205.0 M259.6 195.4 L259.9 205.0" style="--d:1.52s;--t:0.60s"/><path pathLength="1" class="o" d="M332.8 205.0 C333.0 194.5 332.0 173.6 329.0 167.5 M337.2 205.0 C337.0 194.5 338.0 173.6 342.0 169.5" style="--d:1.71s;--t:0.60s"/><path pathLength="1" class="h" d="M335.5 196.8 L336.8 198.8" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M335.5 197.0 L336.8 199.0" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M335.5 189.2 L336.8 191.2" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M335.5 188.1 L336.8 190.1" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="o fill" d="M335.0 148.3 Q341.5 144.7 345.5 149.9 Q351.8 151.2 351.7 158.8 Q356.9 163.8 353.2 170.2 Q355.3 177.7 349.3 181.1 Q347.0 188.2 340.3 187.6 Q335.2 191.7 330.1 186.8 Q323.3 187.2 321.1 179.9 Q314.2 176.9 315.5 170.2 Q312.6 163.7 318.6 158.7 Q318.2 150.9 324.3 149.5 Q328.4 144.6 335.0 148.3 Z" style="--d:1.71s;--t:0.90s"/><path pathLength="1" class="h" d="M324.1 178.9 Q328.1 174.9 332.1 178.9" style="--d:2.23s;--t:0.28s"/><path pathLength="1" class="h" d="M337.7 176.3 Q341.7 172.3 345.7 176.3" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M336.3 165.4 Q340.3 161.4 344.3 165.4" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M337.7 175.8 Q341.7 171.8 345.7 175.8" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M338.9 159.7 Q342.9 155.7 346.9 159.7" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M338.7 164.7 Q342.7 160.7 346.7 164.7" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M327.6 171.3 Q331.6 167.3 335.6 171.3" style="--d:2.24s;--t:0.28s"/><path pathLength="1" class="h" d="M352.4 169.0 L349.9 172.8" style="--d:2.30s;--t:0.28s"/><path pathLength="1" class="h" d="M344.4 162.9 L341.9 166.7" style="--d:2.28s;--t:0.28s"/><path pathLength="1" class="h" d="M343.7 170.0 L341.2 173.8" style="--d:2.28s;--t:0.28s"/><path pathLength="1" class="h" d="M345.1 169.3 L342.6 173.1" style="--d:2.28s;--t:0.28s"/><path pathLength="1" class="h" d="M348.0 163.2 L345.5 167.0" style="--d:2.29s;--t:0.28s"/><path pathLength="1" class="h" d="M345.2 177.7 L342.7 181.5" style="--d:2.29s;--t:0.28s"/><path pathLength="1" class="h" d="M338.6 181.5 L336.1 185.3" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M333.2 177.3 L330.7 181.1" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M344.3 167.0 L341.8 170.8" style="--d:2.28s;--t:0.28s"/><path pathLength="1" class="h" d="M350.5 170.4 L348.0 174.2" style="--d:2.30s;--t:0.28s"/><path pathLength="1" class="h" d="M333.1 181.7 L330.6 185.5" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M346.5 165.0 L344.0 168.8" style="--d:2.29s;--t:0.28s"/><path pathLength="1" class="h" d="M342.7 176.4 L340.2 180.2" style="--d:2.28s;--t:0.28s"/><path pathLength="1" class="h" d="M338.3 186.3 L335.8 190.1" style="--d:2.27s;--t:0.28s"/><path pathLength="1" class="h" d="M347.2 175.5 L344.7 179.3" style="--d:2.29s;--t:0.28s"/><path pathLength="1" class="h" d="M335.7 181.4 L333.2 185.2" style="--d:2.26s;--t:0.28s"/><path pathLength="1" class="h" d="M352.4 165.1 L349.9 168.9" style="--d:2.30s;--t:0.28s"/><path pathLength="1" class="o fill" d="M560.0 157.0 Q562.7 167.5 567.6 176.0 Q565.7 180.0 563.8 175.5 Q561.9 179.5 560.0 175.9 Q558.1 178.1 556.2 175.7 Q554.3 178.4 552.4 176.2 Q557.3 167.5 560.0 157.0 Z" style="--d:2.25s;--t:0.90s"/><path pathLength="1" class="h" d="M560.4 166.1 L561.4 170.2" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M561.9 169.3 L563.5 172.2" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M558.4 166.6 L557.6 169.1" style="--d:2.80s;--t:0.28s"/><path pathLength="1" class="o fill" d="M560.0 170.0 Q563.4 180.4 569.8 189.0 Q567.4 191.0 564.9 188.7 Q562.5 192.2 560.0 188.8 Q557.5 191.9 555.1 189.1 Q552.7 191.6 550.2 188.8 Q556.6 180.4 560.0 170.0 Z" style="--d:2.25s;--t:0.90s"/><path pathLength="1" class="h" d="M563.1 186.7 L565.8 190.3" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M561.5 181.9 L563.9 184.8" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M564.3 187.3 L567.7 190.1" style="--d:2.82s;--t:0.28s"/><path pathLength="1" class="h" d="M555.0 183.8 L553.6 186.3" style="--d:2.79s;--t:0.28s"/><path pathLength="1" class="o fill" d="M560.0 182.9 Q564.2 191.9 572.0 199.2 Q569.0 201.8 566.0 198.9 Q563.0 202.7 560.0 199.0 Q557.0 202.4 554.0 198.9 Q551.0 203.1 548.0 199.0 Q555.8 191.9 560.0 182.9 Z" style="--d:2.25s;--t:0.90s"/><path pathLength="1" class="h" d="M562.0 189.6 L563.5 193.2" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M564.0 193.5 L566.6 196.8" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M561.4 188.6 L562.6 192.3" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M562.7 194.8 L565.0 198.3" style="--d:2.81s;--t:0.28s"/><path pathLength="1" class="h" d="M555.2 194.6 L553.5 197.1" style="--d:2.79s;--t:0.28s"/><path pathLength="1" class="o" d="M558.4 199.2 L558.2 205.0 M561.6 199.2 L561.9 205.0" style="--d:2.25s;--t:0.60s"/><path pathLength="1" class="o" d="M819.8 205.0 C820.0 195.1 819.0 175.9 816.0 170.1 M824.2 205.0 C824.0 195.1 825.0 175.9 829.0 172.1" style="--d:2.88s;--t:0.60s"/><path pathLength="1" class="h" d="M822.5 189.7 L823.8 191.7" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M822.5 198.4 L823.8 200.4" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M822.5 196.4 L823.8 198.4" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M822.5 200.9 L823.8 202.9" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="o fill" d="M822.0 151.9 Q828.2 148.8 832.0 153.7 Q837.8 154.8 837.6 161.9 Q842.7 166.6 839.6 172.8 Q841.3 179.9 835.5 183.2 Q833.4 189.3 827.0 188.2 Q822.1 192.8 817.1 189.0 Q810.7 189.3 808.6 182.2 Q803.1 179.3 805.2 172.7 Q801.0 166.7 805.2 162.0 Q805.4 154.8 811.8 153.4 Q815.7 148.6 822.0 151.9 Z" style="--d:2.89s;--t:0.90s"/><path pathLength="1" class="h" d="M813.7 159.6 Q817.7 155.6 821.7 159.6" style="--d:3.42s;--t:0.28s"/><path pathLength="1" class="h" d="M815.4 158.9 Q819.4 154.9 823.4 158.9" style="--d:3.42s;--t:0.28s"/><path pathLength="1" class="h" d="M819.6 164.9 Q823.6 160.9 827.6 164.9" style="--d:3.43s;--t:0.28s"/><path pathLength="1" class="h" d="M820.5 164.0 Q824.5 160.0 828.5 164.0" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M818.4 182.8 Q822.4 178.8 826.4 182.8" style="--d:3.43s;--t:0.28s"/><path pathLength="1" class="h" d="M826.1 171.4 Q830.1 167.4 834.1 171.4" style="--d:3.45s;--t:0.28s"/><path pathLength="1" class="h" d="M812.1 179.6 Q816.1 175.6 820.1 179.6" style="--d:3.41s;--t:0.28s"/><path pathLength="1" class="h" d="M831.8 184.0 L829.3 187.8" style="--d:3.46s;--t:0.28s"/><path pathLength="1" class="h" d="M819.8 184.7 L817.3 188.5" style="--d:3.43s;--t:0.28s"/><path pathLength="1" class="h" d="M834.8 163.8 L832.3 167.6" style="--d:3.47s;--t:0.28s"/><path pathLength="1" class="h" d="M838.0 164.4 L835.5 168.2" style="--d:3.48s;--t:0.28s"/><path pathLength="1" class="h" d="M821.9 181.7 L819.4 185.5" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M836.2 168.1 L833.7 171.9" style="--d:3.47s;--t:0.28s"/><path pathLength="1" class="h" d="M826.6 187.5 L824.1 191.3" style="--d:3.45s;--t:0.28s"/><path pathLength="1" class="h" d="M827.3 178.2 L824.8 182.0" style="--d:3.45s;--t:0.28s"/><path pathLength="1" class="h" d="M825.0 178.7 L822.5 182.5" style="--d:3.45s;--t:0.28s"/><path pathLength="1" class="h" d="M822.0 186.1 L819.5 189.9" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="h" d="M825.3 186.7 L822.8 190.5" style="--d:3.45s;--t:0.28s"/><path pathLength="1" class="h" d="M833.3 183.1 L830.8 186.9" style="--d:3.47s;--t:0.28s"/><path pathLength="1" class="h" d="M828.8 181.3 L826.3 185.1" style="--d:3.46s;--t:0.28s"/><path pathLength="1" class="h" d="M832.6 174.4 L830.1 178.2" style="--d:3.46s;--t:0.28s"/><path pathLength="1" class="h" d="M830.2 164.9 L827.7 168.7" style="--d:3.46s;--t:0.28s"/><path pathLength="1" class="h" d="M823.8 180.8 L821.3 184.6" style="--d:3.44s;--t:0.28s"/><path pathLength="1" class="o fill" d="M905.0 129.0 Q909.0 145.6 916.4 159.1 Q913.5 162.4 910.7 159.4 Q907.9 162.5 905.0 159.1 Q902.2 161.7 899.3 158.9 Q896.5 161.5 893.6 159.2 Q901.0 145.6 905.0 129.0 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="h" d="M909.6 151.9 L912.2 156.3" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.4 156.0 L911.4 159.7" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M909.7 156.9 L912.9 160.0" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.4 149.0 L909.3 153.2" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M900.9 151.3 L899.2 153.8" style="--d:3.63s;--t:0.28s"/><path pathLength="1" class="o fill" d="M905.0 149.5 Q910.1 166.1 919.7 179.6 Q916.0 183.1 912.3 179.4 Q908.7 182.0 905.0 179.7 Q901.3 182.1 897.6 179.4 Q894.0 181.7 890.3 179.2 Q899.9 166.1 905.0 149.5 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="h" d="M907.8 166.5 L911.0 170.2" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.5 167.5 L910.0 171.0" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.1 177.4 L911.4 181.2" style="--d:3.64s;--t:0.28s"/><path pathLength="1" class="h" d="M909.2 173.8 L913.3 178.2" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.8 176.3 L912.1 180.8" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M900.9 171.7 L898.8 174.2" style="--d:3.63s;--t:0.28s"/><path pathLength="1" class="h" d="M901.0 174.9 L898.5 177.4" style="--d:3.63s;--t:0.28s"/><path pathLength="1" class="o fill" d="M905.0 170.0 Q911.3 184.2 923.0 195.9 Q918.5 198.2 914.0 195.9 Q909.5 198.4 905.0 196.1 Q900.5 199.3 896.0 195.7 Q891.5 199.4 887.0 196.0 Q898.7 184.2 905.0 170.0 Z" style="--d:3.09s;--t:0.90s"/><path pathLength="1" class="h" d="M909.3 190.0 L913.6 192.7" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M911.1 186.4 L915.4 189.1" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M906.6 180.2 L909.1 183.5" style="--d:3.64s;--t:0.28s"/><path pathLength="1" class="h" d="M907.2 181.1 L909.8 185.0" style="--d:3.64s;--t:0.28s"/><path pathLength="1" class="h" d="M909.2 185.3 L912.9 189.1" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M907.9 179.8 L909.7 182.4" style="--d:3.65s;--t:0.28s"/><path pathLength="1" class="h" d="M901.1 188.5 L898.5 191.0" style="--d:3.63s;--t:0.28s"/><path pathLength="1" class="h" d="M900.6 183.8 L898.7 186.3" style="--d:3.63s;--t:0.28s"/><path pathLength="1" class="o" d="M903.4 195.9 L903.2 205.0 M906.6 195.9 L906.9 205.0" style="--d:3.09s;--t:0.60s"/><path pathLength="1" class="o" d="M959.8 205.0 C960.0 188.3 959.0 153.0 956.0 143.3 M964.2 205.0 C964.0 188.3 965.0 153.0 969.0 145.3" style="--d:3.22s;--t:0.60s"/><path pathLength="1" class="h" d="M962.5 189.7 L963.8 191.7" style="--d:3.78s;--t:0.28s"/><path pathLength="1" class="h" d="M962.5 199.2 L963.8 201.2" style="--d:3.78s;--t:0.28s"/><path pathLength="1" class="h" d="M962.5 176.9 L963.8 178.9" style="--d:3.78s;--t:0.28s"/><path pathLength="1" class="h" d="M962.5 179.6 L963.8 181.6" style="--d:3.78s;--t:0.28s"/><path pathLength="1" class="o fill" d="M962.0 111.1 Q970.9 106.1 976.5 114.8 Q986.0 117.4 985.8 130.4 Q994.1 138.1 988.3 148.1 Q991.8 159.4 982.9 164.0 Q979.7 176.0 969.7 175.5 Q962.1 182.4 954.5 175.1 Q944.1 175.8 940.6 164.1 Q931.6 159.2 935.2 147.8 Q929.1 138.0 937.1 130.4 Q936.9 118.7 946.8 116.9 Q952.6 107.1 962.0 111.1 Z" style="--d:3.23s;--t:0.90s"/><path pathLength="1" class="h" d="M952.6 161.2 Q956.6 157.2 960.6 161.2" style="--d:3.75s;--t:0.28s"/><path pathLength="1" class="h" d="M946.3 147.3 Q950.3 143.3 954.3 147.3" style="--d:3.74s;--t:0.28s"/><path pathLength="1" class="h" d="M966.7 133.9 Q970.7 129.9 974.7 133.9" style="--d:3.79s;--t:0.28s"/><path pathLength="1" class="h" d="M945.1 158.1 Q949.1 154.1 953.1 158.1" style="--d:3.74s;--t:0.28s"/><path pathLength="1" class="h" d="M974.4 140.5 Q978.4 136.5 982.4 140.5" style="--d:3.81s;--t:0.28s"/><path pathLength="1" class="h" d="M945.8 153.4 Q949.8 149.4 953.8 153.4" style="--d:3.74s;--t:0.28s"/><path pathLength="1" class="h" d="M957.4 132.1 Q961.4 128.1 965.4 132.1" style="--d:3.77s;--t:0.28s"/><path pathLength="1" class="h" d="M971.1 171.3 L968.6 175.1" style="--d:3.80s;--t:0.28s"/><path pathLength="1" class="h" d="M973.1 165.2 L970.6 169.0" style="--d:3.80s;--t:0.28s"/><path pathLength="1" class="h" d="M981.2 155.1 L978.7 158.9" style="--d:3.82s;--t:0.28s"/><path pathLength="1" class="h" d="M985.4 142.4 L982.9 146.2" style="--d:3.83s;--t:0.28s"/><path pathLength="1" class="h" d="M981.3 164.0 L978.8 167.8" style="--d:3.82s;--t:0.28s"/><path pathLength="1" class="h" d="M983.8 149.9 L981.3 153.7" style="--d:3.83s;--t:0.28s"/><path pathLength="1" class="h" d="M977.6 132.1 L975.1 135.9" style="--d:3.82s;--t:0.28s"/><path pathLength="1" class="h" d="M966.1 161.5 L963.6 165.3" style="--d:3.79s;--t:0.28s"/><path pathLength="1" class="h" d="M971.3 157.9 L968.8 161.7" style="--d:3.80s;--t:0.28s"/><path pathLength="1" class="h" d="M986.5 155.1 L984.0 158.9" style="--d:3.84s;--t:0.28s"/><path pathLength="1" class="h" d="M987.2 140.2 L984.7 144.0" style="--d:3.84s;--t:0.28s"/><path pathLength="1" class="h" d="M980.7 132.9 L978.2 136.7" style="--d:3.82s;--t:0.28s"/><path pathLength="1" class="h" d="M964.9 171.2 L962.4 175.0" style="--d:3.78s;--t:0.28s"/><path pathLength="1" class="h" d="M981.4 152.2 L978.9 156.0" style="--d:3.82s;--t:0.28s"/><path pathLength="1" class="h" d="M970.9 168.2 L968.4 172.0" style="--d:3.80s;--t:0.28s"/><path pathLength="1" class="h" d="M968.2 166.2 L965.7 170.0" style="--d:3.79s;--t:0.28s"/><path pathLength="1" class="h" d="M984.5 144.1 L982.0 147.9" style="--d:3.83s;--t:0.28s"/><path pathLength="1" class="h" d="M976.0 160.1 L973.5 163.9" style="--d:3.81s;--t:0.28s"/><path pathLength="1" class="h" d="M957.8 159.4 L955.3 163.2" style="--d:3.77s;--t:0.28s"/><path pathLength="1" class="h" d="M965.7 162.7 L963.2 166.5" style="--d:3.79s;--t:0.28s"/><path pathLength="1" class="h" d="M971.0 171.4 L968.5 175.2" style="--d:3.80s;--t:0.28s"/><path pathLength="1" class="h" d="M982.5 145.4 L980.0 149.2" style="--d:3.83s;--t:0.28s"/><path pathLength="1" class="h" d="M976.7 158.2 L974.2 162.0" style="--d:3.81s;--t:0.28s"/><path pathLength="1" class="h" d="M983.0 138.9 L980.5 142.7" style="--d:3.83s;--t:0.28s"/><path pathLength="1" class="h" d="M960.6 168.6 L958.1 172.4" style="--d:3.77s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1030.0 77.0 Q1036.3 97.9 1048.0 115.0 Q1043.5 117.6 1039.0 115.3 Q1034.5 117.9 1030.0 114.7 Q1025.5 118.2 1021.0 115.0 Q1016.5 118.1 1012.0 115.5 Q1023.7 97.9 1030.0 77.0 Z" style="--d:3.39s;--t:0.90s"/><path pathLength="1" class="h" d="M1036.6 103.3 L1040.4 107.3" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.7 92.0 L1034.2 95.9" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.1 109.2 L1038.6 112.4" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.3 102.6 L1035.1 106.4" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.9 93.7 L1034.9 98.1" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.6 96.0 L1034.0 98.7" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1020.8 109.6 L1017.7 112.1" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="h" d="M1024.5 100.5 L1022.2 103.0" style="--d:3.93s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1030.0 102.9 Q1037.8 123.8 1052.3 140.9 Q1046.7 144.3 1041.1 140.5 Q1035.6 144.6 1030.0 141.3 Q1024.4 143.3 1018.9 141.1 Q1013.3 144.3 1007.7 140.8 Q1022.2 123.8 1030.0 102.9 Z" style="--d:3.39s;--t:0.90s"/><path pathLength="1" class="h" d="M1033.9 136.2 L1040.1 139.4" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1036.4 126.3 L1041.0 130.0" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.2 138.7 L1040.2 142.5" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1035.2 119.6 L1038.2 123.0" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1036.4 126.0 L1041.7 129.9" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1032.6 120.1 L1036.2 123.1" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1039.6 136.3 L1045.2 139.6" style="--d:3.97s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.6 121.4 L1037.4 125.3" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1022.5 123.0 L1020.2 125.5" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="h" d="M1021.2 131.2 L1017.8 133.7" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="h" d="M1026.2 123.5 L1023.7 126.0" style="--d:3.93s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1030.0 128.8 Q1039.3 149.7 1056.5 166.8 Q1049.9 169.5 1043.2 167.3 Q1036.6 170.0 1030.0 167.2 Q1023.4 169.0 1016.8 166.4 Q1010.1 168.9 1003.5 167.0 Q1020.7 149.7 1030.0 128.8 Z" style="--d:3.39s;--t:0.90s"/><path pathLength="1" class="h" d="M1032.7 146.1 L1036.9 150.0" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.5 149.5 L1038.7 153.1" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1033.9 150.2 L1038.2 153.3" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.4 148.1 L1035.4 151.8" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1032.0 148.2 L1037.1 151.7" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.2 153.8 L1040.9 157.8" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1037.6 156.3 L1044.4 159.8" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.4 151.5 L1039.5 155.0" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1036.0 154.2 L1042.5 158.5" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1031.4 147.2 L1035.2 149.8" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1017.5 161.4 L1013.0 163.9" style="--d:3.91s;--t:0.28s"/><path pathLength="1" class="h" d="M1023.7 152.7 L1020.4 155.2" style="--d:3.93s;--t:0.28s"/><path pathLength="1" class="h" d="M1015.0 162.7 L1010.3 165.2" style="--d:3.91s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1030.0 154.7 Q1040.8 173.9 1060.7 189.6 Q1053.0 193.0 1045.4 189.8 Q1037.7 193.1 1030.0 189.6 Q1022.3 192.4 1014.6 189.7 Q1007.0 193.4 999.3 190.1 Q1019.2 173.9 1030.0 154.7 Z" style="--d:3.39s;--t:0.90s"/><path pathLength="1" class="h" d="M1043.2 186.2 L1050.4 189.1" style="--d:3.97s;--t:0.28s"/><path pathLength="1" class="h" d="M1039.9 187.3 L1049.2 190.4" style="--d:3.97s;--t:0.28s"/><path pathLength="1" class="h" d="M1038.9 185.0 L1049.5 187.7" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1033.1 187.8 L1041.0 191.0" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1033.4 180.3 L1040.9 184.7" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1038.3 176.1 L1044.7 179.7" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.3 170.6 L1039.7 174.4" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.4 171.5 L1039.3 174.7" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1038.2 179.0 L1043.6 182.0" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1034.5 180.7 L1040.5 184.7" style="--d:3.95s;--t:0.28s"/><path pathLength="1" class="h" d="M1039.0 173.9 L1044.6 176.6" style="--d:3.96s;--t:0.28s"/><path pathLength="1" class="h" d="M1020.2 182.2 L1015.4 184.7" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="h" d="M1014.3 185.0 L1009.0 187.5" style="--d:3.90s;--t:0.28s"/><path pathLength="1" class="h" d="M1021.7 184.1 L1016.5 186.6" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="h" d="M1020.2 172.7 L1017.0 175.2" style="--d:3.92s;--t:0.28s"/><path pathLength="1" class="o" d="M1028.4 189.6 L1028.2 205.0 M1031.6 189.6 L1031.9 205.0" style="--d:3.39s;--t:0.60s"/><path pathLength="1" class="o fill" d="M1088.0 101.0 Q1093.1 118.0 1102.7 131.9 Q1099.0 134.2 1095.3 131.6 Q1091.7 133.9 1088.0 131.6 Q1084.3 134.8 1080.7 132.3 Q1077.0 134.5 1073.3 131.6 Q1082.9 118.0 1088.0 101.0 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="h" d="M1090.3 127.2 L1094.6 130.9" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.6 129.1 L1094.1 132.4" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1090.6 127.1 L1095.1 129.9" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1093.1 121.0 L1095.8 124.0" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1093.3 128.8 L1096.8 131.7" style="--d:4.10s;--t:0.28s"/><path pathLength="1" class="h" d="M1084.3 119.7 L1082.5 122.2" style="--d:4.07s;--t:0.28s"/><path pathLength="1" class="h" d="M1080.5 128.2 L1077.9 130.7" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1088.0 122.0 Q1094.3 139.0 1106.1 152.9 Q1101.6 156.9 1097.0 153.1 Q1092.5 156.2 1088.0 152.8 Q1083.5 156.4 1079.0 152.9 Q1074.4 155.1 1069.9 152.9 Q1081.7 139.0 1088.0 122.0 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="h" d="M1091.6 140.0 L1094.3 142.5" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1092.5 151.1 L1097.6 153.9" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1094.5 143.8 L1098.1 147.3" style="--d:4.10s;--t:0.28s"/><path pathLength="1" class="h" d="M1093.2 142.1 L1097.2 145.1" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1091.6 136.4 L1093.8 140.6" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.2 133.5 L1091.4 137.7" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1079.6 146.1 L1076.7 148.6" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="h" d="M1079.0 148.1 L1076.0 150.6" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1088.0 143.1 Q1095.5 160.1 1109.5 174.0 Q1104.1 176.1 1098.8 174.3 Q1093.4 176.3 1088.0 173.6 Q1082.6 176.1 1077.2 173.5 Q1071.9 177.7 1066.5 173.9 Q1080.5 160.1 1088.0 143.1 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="h" d="M1089.0 155.5 L1092.3 159.2" style="--d:4.08s;--t:0.28s"/><path pathLength="1" class="h" d="M1090.3 170.9 L1095.4 174.0" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.5 157.4 L1092.3 161.2" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.7 157.0 L1092.9 160.3" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1091.4 156.7 L1094.5 160.0" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.6 162.7 L1094.3 165.6" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1089.2 160.1 L1093.8 163.8" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1092.3 161.2 L1097.3 163.9" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1079.6 163.9 L1076.7 166.4" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="h" d="M1079.6 163.7 L1076.8 166.2" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="h" d="M1081.8 171.2 L1077.9 173.7" style="--d:4.07s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1088.0 164.1 Q1096.7 179.8 1113.0 192.5 Q1106.7 195.1 1100.5 192.3 Q1094.2 196.0 1088.0 192.8 Q1081.8 195.9 1075.5 192.9 Q1069.3 194.9 1063.0 192.4 Q1079.3 179.8 1088.0 164.1 Z" style="--d:3.53s;--t:0.90s"/><path pathLength="1" class="h" d="M1097.6 188.6 L1103.3 193.1" style="--d:4.11s;--t:0.28s"/><path pathLength="1" class="h" d="M1097.7 186.7 L1103.7 190.4" style="--d:4.11s;--t:0.28s"/><path pathLength="1" class="h" d="M1099.6 190.4 L1107.4 194.7" style="--d:4.11s;--t:0.28s"/><path pathLength="1" class="h" d="M1099.3 191.1 L1107.6 195.5" style="--d:4.11s;--t:0.28s"/><path pathLength="1" class="h" d="M1091.1 176.5 L1094.7 179.3" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1090.6 187.4 L1097.6 190.4" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1093.1 179.6 L1096.8 183.0" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1099.7 188.7 L1106.0 191.9" style="--d:4.11s;--t:0.28s"/><path pathLength="1" class="h" d="M1091.5 185.9 L1098.8 188.8" style="--d:4.09s;--t:0.28s"/><path pathLength="1" class="h" d="M1079.8 185.4 L1076.1 187.9" style="--d:4.06s;--t:0.28s"/><path pathLength="1" class="h" d="M1084.2 178.3 L1081.7 180.8" style="--d:4.07s;--t:0.28s"/><path pathLength="1" class="h" d="M1082.6 178.4 L1080.1 180.9" style="--d:4.07s;--t:0.28s"/><path pathLength="1" class="o" d="M1086.4 192.5 L1086.2 205.0 M1089.6 192.5 L1089.9 205.0" style="--d:3.53s;--t:0.60s"/><path pathLength="1" class="o fill" d="M1146.0 59.0 Q1153.2 82.8 1166.6 102.4 Q1161.4 104.9 1156.3 102.9 Q1151.1 105.6 1146.0 101.9 Q1140.9 105.8 1135.7 102.1 Q1130.6 105.3 1125.4 102.6 Q1138.8 82.8 1146.0 59.0 Z" style="--d:3.67s;--t:0.90s"/><path pathLength="1" class="h" d="M1155.3 96.5 L1160.8 99.6" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1148.9 84.5 L1153.3 87.9" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1148.6 92.0 L1154.4 96.4" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1149.7 79.5 L1152.3 82.0" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1148.2 84.9 L1152.7 88.6" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1154.3 91.7 L1158.3 94.4" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1148.3 75.1 L1151.2 79.0" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1136.1 91.4 L1133.1 93.9" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1141.3 87.9 L1138.5 90.4" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1146.0 88.6 Q1154.9 112.4 1171.4 131.9 Q1165.1 135.2 1158.7 131.4 Q1152.4 134.4 1146.0 131.4 Q1139.6 134.2 1133.3 131.5 Q1126.9 135.0 1120.6 131.5 Q1137.1 112.4 1146.0 88.6 Z" style="--d:3.67s;--t:0.90s"/><path pathLength="1" class="h" d="M1154.5 119.4 L1160.0 122.2" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1154.2 121.2 L1161.5 124.8" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1154.7 118.9 L1160.9 123.3" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.9 111.2 L1156.5 114.6" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1148.8 104.0 L1151.5 107.7" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.5 117.0 L1155.8 119.7" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1153.4 119.5 L1160.6 123.6" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1150.1 111.3 L1154.4 115.4" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1153.7 114.0 L1158.5 117.3" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1137.9 119.6 L1134.3 122.1" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1138.3 129.7 L1133.5 132.2" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1140.3 118.0 L1136.8 120.5" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1146.0 118.1 Q1156.6 141.9 1176.2 161.5 Q1168.7 164.8 1161.1 161.1 Q1153.6 163.8 1146.0 161.4 Q1138.4 164.7 1130.9 161.7 Q1123.3 164.4 1115.8 161.3 Q1135.4 141.9 1146.0 118.1 Z" style="--d:3.67s;--t:0.90s"/><path pathLength="1" class="h" d="M1154.6 142.8 L1159.5 145.4" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1154.5 156.3 L1161.6 159.1" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1157.7 156.4 L1164.6 160.3" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1150.3 138.8 L1155.3 141.4" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1152.9 157.6 L1160.4 161.7" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1147.5 136.1 L1151.8 139.6" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1158.3 156.7 L1165.8 159.3" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1152.7 149.0 L1159.1 153.3" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.6 138.7 L1155.3 143.0" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1156.5 158.0 L1164.8 161.9" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1158.3 156.8 L1165.2 160.3" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1137.2 142.5 L1133.8 145.0" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1127.9 158.3 L1122.3 160.8" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="h" d="M1136.4 144.6 L1132.7 147.1" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1138.9 146.0 L1135.0 148.5" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1146.0 147.7 Q1158.3 169.6 1181.0 187.5 Q1172.3 191.0 1163.5 187.7 Q1154.8 190.2 1146.0 187.4 Q1137.2 190.9 1128.5 187.7 Q1119.7 190.4 1111.0 187.1 Q1133.7 169.6 1146.0 147.7 Z" style="--d:3.67s;--t:0.90s"/><path pathLength="1" class="h" d="M1148.5 163.9 L1153.9 167.4" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1152.8 177.0 L1160.7 179.8" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1158.2 184.9 L1167.0 188.8" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1155.3 175.9 L1164.4 179.6" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1162.5 182.5 L1172.0 186.3" style="--d:4.26s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.7 170.5 L1157.9 174.3" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.1 170.0 L1158.5 174.1" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1158.7 177.8 L1166.9 181.5" style="--d:4.25s;--t:0.28s"/><path pathLength="1" class="h" d="M1150.2 167.6 L1154.9 171.7" style="--d:4.23s;--t:0.28s"/><path pathLength="1" class="h" d="M1153.5 183.6 L1163.2 186.3" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1151.9 165.0 L1157.8 167.7" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1153.8 167.7 L1158.8 171.9" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1152.2 170.0 L1157.7 173.1" style="--d:4.24s;--t:0.28s"/><path pathLength="1" class="h" d="M1136.0 175.2 L1131.2 177.7" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1136.9 180.6 L1131.1 183.1" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1128.9 179.0 L1123.3 181.5" style="--d:4.18s;--t:0.28s"/><path pathLength="1" class="h" d="M1137.5 173.4 L1132.9 175.9" style="--d:4.20s;--t:0.28s"/><path pathLength="1" class="h" d="M1139.6 169.7 L1135.7 172.2" style="--d:4.21s;--t:0.28s"/><path pathLength="1" class="o" d="M1144.4 187.5 L1144.2 205.0 M1147.6 187.5 L1147.9 205.0" style="--d:3.67s;--t:0.60s"/><path pathLength="1" class="o fill" d="M1200.0 97.0 Q1205.3 114.6 1215.2 129.1 Q1211.4 132.7 1207.6 129.2 Q1203.8 131.1 1200.0 129.0 Q1196.2 132.3 1192.4 128.9 Q1188.6 131.1 1184.8 129.0 Q1194.7 114.6 1200.0 97.0 Z" style="--d:3.80s;--t:0.90s"/><path pathLength="1" class="h" d="M1204.6 115.0 L1207.2 119.4" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.8 124.9 L1208.3 129.0" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.2 110.0 L1203.8 112.6" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1201.5 116.1 L1205.2 119.8" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1207.2 125.5 L1212.1 129.3" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1193.4 119.9 L1191.2 122.4" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="h" d="M1195.6 122.7 L1193.1 125.2" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1200.0 118.9 Q1206.6 136.5 1218.8 150.9 Q1214.1 154.0 1209.4 150.8 Q1204.7 154.0 1200.0 151.1 Q1195.3 154.3 1190.6 151.0 Q1185.9 154.5 1181.2 151.3 Q1193.4 136.5 1200.0 118.9 Z" style="--d:3.80s;--t:0.90s"/><path pathLength="1" class="h" d="M1201.3 131.9 L1203.2 134.7" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.2 148.5 L1209.7 152.0" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.9 140.9 L1207.7 144.1" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1207.4 146.4 L1211.5 150.0" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1203.8 131.9 L1205.8 134.9" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1205.6 144.9 L1210.9 148.2" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.4 140.1 L1206.4 143.1" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1194.8 144.6 L1191.8 147.1" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="h" d="M1196.0 136.9 L1193.9 139.4" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1200.0 140.7 Q1207.8 158.4 1222.4 172.8 Q1216.8 175.9 1211.2 172.9 Q1205.6 174.8 1200.0 173.3 Q1194.4 176.5 1188.8 172.7 Q1183.2 175.1 1177.6 173.1 Q1192.2 158.4 1200.0 140.7 Z" style="--d:3.80s;--t:0.90s"/><path pathLength="1" class="h" d="M1203.8 170.7 L1211.4 174.9" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.0 170.0 L1209.4 172.8" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1205.5 156.4 L1209.7 159.8" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.5 154.4 L1205.2 158.2" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1207.9 165.8 L1213.4 169.2" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1203.8 160.9 L1208.2 164.8" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.3 165.6 L1210.1 168.4" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.3 152.8 L1204.9 155.4" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1194.4 157.9 L1192.0 160.4" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="h" d="M1186.9 170.4 L1182.8 172.9" style="--d:4.32s;--t:0.28s"/><path pathLength="1" class="h" d="M1195.1 157.2 L1192.8 159.7" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1200.0 162.6 Q1209.1 178.8 1225.9 192.0 Q1219.4 194.8 1213.0 191.9 Q1206.5 194.3 1200.0 192.1 Q1193.5 195.7 1187.0 191.9 Q1180.6 194.4 1174.1 191.6 Q1190.9 178.8 1200.0 162.6 Z" style="--d:3.80s;--t:0.90s"/><path pathLength="1" class="h" d="M1204.1 173.2 L1206.8 177.1" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1202.9 186.9 L1208.9 190.0" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1209.1 186.5 L1215.3 189.9" style="--d:4.38s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.6 179.2 L1209.9 182.2" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1211.1 187.2 L1218.5 191.6" style="--d:4.38s;--t:0.28s"/><path pathLength="1" class="h" d="M1204.2 189.5 L1213.6 192.4" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1203.3 187.1 L1209.7 190.5" style="--d:4.36s;--t:0.28s"/><path pathLength="1" class="h" d="M1209.0 187.7 L1215.2 192.0" style="--d:4.38s;--t:0.28s"/><path pathLength="1" class="h" d="M1207.4 188.2 L1213.2 191.3" style="--d:4.37s;--t:0.28s"/><path pathLength="1" class="h" d="M1192.3 181.2 L1189.1 183.7" style="--d:4.33s;--t:0.28s"/><path pathLength="1" class="h" d="M1187.1 189.8 L1182.3 192.3" style="--d:4.32s;--t:0.28s"/><path pathLength="1" class="h" d="M1192.6 188.2 L1188.1 190.7" style="--d:4.34s;--t:0.28s"/><path pathLength="1" class="o" d="M1198.4 192.0 L1198.2 205.0 M1201.6 192.0 L1201.9 205.0" style="--d:3.80s;--t:0.60s"/><path pathLength="1" class="o fill" d="M1236.0 125.0 Q1240.3 142.4 1248.2 156.7 Q1245.1 159.2 1242.1 156.9 Q1239.0 159.4 1236.0 156.4 Q1233.0 158.8 1229.9 156.2 Q1226.9 159.5 1223.8 156.7 Q1231.7 142.4 1236.0 125.0 Z" style="--d:3.89s;--t:0.90s"/><path pathLength="1" class="h" d="M1238.5 143.7 L1240.6 146.2" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1238.3 148.9 L1241.3 152.2" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1236.8 141.2 L1238.6 144.3" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="h" d="M1236.6 138.3 L1238.2 140.8" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="h" d="M1231.2 153.4 L1229.0 155.9" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1236.0 146.6 Q1241.5 164.0 1251.7 178.3 Q1247.8 181.2 1243.8 178.3 Q1239.9 180.3 1236.0 177.9 Q1232.1 181.8 1228.2 178.3 Q1224.2 181.3 1220.3 178.1 Q1230.5 164.0 1236.0 146.6 Z" style="--d:3.89s;--t:0.90s"/><path pathLength="1" class="h" d="M1240.1 172.0 L1244.7 176.1" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1241.9 174.7 L1246.8 178.1" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1239.8 167.8 L1243.2 172.0" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1237.7 174.0 L1242.6 177.7" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="h" d="M1241.7 169.1 L1244.5 172.5" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1240.8 164.8 L1243.2 168.4" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1230.7 164.5 L1228.9 167.0" style="--d:4.43s;--t:0.28s"/><path pathLength="1" class="h" d="M1229.3 169.4 L1227.0 171.9" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="o fill" d="M1236.0 168.2 Q1242.7 183.2 1255.2 195.4 Q1250.4 198.0 1245.6 195.8 Q1240.8 197.4 1236.0 195.1 Q1231.2 198.9 1226.4 195.8 Q1221.6 199.0 1216.8 195.2 Q1229.3 183.2 1236.0 168.2 Z" style="--d:3.89s;--t:0.90s"/><path pathLength="1" class="h" d="M1239.2 179.0 L1242.0 181.6" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1241.9 193.0 L1246.4 196.4" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1237.6 183.2 L1241.6 187.6" style="--d:4.44s;--t:0.28s"/><path pathLength="1" class="h" d="M1238.4 179.7 L1240.8 183.6" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1238.0 179.5 L1240.5 182.9" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1240.3 184.8 L1244.9 189.2" style="--d:4.45s;--t:0.28s"/><path pathLength="1" class="h" d="M1244.1 192.5 L1249.0 195.5" style="--d:4.46s;--t:0.28s"/><path pathLength="1" class="h" d="M1228.4 187.4 L1225.7 189.9" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="h" d="M1229.5 189.2 L1226.5 191.7" style="--d:4.42s;--t:0.28s"/><path pathLength="1" class="o" d="M1234.4 195.4 L1234.2 205.0 M1237.6 195.4 L1237.9 205.0" style="--d:3.89s;--t:0.60s"/><path pathLength="1" class="h" d="M295.9 205.0 Q294.9 201.0 292.9 198.0 M296.9 205.0 Q297.4 200.0 296.9 196.0 M297.9 205.0 Q298.9 202.0 300.9 199.0" style="--d:2.17s;--t:0.28s"/><path pathLength="1" class="h" d="M321.7 205.0 Q320.7 201.0 318.7 198.0 M322.7 205.0 Q323.2 200.0 322.7 196.0 M323.7 205.0 Q324.7 202.0 326.7 199.0" style="--d:2.23s;--t:0.28s"/><path pathLength="1" class="h" d="M352.2 205.0 Q351.2 201.0 349.2 198.0 M353.2 205.0 Q353.7 200.0 353.2 196.0 M354.2 205.0 Q355.2 202.0 357.2 199.0" style="--d:2.30s;--t:0.28s"/><path pathLength="1" class="h" d="M387.1 205.0 Q386.1 201.0 384.1 198.0 M388.1 205.0 Q388.6 200.0 388.1 196.0 M389.1 205.0 Q390.1 202.0 392.1 199.0" style="--d:2.39s;--t:0.28s"/><path pathLength="1" class="h" d="M422.5 205.0 Q421.5 201.0 419.5 198.0 M423.5 205.0 Q424.0 200.0 423.5 196.0 M424.5 205.0 Q425.5 202.0 427.5 199.0" style="--d:2.47s;--t:0.28s"/><path pathLength="1" class="h" d="M462.8 205.0 Q461.8 201.0 459.8 198.0 M463.8 205.0 Q464.3 200.0 463.8 196.0 M464.8 205.0 Q465.8 202.0 467.8 199.0" style="--d:2.57s;--t:0.28s"/><path pathLength="1" class="h" d="M498.1 205.0 Q497.1 201.0 495.1 198.0 M499.1 205.0 Q499.6 200.0 499.1 196.0 M500.1 205.0 Q501.1 202.0 503.1 199.0" style="--d:2.66s;--t:0.28s"/><path pathLength="1" class="h" d="M522.5 205.0 Q521.5 201.0 519.5 198.0 M523.5 205.0 Q524.0 200.0 523.5 196.0 M524.5 205.0 Q525.5 202.0 527.5 199.0" style="--d:2.71s;--t:0.28s"/><path pathLength="1" class="h" d="M596.8 205.0 Q595.8 201.0 593.8 198.0 M597.8 205.0 Q598.3 200.0 597.8 196.0 M598.8 205.0 Q599.8 202.0 601.8 199.0" style="--d:2.89s;--t:0.28s"/><path pathLength="1" class="h" d="M637.9 205.0 Q636.9 201.0 634.9 198.0 M638.9 205.0 Q639.4 200.0 638.9 196.0 M639.9 205.0 Q640.9 202.0 642.9 199.0" style="--d:2.99s;--t:0.28s"/><path pathLength="1" class="h" d="M685.4 205.0 Q684.4 201.0 682.4 198.0 M686.4 205.0 Q686.9 200.0 686.4 196.0 M687.4 205.0 Q688.4 202.0 690.4 199.0" style="--d:3.11s;--t:0.28s"/><path pathLength="1" class="h" d="M727.8 205.0 Q726.8 201.0 724.8 198.0 M728.8 205.0 Q729.3 200.0 728.8 196.0 M729.8 205.0 Q730.8 202.0 732.8 199.0" style="--d:3.21s;--t:0.28s"/><path pathLength="1" class="h" d="M761.2 205.0 Q760.2 201.0 758.2 198.0 M762.2 205.0 Q762.7 200.0 762.2 196.0 M763.2 205.0 Q764.2 202.0 766.2 199.0" style="--d:3.29s;--t:0.28s"/><path pathLength="1" class="h" d="M465.2 205.0 Q464.2 201.0 462.2 198.0 M466.2 205.0 Q466.7 200.0 466.2 196.0 M467.2 205.0 Q468.2 202.0 470.2 199.0" style="--d:2.58s;--t:0.28s"/><path pathLength="1" class="h" d="M705.6 205.0 Q704.6 201.0 702.6 198.0 M706.6 205.0 Q707.1 200.0 706.6 196.0 M707.6 205.0 Q708.6 202.0 710.6 199.0" style="--d:3.16s;--t:0.28s"/><path pathLength="1" class="o" d="M0 206 C200 204 420 208 620 206 C820 204 1040 208 1240 206" style="--d:0.90s;--t:0.60s"/></svg>
+  </section>
+  <p class="ornament" aria-hidden="true"></p>
+  <section id="om-mig">
+    <div class="wide">
+      <div class="section-head">
+        <span class="sec-doodle" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 28c0-1 1-2 2-2l30 .5c1.5 0 2 1 1.8 2.5-.8 11-4.8 21-16.8 21.5C17 50.8 13 41 12 28z"/><path d="M45.5 31c6.5-1.5 10 2 8.5 7-1.2 4-5.5 5.5-10.5 4.5"/><path d="M46 34c3.2-.8 5 1 4.3 3.4-.6 1.8-2.6 2.6-5.3 2.2"/><path d="M8 53.5c10 2.6 34 2.8 46-.4"/><path d="M13 51.5c8.5 1.6 26 1.7 36 0"/><path d="M14 29.5c9 1.2 21 1.2 30 .2"/><path d="M22 20c-3-3.5 3-6 0-10.5"/><path d="M30 21c-3-5 3-7.5 0-13.5"/><path d="M38 20c-3-3.5 3-6 0-10"/><g class="hatch" stroke-width="0.9"><path d="M40.5 33l-2 7"/><path d="M42.5 34l-2.4 8.5"/><path d="M38 36l-1.2 4.5"/><path d="M36.5 45.5l-3 2.5"/><path d="M39.5 44l-3.5 3.6"/></g></svg></span><span class="smallcaps">Om mig</span>
+        <h2>Från whiteboard till wireframe</h2>
+      </div>
+      <div class="about-grid">
+        <figure class="about-photo"><img src="bilder/portratt.webp" alt="Porträtt av Jenny Kliushnik" width="700" height="933" decoding="async" loading="lazy"><figcaption>Jenny · Stockholm</figcaption></figure>
+        <div class="measure">
+        <p><span class="greet">Hej!</span> Jag heter Jenny. Jag studerar UX-design på Nackademin med fokus på hela den användarcentrerade processen, från research och behovsanalys till prototyper och användningstester. Det jag brinner mest för är att omvandla komplexa, ibland känsliga, problem till lösningar som känns enkla och trygga att använda.</p>
+        <h3>Varför pedagogik och inköp faktiskt är UX-erfarenhet</h3>
+        <p>Innan UX arbetade jag som lärare och studiehandledare, och tidigare med inköp och leveranskoordinering inom solcellsproduktion. Båda rollerna handlade om samma sak som UX gör: förstå vad någon faktiskt behöver, ofta innan de kan formulera det själva, och sedan bygga ett tydligt flöde fram till det. Det märks i hur jag jobbar idag — jag lutar mig ofta åt målgrupper som annars lätt glöms bort i digital design: patienter, elever, anhöriga, besökare med funktionsnedsättning.</p>
+        </div>
+      </div>
+      <div class="about-grid rev">
+        <div class="measure">
+        <h3>Utanför skärmen</h3>
+        <p>Jag hämtar mycket energi från naturen, och när jag är ute har jag nästan alltid kameran med mig. Teckning var mitt favoritämne i skolan, och den visuella sidan — färger, form och små detaljer — är fortfarande det som gör mig gladast i designarbetet. Jag älskar också att laga mat och att resa — nya platser ger mig nya perspektiv på hur människor lever. Och en lugn kväll med en bra film är aldrig fel.</p>
+        <p>Samtidigt är jag noggrann och tar ansvar för helheten. Jag jobbar strukturerat, gärna med post-its på väggen, tills alla delar hänger ihop.</p>
+        </div>
+        <figure class="folder-fig folder">
+          <div class="folder-stage"><svg class="folder-back" viewBox="0 0 260 200" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path class="fb" stroke-width="1.5" d="M12 190 L10 46 C10 41 13 38 18 38 L160 39 L168 28 C170 25 172 23 176 23 L240 24 C245 24 248 27 248 32 L248 188"/><g stroke-width=".6"><path d="M182 32h50"/><path d="M20 50l-2 8"/><path d="M26 50l-2 10"/></g></svg><img class="ph ph-n n1" src="bilder/natur-1.webp" alt="Rosa pioner i en trädgård" width="240" height="300" decoding="async"><img class="ph ph-n n2" src="bilder/natur-2.webp" alt="Ett stenröse på en fjälltopp" width="240" height="300" decoding="async"><img class="ph ph-n n3" src="bilder/natur-3.webp" alt="Ett högt vattenfall mellan klippväggar" width="240" height="300" decoding="async"><img class="ph ph-n n4" src="bilder/natur-4.webp" alt="Solbelysta klippor med gröna ormbunkar" width="240" height="300" decoding="async"><img class="ph ph-n n5" src="bilder/natur-5.webp" alt="Rosa körsbärsblommor på en gren" width="240" height="300" decoding="async"><svg class="folder-front" viewBox="0 0 260 200" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path class="ff" stroke-width="1.6" d="M4 94 C4 89 7 86 12 86 L248 84 C253 84 256 87 255 92 L244 188 C243 193 240 196 235 196 L25 198 C20 198 17 195 16 190 Z"/><path stroke-width="1" d="M80 118 L180 117 L178 146 L82 147 Z"/><text x="130" y="140" text-anchor="middle" class="flabel">Jenny</text><g stroke-width=".6"><path d="M200 160l14 22"/><path d="M208 158l14 24"/><path d="M216 156l13 24"/><path d="M224 154l11 22"/><path d="M232 152l8 16"/><path d="M22 100l-2 12"/><path d="M28 100l-2 16"/><path d="M34 101l-2 10"/><path d="M40 170l-3 18"/><path d="M47 174l-2 14"/></g><path stroke-width=".8" d="M12 92 C80 96 180 95 246 90"/></svg></div>
+          <figcaption>Mina naturbilder</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <p class="ornament" aria-hidden="true"></p>
+  <section id="projekt">
+    <div class="wide">
+    <div class="wide section-head">
+      <span class="sec-doodle" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 19l1-7.5c.1-.9.9-1.5 1.8-1.4L52 12.8c1.1.1 1.8 1 1.7 2.1l-2.1 27.6c-.1 1.1-.9 1.8-2 1.7l-6.4-.6"/><path fill="var(--paper, #FFFFFF)" d="M10 22c0-1 1-1.8 2-1.8L40 19c1.2 0 2 .8 2 2l1 27-8 7.5-21.5 1c-1.2 0-2-.7-2-1.9z"/><path d="M43 48l-7 .5c-.7.1-1 .5-1 1.2v5.8"/><path d="M16 30l19-.7"/><path d="M16 36.5l21-.7"/><path d="M16 43l13-.4"/><g class="hatch" stroke-width="0.9"><path d="M37.5 50.5l2.5-.2"/><path d="M36.8 52.8l1.4-1.2"/><path d="M46 17l3 .3"/><path d="M47 21l3 .3"/><path d="M46.5 25l3 .3"/><path d="M46 29l2.8.2"/></g></svg></span><span class="smallcaps">Projekt</span>
+      <h2>Sex projekt, en röd tråd</h2>
+      <p>Fyra utvalda case först, två kortare längst ned. De flesta gjordes i grupp under utbildningen.</p>
+    </div>
+      <nav class="project-index" aria-label="Snabbnavigering till utvalda projekt">
+        <a href="case-titra.html" class="pi-card">
+          <span class="pi-thumb"><img src="bilder/titra-persona.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">Behovsvalidering · Uppdrag med KI Innovations AB</span>
+            <span class="pi-badge">Grupp</span>
+          </div>
+          <span class="pi-title">Titra Health</span>
+          <span class="pi-dek">Kartlade titreringsprocessen för ADHD-medicin ur patient-, familje- och skolperspektiv.</span>
+          <div class="pi-tools"><span class="pi-tool">Miro</span></div>
+          <span class="pi-meta">69 enkätsvar · 9 djupintervjuer</span>
+        </a>
+        <a href="case-freshly.html" class="pi-card own">
+          <span class="pi-thumb"><img src="bilder/freshly-vyer.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">UI-design · Uppdrag från entreprenör</span>
+            <span class="pi-badge">Helt mitt eget</span>
+          </div>
+          <span class="pi-title">Freshly</span>
+          <span class="pi-dek">Tog lågupplösta researcher-skisser till en färdig, motiverad UI-design för en 10-minutersleverans.</span>
+          <div class="pi-tools"><span class="pi-tool">Figma</span><span class="pi-tool">AI-verktyg</span></div>
+          <span class="pi-meta">5 designade vyer</span>
+        </a>
+        <a href="case-viking.html" class="pi-card">
+          <span class="pi-thumb"><img src="bilder/viking-startsida.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">UX-etik</span>
+            <span class="pi-badge">Grupp + egen prototyp</span>
+          </div>
+          <span class="pi-title">The Viking Museum</span>
+          <span class="pi-dek">Slog hål på hornhjälms-myten och byggde in tillgänglighet från första skiss — inte i efterhand.</span>
+          <div class="pi-tools"><span class="pi-tool">Figma</span><span class="pi-tool">AI-verktyg</span></div>
+          <span class="pi-meta">Tillgänglighet &amp; integritet by design</span>
+        </a>
+        <a href="case-meter.html" class="pi-card">
+          <span class="pi-thumb"><img src="bilder/meter-omslag.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">Webb- &amp; visuell design</span>
+            <span class="pi-badge">Individuellt</span>
+          </div>
+          <span class="pi-title">Meter — Koncept för startsida</span>
+          <span class="pi-dek">Ett designförslag för hälsoappen Meters startsida, byggt kring en enkel idé: din hälsa följer dagens rytm.</span>
+          <div class="pi-tools"><span class="pi-tool">Framer</span></div>
+          <span class="pi-meta">Desktop och mobil</span>
+        </a>
+      </nav>
+      <p class="index-label"><span class="smallcaps">Ytterligare arbete</span></p>
+      <nav class="project-index" aria-label="Snabbnavigering till ytterligare projekt">
+        <a href="case-tv4play.html" class="pi-card">
+          <span class="pi-thumb"><img src="bilder/tv4-postits.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">Tillgänglighet &amp; kvantitativ analys</span>
+            <span class="pi-badge">Grupp</span>
+          </div>
+          <span class="pi-title">TV4 Play</span>
+          <span class="pi-dek">Direktsänd textning ger tillgång till vad som händer — men inte till hur det känns.</span>
+          <div class="pi-tools"><span class="pi-tool">Excel</span><span class="pi-tool">Miro</span></div>
+          <span class="pi-meta">30+ analyserade citat · AI som "Red Team"</span>
+        </a>
+        <a href="case-wingspan.html" class="pi-card">
+          <span class="pi-thumb"><img src="bilder/wingspan-figjam.webp" alt="" loading="lazy" decoding="async"></span>
+          <div class="pi-top">
+            <span class="pi-kicker">UX Research &amp; Analys</span>
+            <span class="pi-badge">Grupp</span>
+          </div>
+          <span class="pi-title">Wingspan</span>
+          <span class="pi-dek">Användbarhetstester visade att budskapet, inte navigeringen, var det verkliga hindret.</span>
+          <div class="pi-tools"><span class="pi-tool">Figma</span><span class="pi-tool">FigJam</span></div>
+          <span class="pi-meta">5 användbarhetstester · 8 gerillatester</span>
+        </a>
+      </nav>
+    </div>
+  </section>
+  <p class="ornament" aria-hidden="true"></p>
+  <section id="omdomen" aria-labelledby="omdomen-rubrik">
+    <div class="wide">
+      <div class="section-head">
+        <span class="smallcaps">Omdömen</span>
+        <h2 id="omdomen-rubrik">Vad andra säger</h2>
+      </div>
+      <div class="quotes">
+        <figure class="quote">
+          <blockquote><p>Du har god förståelse för projektets komplexitet och de många aktörer som påverkas. […] Analysen av samspelet mellan användarbehov och uppdragsgivarens mål är genomtänkt, särskilt där du identifierar möjliga konflikter mellan effektivitet och mänsklig kontakt.</p></blockquote>
+          <figcaption><strong>Lärare på Nackademin</strong>Individuell skriftlig återkoppling på <a href="case-titra.html">Titra Health</a>, kursen Behovsanalys</figcaption>
+        </figure>
+        <figure class="quote">
+          <blockquote><p>En välstrukturerad och visuellt enhetlig presentation med genomtänkta val av färger, typsnitt och layout. […] Överlag en sammanhängande och tydlig analys med välformulerade rekommendationer. Snyggt jobbat!</p></blockquote>
+          <figcaption><strong>Lärare på Nackademin</strong>Återkoppling på gruppens presentation av <a href="case-titra.html">Titra Health</a></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+  <p class="ornament" aria-hidden="true"></p>
+  <section id="kompetens">
+    <div class="wide">
+      <div class="section-head">
+        <span class="sec-doodle" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 38c-1-16 7-27 19-27.5C44 10 52.5 21 51.5 38"/><path d="M16.6 34.5c-.4-12.5 6-20.6 15.4-21 9.4-.3 16.2 8 15.6 21"/><path d="M10 36c0-2.5 2-3.5 4.5-3.2l2.5.2c2 .2 3 1.5 3 3.5V50c0 2.5-1.5 3.5-3.5 3.3L14 53c-2.5-.2-3.7-1.5-3.8-4z"/><path d="M54 36.2c0-2.5-2-3.6-4.5-3.3l-2.5.2c-2 .2-3 1.5-3 3.5l.2 13.4c0 2.4 1.4 3.5 3.4 3.3L50 53c2.5-.3 3.8-1.6 3.8-4z"/><g class="hatch" stroke-width="0.9"><path d="M12.5 37v11.5"/><path d="M14.8 36.2v13.6"/><path d="M47 37v12"/><path d="M49.2 36.5v13"/><path d="M22 18.5l2.5 2"/><path d="M25.5 15.8l1.8 2.3"/></g></svg></span><span class="smallcaps">Kompetens</span>
+        <h2>Verktyg &amp; arbetssätt</h2>
+      </div>
+      <div class="skills-cols">
+        <div class="skill-group">
+          <span class="smallcaps">Research &amp; analys</span>
+          <div class="skill-item"><h4>Intervjuer &amp; enkäter</h4><p>Enkäter med skal- och fritextfrågor och semistrukturerade intervjuer med tre målgrupper: 69 enkätsvar och 9 djupintervjuer. Jag rekryterade respondenter via riktade Facebook-grupper.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-titra.html">Titra Health</a></p></div>
+          <div class="skill-item"><h4>Användbarhetstester</h4><p>Modererade think-aloud-tester på distans, gerillatester och heuristisk utvärdering enligt Nielsen. Jag genomförde ett av testerna och tog fram gruppens arbetsmall för observationer.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-wingspan.html">Wingspan</a></p></div>
+          <div class="skill-item"><h4>Behovsvalidering</h4><p>Netnografisk research med 19 evidenspunkter, Job Stories, HILS-bedömning, value proposition och förståelsetest med fem personer.</p></div>
+          <div class="skill-item"><h4>Analys &amp; syntes</h4><p>Affinity mapping i Miro, kodning av 30+ citat i Excel, card sorting och personas byggda på data.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-titra.html">Titra Health</a>, <a href="case-tv4play.html">TV4 Play</a></p></div>
+        </div>
+        <div class="skill-group">
+          <span class="smallcaps">Design &amp; prototyp</span>
+          <div class="skill-item"><h4>UI-design &amp; designsystem</h4><p>Fem vyer för mobil och tablet med motiverade designval (Hicks lag, Fitts lag, inverted pyramid), 8pt-spacing, typskala och komponenter i Figma.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-freshly.html">Freshly</a></p></div>
+          <div class="skill-item"><h4>Interaktiv prototyp</h4><p>En omdesignad museisajt med quizet "Segla genom sagan", som jag byggde själv från koncept till klickbar prototyp.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-viking.html">The Viking Museum</a></p></div>
+          <div class="skill-item"><h4>Tillgänglighet</h4><p>Tillgänglighetsinställningar överst i navigeringen, textade videor utan autoplay, analys av direktsänd textning och test med Funkify. Den här sajten följer WCAG AAA-kontrast.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-viking.html">The Viking Museum</a>, <a href="case-tv4play.html">TV4 Play</a></p></div>
+        </div>
+        <div class="skill-group">
+          <span class="smallcaps">Etik, samarbete &amp; AI</span>
+          <div class="skill-item"><h4>Privacy by Design &amp; GDPR</h4><p>Analys av samtycke enligt GDPR artikel 7. Mörka mönster i cookie-banner och biljettflöde designades bort.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-viking.html">The Viking Museum</a></p></div>
+          <div class="skill-item"><h4>Facilitering &amp; samarbete</h4><p>Card sorting-workshop, Cards of Humanity, prickröstning och prioritering i grupp. Jag drev processens struktur i TV4-projektet.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-tv4play.html">TV4 Play</a>, <a href="case-wingspan.html">Wingspan</a></p></div>
+          <div class="skill-item"><h4>Kommunikation &amp; pedagogik</h4><p>Min lärarbakgrund hjälpte gruppen att förstå och kommunicera med skolpersonal och unga patienter.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-titra.html">Titra Health</a></p></div>
+          <div class="skill-item"><h4>AI i designprocessen</h4><p>AI som "Red Team" mot gruppens egna slutsatser, och Gemini, ChatGPT och Claude för namn, färger, designsystem och heuristisk granskning, öppet redovisat.</p><p class="skill-proof"><span class="vh">Se projekt: </span>→ <a href="case-tv4play.html">TV4 Play</a>, <a href="case-freshly.html">Freshly</a></p></div>
+        </div>
+      </div>
+      <p class="skill-tools">Verktyg: Figma, FigJam, Miro, Excel, Teams och AI-verktyg som ChatGPT, Claude och Gemini.</p>
+    </div>
+  </section>
+  <p class="ornament" aria-hidden="true"></p>
+  <section id="erfarenhet">
+    <div class="wide">
+      <div class="section-head">
+        <span class="sec-doodle" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 44.5c0-1 .8-1.8 1.8-1.8l38.5-.4c1 0 1.9.8 1.9 1.8v6.6c0 1-.8 1.8-1.8 1.8l-38.6.3c-1 0-1.8-.8-1.8-1.8z"/><path d="M13 42.6l-.1 9.8"/><path d="M45.5 42.4v10"/><path d="M14 33.8c0-1 .8-1.8 1.8-1.8L50 31.2c1 0 1.8.8 1.8 1.8v6.8c0 1-.8 1.8-1.8 1.8l-34.3.6c-1 0-1.7-.8-1.7-1.8z"/><path d="M18.5 32v9.8"/><path d="M46 31.5l.2 9.8"/><path d="M20 23.5c3.5-2.2 8.5-2.6 12.4-.4 3.9-2.2 8.9-1.8 12.4.4v6.3c-3.5-1.8-8.5-2.1-12.4.1-3.9-2.2-8.9-1.8-12.4-.1z"/><path d="M32.4 23.1v6.8"/><path d="M36 12l6 2.8-6 2.6-6-2.6z"/><path d="M33 16.2v2.6c1.8 1.2 4.2 1.2 6 0v-2.6"/><path d="M42 14.8v4.2"/><g class="hatch" stroke-width="0.9"><path d="M22 45.2v5.6"/><path d="M25 45.2v5.6"/><path d="M28 45.1v5.6"/><path d="M27 34.4v5.5"/><path d="M30 34.3v5.5"/><path d="M23.5 25l5 .6"/><path d="M36 25.5l5-.6"/></g></svg></span><span class="smallcaps">Bakgrund</span>
+        <h2>Utbildning &amp; erfarenhet</h2>
+      </div>
+      <div class="timeline-cols">
+        <div>
+          <span class="smallcaps">Utbildning</span>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">UX-designer</div><div class="tl-org">Nackademin</div></div>
+            <div class="tl-date">2025–2027</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Lärarlegitimation</div><div class="tl-org">Stockholms universitet</div></div>
+            <div class="tl-date">2020–2021</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Svenska språket</div><div class="tl-org">JENSEN yrkeshögskola</div></div>
+            <div class="tl-date">2016–2020</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Lärarutbildning</div><div class="tl-org">Moscow State Pedagogical University</div></div>
+            <div class="tl-date">2011–2014</div>
+          </div>
+        </div>
+        <div>
+          <span class="smallcaps">Erfarenhet</span>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">UX-designer</div><div class="tl-org">Nackademin — projektbaserat</div></div>
+            <div class="tl-date">Aug 2025–nu</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Studiehandledare &amp; modersmålslärare</div><div class="tl-org">Sundbybergs stad</div></div>
+            <div class="tl-date">2022–2025</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Samverkans­inlärningsledare</div><div class="tl-org">Stockholms universitet</div></div>
+            <div class="tl-date">2021</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-main"><div class="tl-role">Inköpsspecialist</div><div class="tl-org">Kvant</div></div>
+            <div class="tl-date">2014–2016</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="kontakt">
+    <div class="wide">
+      <span class="sec-doodle" aria-hidden="true"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 9c0-1.5 1.2-2.5 2.7-2.5L42 6.8c1.6 0 2.6 1.1 2.6 2.6L45 55c0 1.6-1.1 2.6-2.7 2.6l-19.5.2c-1.6 0-2.6-1-2.6-2.6z"/><path d="M23.5 15.5l18-.1.3 30.3-18.1.2z"/><path d="M29 11.5l7-.1"/><circle cx="32.7" cy="52" r="1.6"/><path d="M26.5 27c0-2 1.5-3 3.1-3 1.3 0 2.3.8 2.9 2 .6-1.2 1.6-2 2.9-2 1.6 0 3.1 1 3.1 3 0 3.4-4.3 6.3-6 7.3-1.7-1-6-3.9-6-7.3z"/><g class="hatch" stroke-width="0.9"><path d="M41.8 9.5v3.5"/><path d="M42.6 20l-.1 20"/><path d="M22 20v22"/><path d="M34 38.5l4-.1"/><path d="M29 41.5l9-.1"/></g></svg></span><span class="smallcaps">Kontakt</span>
+      <h2>Vill du ha en UX-designer som frågar "förstår du mig?" innan "ser det bra ut?"</h2>
+      <p class="lede">Jag söker en LIA-plats i Stockholm, november 2026 till april 2027, där jag kan omsätta forskning och användarcentrerad design till digitala upplevelser som fler kan lita på.</p>
+      <div class="contact-links">
+        <a href="mailto:jenny.kliushnik@yh.nackademin.se">jenny.kliushnik@yh.nackademin.se</a><button type="button" class="copy-btn" data-copy="jenny.kliushnik@yh.nackademin.se" aria-label="Kopiera e-postadress" title="Kopiera e-postadress" hidden><svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.5V5.2c0-.7.5-1.2 1.2-1.2h5.3l3.5 3.5v8.3c0 .7-.5 1.2-1.2 1.2H15"/><path d="M15.5 4v3.5H19"/><path d="M5 9.2c0-.7.5-1.2 1.2-1.2H14c.6 0 1 .5 1 1.2v9.6c0 .7-.5 1.2-1.2 1.2H6.2c-.7 0-1.2-.5-1.2-1.2z"/></svg><svg class="i-ok" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M8.3 12.2l2.6 2.6 4.9-5.2"/></svg></button><span class="sep">·</span><a href="tel:+46722707692">072-270 76 92</a><button type="button" class="copy-btn" data-copy="072-270 76 92" aria-label="Kopiera telefonnummer" title="Kopiera telefonnummer" hidden><svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.5V5.2c0-.7.5-1.2 1.2-1.2h5.3l3.5 3.5v8.3c0 .7-.5 1.2-1.2 1.2H15"/><path d="M15.5 4v3.5H19"/><path d="M5 9.2c0-.7.5-1.2 1.2-1.2H14c.6 0 1 .5 1 1.2v9.6c0 .7-.5 1.2-1.2 1.2H6.2c-.7 0-1.2-.5-1.2-1.2z"/></svg><svg class="i-ok" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M8.3 12.2l2.6 2.6 4.9-5.2"/></svg></button><span class="sep">·</span><a href="https://www.linkedin.com/in/jenny-kliushnik" target="_blank" rel="noopener">LinkedIn</a><button type="button" class="copy-btn" data-copy="https://www.linkedin.com/in/jenny-kliushnik" aria-label="Kopiera LinkedIn-länk" title="Kopiera LinkedIn-länk" hidden><svg class="i-copy" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.5V5.2c0-.7.5-1.2 1.2-1.2h5.3l3.5 3.5v8.3c0 .7-.5 1.2-1.2 1.2H15"/><path d="M15.5 4v3.5H19"/><path d="M5 9.2c0-.7.5-1.2 1.2-1.2H14c.6 0 1 .5 1 1.2v9.6c0 .7-.5 1.2-1.2 1.2H6.2c-.7 0-1.2-.5-1.2-1.2z"/></svg><svg class="i-ok" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="M8.3 12.2l2.6 2.6 4.9-5.2"/></svg></button><span class="sep">·</span><a href="Jenny_Kliushnik_CV.pdf" target="_blank" rel="noopener">Ladda ner CV</a>
+      </div>
+      <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
+      <footer class="site-footer">© 2026 Jenny Kliushnik · Stockholm, Sverige</footer>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var st=document.getElementById('copy-status');
+  var btns=document.querySelectorAll('.copy-btn');
+  if(!navigator.clipboard||!btns.length) return;
+  Array.prototype.forEach.call(btns,function(b){
+    b.hidden=false;
+    b.addEventListener('click',function(){
+      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function(){
+        b.classList.add('is-copied');
+        if(st) st.textContent='Kopierat: '+b.getAttribute('data-copy');
+        setTimeout(function(){ b.classList.remove('is-copied'); if(st) st.textContent=''; },2500);
+      },function(){ if(st) st.textContent='Det gick inte att kopiera.'; });
+    });
+  });
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('theme-toggle'), d=document.documentElement; if(!b) return;
+  function sync(){ b.setAttribute('aria-pressed', d.getAttribute('data-theme')==='dark'?'true':'false'); }
+  b.hidden=false; sync();
+  b.addEventListener('click',function(){
+    var t=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    d.setAttribute('data-theme',t);
+    try{localStorage.setItem('theme',t);}catch(e){}
+    sync();
+  });
+})();
+</script>
+</body>
+</html>

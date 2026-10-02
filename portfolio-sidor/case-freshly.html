@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<script>(function(){var t=null,d=document.documentElement;try{t=localStorage.getItem("theme");}catch(e){}if(t!=="light"&&t!=="dark"){t=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light";}d.setAttribute("data-theme",t);})();</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="alternate" hreflang="sv" href="https://jennykliushnik.netlify.app/case-freshly.html">
+<link rel="alternate" hreflang="en" href="https://jennykliushnik.netlify.app/en/case-freshly.html">
+<meta name="color-scheme" content="light dark">
+<title>Freshly — Jenny Kliushnik</title>
+<meta name="description" content="Tog lågupplösta researcher-skisser till en färdig, motiverad UI-design för en 10-minutersleverans.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="sv_SE">
+<meta property="og:title" content="Freshly — Jenny Kliushnik">
+<meta property="og:description" content="Tog lågupplösta researcher-skisser till en färdig, motiverad UI-design för en 10-minutersleverans.">
+<meta property="og:url" content="https://jennykliushnik.netlify.app/case-freshly.html">
+<meta property="og:image" content="https://jennykliushnik.netlify.app/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jenny Kliushnik, UX-designer — Gör det komplexa begripligt för fler">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ================= SKALAN =================
+       Snäckpaletten. De fem färgerna ur bilden ligger på steg 200–600.
+       Bilden innehåller ingen färg mörk nog för text — den mörkaste,
+       #777775, ger 3,76:1 mot bakgrunden. Steg 700–1000 fortsätter därför
+       nedåt i OKLab med sandtonens värme, och steg 100 är ett snäckvitt
+       ovanför de fem. Siffran anger mörkhet: 100 ljusast, 1000 mörkast. */
+    --b100:  #F8F8F7;  /* härledd — snäckvitt, kortytor */
+    --b200:  #EBEBEB;  /* palett — sidbakgrund */
+    --b300:  #E0E2E6;  /* palett — sval ljusgrå */
+    --b400:  #C4B3A9;  /* palett — sand */
+    --b500:  #98978E;  /* palett — gråsjögrön */
+    --b600:  #777775;  /* palett — den mörkaste i bilden */
+    --b700:  #605A53;  /* härledd */
+    --b800:  #48433C;  /* härledd */
+    --b900:  #332E28;  /* härledd */
+    --b1000: #221D17;  /* härledd — brödtext */
+
+    /* Sekundär text — steg 800 duger, men den får ett eget namn eftersom
+       rollen är text och inte yta. */
+    --neutral: #48433C;
+
+    /* ---- Accenten: sandtonen ur bilden, mörkad tills den bär text ----
+       #C4B3A9 är den enda kulören bland snäckorna. Ren är den alldeles för
+       ljus för text (1,7:1), så accenten är samma ton nedmörkad i två steg:
+       det ljusare bara över 24 px, det mörkare på allt under. */
+    --gold:      #C0256B;  /* magenta — 4,74:1 mot --paper, AAA över 24 px */
+    --gold-text: #8C1A4E;  /* samma kulör nedmörkad — 7,42:1 / 8,33:1 */
+
+    /* ================= ROLLER =================
+       Allt i stilmallen refererar till namnen nedan, aldrig till skalan
+       direkt. Vill du byta ton på hela sidan räcker det att flytta en roll
+       ett steg upp eller ner. Textfärgerna klarar WCAG AAA: minst 7:1 för
+       text under 24 px, minst 4,5:1 över. */
+    --surface:    var(--b100);   /* kortytor — ljusare än sidan */
+    --paper:      var(--b200);   /* sidbakgrund */
+    --line:       var(--b300);   /* hårfina linjer */
+    --line-strong:var(--b400);   /* tydligare ramar och avdelare */
+    --hover:      var(--b500);   /* kortets ram vid hover */
+    --blue:       var(--gold);      /* accent över 24 px */
+    --blue-text:  var(--gold-text); /* accent under 24 px */
+    --ink-deep:   var(--b900);   /* den mörka avslutningen längst ned */
+    --heading:    var(--b900);   /* rubriker */
+    --ink:        var(--b1000);  /* brödtext — 14,02:1 */
+    --ink-soft:   var(--neutral);/* sekundär text — 8,22:1 */
+
+    --accent: var(--blue-text);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    /* Grotesk för allt som är etikett, siffra eller metadata. Kontrasten mot
+       antikvan är det som gör att sidan läser som satt och inte som en mall. */
+    --font-meta: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'EB Garamond', Georgia, serif;
+    --measure: 640px;
+    --wide: 900px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:112px;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:19px;
+    line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img{max-width:100%; display:block;}
+  a{color:var(--ink); text-decoration:none;}
+  a:hover{text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:4px;}
+  a:hover{color:var(--accent);}
+  a:focus-visible, summary:focus-visible{outline:1.5px solid var(--accent); outline-offset:3px;}
+
+  .skip-link{
+    position:absolute; left:-999px; top:0; background:var(--ink); color:var(--paper);
+    padding:0.8rem 1.2rem; z-index:200;
+  }
+  .skip-link:focus{left:0;}
+
+  h1,h2,h3,h4{
+    font-family:var(--font-display); font-weight:500; margin:0; text-wrap:balance;
+    color:var(--heading);
+    line-height:1.18; letter-spacing:0.003em;
+  }
+
+  .smallcaps{
+    font-family:var(--font-body); font-size:0.78rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:var(--accent); font-weight:500;
+  }
+
+  .measure{max-width:var(--measure); margin-left:auto; margin-right:auto;}
+  .wide{max-width:var(--wide); margin-left:auto; margin-right:auto; padding:0 2rem;}
+  .center{text-align:center;}
+
+  hr.rule{border:none; border-top:1px solid var(--line); margin:0;}
+  .ornament{
+    max-width:var(--wide); margin:0 auto; padding:0 2rem; height:1px;
+  }
+  .ornament::before{
+    content:""; display:block; height:1px; background:var(--line);
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    padding:1.6rem 2rem; text-align:center;
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:50;
+    background:rgba(235,235,235,0.92); backdrop-filter:blur(6px);
+  }
+  .nav-name{
+    font-family:var(--font-display); font-size:1.3rem; letter-spacing:0.02em;
+    color:var(--ink); text-decoration:none; display:block; margin-bottom:0.55rem;
+  }
+  nav.nav-links{display:flex; justify-content:center; flex-wrap:wrap;}
+  nav.nav-links a{
+    font-family:var(--font-body); font-size:0.76rem; letter-spacing:0.13em; text-transform:uppercase;
+    color:var(--ink-soft); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent;
+    transition:border-color 180ms ease, color 180ms ease;
+    margin:0 0.8rem;
+  }
+  nav.nav-links a:hover{color:var(--accent); border-color:var(--accent);}
+
+  /* ---------- ACCENT PER SEKTION ---------- */
+  /* Paletten har en enda accent, så alla case delar den. Vill du skilja dem
+     åt igen räcker det att sätta om --accent per id, t.ex.
+     #case-titra{--accent:var(--blue);} */
+
+  /* ---------- HERO ---------- */
+  .hero{padding:4.2rem 2rem 3.2rem; text-align:center;}
+  .hero-status{
+    display:inline-block; margin:1.8rem 0 0; padding:0.3rem 1rem;
+    font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--blue-text); border:1px solid var(--blue); border-radius:20px;
+  }
+  .hero-anim{animation:rise 800ms ease both;}
+  @keyframes rise{from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);}}
+
+  .hero .smallcaps{display:block; margin-bottom:1.4rem;}
+  .hero h1{
+    font-size:clamp(2.5rem, 5.4vw, 4.1rem); font-weight:500;
+    max-width:21ch; margin:0 auto;
+  }
+  .hero h1 em{font-style:italic; font-weight:400; color:var(--blue);}
+  .hero .lede{
+    max-width:52ch; margin:1.6rem auto 0; color:var(--ink-soft); font-size:1.18rem;
+  }
+
+  .hero-links{margin-top:2rem; font-size:0.95rem;}
+  .hero-links a{margin:0 0.9rem;}
+  .hero-links .sep{color:var(--ink-soft);}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:3.4rem 0;}
+  .section-head{text-align:center; margin-bottom:3.4rem;}
+  .section-head h2{font-size:clamp(1.9rem,3.4vw,2.5rem); font-weight:500;}
+  .section-head .smallcaps{display:block; margin-bottom:1rem;}
+  .section-head p{color:var(--ink-soft); max-width:56ch; margin:1.1rem auto 0;}
+
+  /* ---------- ABOUT ---------- */
+  #om-mig p{color:var(--ink-soft);}
+  #om-mig .measure > p:first-of-type::first-letter{
+    font-family:var(--font-display); font-size:3.6rem; float:left; line-height:0.78;
+    padding-right:0.12em; padding-top:0.06em; color:var(--accent); font-weight:500;
+  }
+  #om-mig h3{font-size:1.25rem; margin:2.2rem 0 0.7rem; font-weight:500;}
+
+  /* ---------- PROJECTS ---------- */
+  .case{padding:5.5rem 0;}
+  .case-intro{
+    text-align:left; margin-bottom:2.6rem;
+    max-width:var(--measure); margin-left:auto; margin-right:auto;
+  }
+  .case-kicker{display:block; margin-bottom:0.9rem;}
+  .case h3{font-size:2.5rem;}
+  .case h3 span.italic{font-style:italic; font-weight:400;}
+  .case-dek{
+    max-width:50ch; margin:1rem 0 0; color:var(--ink-soft); font-size:1.12rem; font-style:italic;
+  }
+
+  .case-body p{color:var(--ink-soft); margin:0 0 1.15rem;}
+  .case-body strong{color:var(--ink); font-weight:500;}
+
+  .case-figure{margin:1.8rem 0 2.2rem;}
+  .case-figure img{
+    width:100%; display:block; border:1px solid var(--line-strong); border-radius:2px;
+  }
+  .case-figure figcaption{
+    text-align:left; font-size:0.85rem; font-style:italic; color:var(--ink-soft);
+    margin-top:0.7rem;
+  }
+  .case-figure-wide{margin:0 0 2.4rem;}
+  .case-figure-wide figcaption{max-width:var(--measure); margin-left:auto; margin-right:auto; margin-top:0.7rem;}
+
+  /* ---------- PROJECT INDEX (SCAN CARDS) ---------- */
+  .project-index{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1.4rem;
+    margin:0 0 4.5rem;
+  }
+  .pi-card{
+    display:flex; flex-direction:column; gap:0.55rem;
+    padding:1.5rem 1.5rem 1.7rem; text-decoration:none;
+    border:1px solid var(--line); border-radius:14px;
+    background:var(--surface);
+    box-shadow:0 1px 2px rgba(34,29,23,0.05), 0 6px 16px -10px rgba(34,29,23,0.22);
+    transition:border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease;
+  }
+  .pi-card:hover, .pi-card:focus-visible{
+    border-color:var(--hover); transform:translateY(-4px);
+    box-shadow:0 2px 4px rgba(34,29,23,0.06), 0 16px 32px -14px rgba(34,29,23,0.32);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pi-card{transition:border-color 200ms ease;}
+    .pi-card:hover, .pi-card:focus-visible{transform:none;}
+  }
+  .pi-top{display:flex; justify-content:space-between; align-items:flex-start; gap:0.6rem;}
+  .pi-kicker{
+    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);
+  }
+  .pi-badge{
+    font-size:0.6rem; letter-spacing:0.05em; text-transform:uppercase; white-space:nowrap;
+    color:var(--ink-soft); border:1px solid var(--accent); border-radius:20px; padding:0.15rem 0.55rem;
+    flex-shrink:0;
+  }
+  .pi-title{
+    font-family:var(--font-display); font-size:1.5rem; color:var(--ink); font-weight:500;
+  }
+  .pi-dek{color:var(--ink-soft); font-size:0.92rem; line-height:1.5; flex-grow:1;}
+  .pi-tools{display:flex; flex-wrap:wrap; gap:0.35rem;}
+  .pi-tool{
+    font-size:0.68rem; color:var(--ink-soft); border:1px solid var(--line); border-radius:20px;
+    padding:0.1rem 0.55rem;
+  }
+  .pi-meta{
+    font-size:0.78rem; color:var(--ink); font-style:italic; padding-top:0.3rem;
+    border-top:1px solid var(--line);
+  }
+
+  .stat-line{
+    display:flex; justify-content:center; flex-wrap:wrap; margin:2.2rem 0;
+    padding:1.6rem 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .stat{text-align:center; margin:0 1.5rem;}
+  .stat .num{font-family:var(--font-display); font-size:2.3rem; color:var(--blue);}
+  .stat .lbl{font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:0.3rem;}
+
+  .role-note{
+    margin:2rem 0; padding-left:1.3rem; border-left:2px solid var(--accent);
+  }
+  .role-note .smallcaps{display:block; margin-bottom:0.5rem;}
+
+  /* Resultatraden under ingressen — stänger kedjan problem → lösning → effekt
+     redan innan läsaren har scrollat in i caset. */
+  .case-result{
+    margin:1.1rem 0 0; font-size:0.95rem; color:var(--ink-soft);
+    font-family:var(--font-body); font-style:normal;
+  }
+  .case-result span{
+    font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--accent); margin-right:0.55rem;
+  }
+
+  /* Utlyft ur den hopfällda delen: det som annars aldrig blir läst. */
+  .insight{
+    margin:2.2rem 0 0; padding:1.4rem 0;
+    border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);
+  }
+  .insight .smallcaps{display:block; margin-bottom:0.55rem;}
+  .insight p{margin:0;}
+
+  .case-nav{
+    display:flex; justify-content:space-between; gap:1.5rem;
+    margin:2.6rem 0 0; font-size:0.8rem; letter-spacing:0.06em;
+  }
+  .case-nav a{text-decoration:none;}
+  .case-nav .spacer{flex:1;}
+
+
+  .index-label{text-align:center; margin:3rem 0 1.4rem;}
+  .more-divider{text-align:center; padding:1rem 2rem 0;}
+  .more-divider-title{
+    font-size:1.6rem; font-weight:500; color:var(--ink-soft);
+  }
+  .more-divider p{color:var(--ink-soft); font-size:0.95rem; margin:0.6rem 0 0;}
+  .role-note p{margin:0; color:var(--ink-soft); font-style:italic;}
+
+  details.more{margin-top:1.6rem; text-align:left;}
+  details.more summary{
+    cursor:pointer; font-family:var(--font-body); font-size:0.85rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--accent); list-style:none; text-align:left;
+  }
+  details.more summary::-webkit-details-marker{display:none;}
+  details.more[open] summary{margin-bottom:1.4rem;}
+  details.more .more-inner{border-top:1px solid var(--line); padding-top:1.6rem;}
+  details.more h4{font-size:1.15rem; font-weight:500; margin:1.5rem 0 0.5rem; font-family:var(--font-display);}
+  details.more h4:first-child{margin-top:0;}
+  details.more p, details.more li{color:var(--ink-soft);}
+  details.more ul{margin:0.4rem 0 1rem; padding-left:1.3rem;}
+
+  .case-links{text-align:left; margin-top:1.8rem; font-size:0.85rem; letter-spacing:0.06em;}
+
+  /* ---------- SKILLS ---------- */
+  #kompetens{border-top:1px solid var(--line-strong); border-bottom:1px solid var(--line-strong);}
+  .skills-cols{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:2.6rem 3rem; max-width:var(--wide); margin:0 auto;
+  }
+  .skill-group{padding:0;}
+  .skill-group > .smallcaps{
+    display:block; padding-bottom:0.7rem; border-bottom:2px solid var(--blue);
+  }
+  .skill-item{padding:1.1rem 0; border-top:1px solid var(--line);}
+  .skill-item:first-of-type{border-top:none; padding-top:1.1rem;}
+  .skill-item h4{font-size:1.05rem; font-weight:600; margin-bottom:0.35rem;}
+  .skill-item p{margin:0; font-size:0.92rem; color:var(--ink-soft); font-family:var(--font-body);}
+
+  /* ---------- TIMELINE ---------- */
+  .timeline-cols{
+    display:grid; grid-template-columns:1fr 1fr; gap:0 4rem; max-width:var(--wide); margin:0 auto;
+  }
+  .timeline-cols > div > .smallcaps{display:block; margin-bottom:1.3rem; text-align:center;}
+  .tl-item{
+    display:flex; justify-content:space-between; gap:1rem; padding:0.95rem 0;
+    border-top:1px solid var(--line); font-size:0.95rem;
+  }
+  .tl-main .tl-role{color:var(--ink); font-style:italic;}
+  .tl-main .tl-org{color:var(--ink-soft); font-size:0.88rem;}
+  .tl-date{color:var(--ink-soft); font-size:0.82rem; white-space:nowrap; padding-top:0.1rem;}
+
+  /* ---------- CONTACT ---------- */
+  /* Mörk avslutning. Alla värden nedan är steg ur samma ramp, kontrollerade
+     mot --b900: b100 ger 12,65:1, b200 11,28:1, sanden b400 6,64:1. */
+  #kontakt{background:var(--ink-deep); color:var(--b200); text-align:center;}
+  #kontakt .smallcaps{color:var(--b400);}
+  #kontakt h2{color:var(--b100); font-size:clamp(2rem,4.2vw,3rem); max-width:24ch; margin:1.2rem auto 0;}
+  #kontakt p.lede{color:var(--b300); max-width:48ch; margin:1.4rem auto 0; font-size:1.1rem;}
+  #kontakt .contact-links{margin-top:2.4rem; font-size:1.05rem;}
+  #kontakt .contact-links a{color:var(--b100); margin:0 1rem;}
+  #kontakt .contact-links a:hover{color:var(--b400);}
+  #kontakt .sep{color:var(--b500);}
+  footer.site-footer{
+    padding:2.4rem 0 0.5rem; font-size:0.78rem; color:var(--b300); letter-spacing:0.06em;
+  }
+
+
+  /* ---------- CASE-SIDA ---------- */
+  .case-page{padding:3.5rem 2rem 0;}
+  .case-back{
+    max-width:var(--wide); margin:0 auto 2.4rem; font-size:0.82rem; letter-spacing:0.06em;
+  }
+  .case-back a{text-decoration:none;}
+  .case-cta{
+    margin-top:5rem; padding:3.4rem 2rem 1rem;
+    background:var(--ink-deep); color:var(--b200);
+  }
+  .case-cta .measure{margin:0 auto; text-align:center;}
+  .case-cta .smallcaps{display:block; margin-bottom:0.9rem; color:var(--b400);}
+  .case-cta p{margin:0; color:var(--b300);}
+  .case-cta a{color:var(--b100);}
+  .case-cta a:hover{color:var(--b400);}
+
+
+  /* ---------- METATYPOGRAFI ---------- */
+  .smallcaps, .pi-kicker, .pi-badge, .pi-tool, .pi-meta, .stat .lbl,
+  .case-result span, .case-nav, .tl-date, .hero-status, nav.nav-links a,
+  .skip-link, footer.site-footer, .case-back, .index-label, .more-divider p{
+    font-family:var(--font-meta);
+    font-feature-settings:"tnum" 1;
+  }
+  .smallcaps{font-weight:500; letter-spacing:0.14em; font-size:0.72rem;}
+  .pi-kicker{font-weight:500; font-size:0.63rem; letter-spacing:0.12em;}
+  .pi-badge, .pi-tool{font-weight:500; font-size:0.62rem; letter-spacing:0.08em;}
+  .pi-meta{font-style:normal; font-size:0.72rem; letter-spacing:0.02em;}
+  .stat .lbl{font-weight:500; font-size:0.66rem; letter-spacing:0.1em;}
+  .case-result span{font-weight:600;}
+  nav.nav-links a{font-size:0.72rem; letter-spacing:0.1em; font-weight:500;}
+  .tl-date{font-size:0.74rem; letter-spacing:0.02em;}
+  .case-nav{font-size:0.72rem; letter-spacing:0.06em;}
+  .case-back{font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;}
+
+  /* ---------- ASYMMETRISKT RUTNÄT PÅ CASE ----------
+     Textspalten ligger vänsterställd i den breda ytan i stället för centrerad.
+     Den tomma högermarginalen är avsiktlig — där ligger numret, och dit
+     sträcker sig de breda bilderna. */
+  .case > .wide{position:relative;}
+  .case > .wide > *{max-width:var(--measure); margin-left:0; margin-right:auto;}
+  .case > .wide > .case-figure-wide{max-width:none; margin-right:0;}
+  .case .measure{max-width:var(--measure); margin-left:0; margin-right:auto;}
+  .case-figure-wide figcaption{
+    max-width:var(--measure); margin-left:0; margin-right:auto;
+  }
+
+
+
+  @media (max-width:860px){
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    html{scroll-padding-top:96px;}
+    body{font-size:17.5px;}
+    nav.nav-links{gap:1rem;}
+    .skills-cols{grid-template-columns:1fr 1fr;}
+    .timeline-cols{grid-template-columns:1fr; gap:3rem 0;}
+    .stat-line{gap:1.8rem;}
+    .case h3{font-size:2rem;}
+    .project-index{grid-template-columns:1fr 1fr; gap:1rem;}
+  }
+  @media (max-width:520px){
+    .skills-cols{grid-template-columns:1fr;}
+    .wide{padding:0 1.4rem;}
+    .hero{padding:3rem 1.4rem 2.4rem;}
+    .project-index{grid-template-columns:1fr;}
+  }
+
+
+  /* ---------- SPRÅKFLAGGA & MÖRKT LÄGE ---------- */
+  .vh{position:absolute!important; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+  nav.nav-links a.lang-switch, .theme-toggle{display:inline-flex; align-items:center;}
+  nav.nav-links a.lang-switch{border-left:1px solid var(--line-strong); padding-left:1.1rem; margin-left:0.2rem; border-bottom:none;}
+  .flag{width:22px; height:14px; display:block; border-radius:2px; box-shadow:0 0 0 1px var(--line-strong);}
+  .theme-toggle{
+    background:none; border:0; padding:0.2rem; margin:0; cursor:pointer; color:var(--ink-soft);
+    border-radius:6px; line-height:0;
+  }
+  .theme-toggle .ico{width:20px; height:20px;}
+  .theme-toggle:hover{color:var(--accent);}
+  .theme-toggle:focus-visible{outline:1.5px solid var(--accent); outline-offset:3px;}
+  .theme-toggle .sun{display:none;}
+  :root[data-theme="dark"] .theme-toggle .sun{display:block;}
+  :root[data-theme="dark"] .theme-toggle .moon{display:none;}
+
+  /* Mörkt läge: bara rollerna byts. Skalan (b100–b1000) lämnas orörd, så att
+     det mörka kontaktblocket fortsätter att ha ljus text. Kontrast mot --paper:
+     brödtext 14:1, sekundär text 9,6:1, accenttext 9,1:1, accent över 24 px 5,9:1. */
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --surface:#2A2621; --paper:#1E1B17; --line:#3A352F; --line-strong:#5A534A; --hover:#8A8176;
+    --heading:#F4F1EC; --ink:#ECE8E2; --neutral:#C9C1B6; --ink-deep:#131110;
+    --gold:#E76FA6; --gold-text:#F2A7C8;
+    --moss:#9AA888; --moss-soft:#737E66;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface:#2A2621; --paper:#1E1B17; --line:#3A352F; --line-strong:#5A534A; --hover:#8A8176;
+    --heading:#F4F1EC; --ink:#ECE8E2; --neutral:#C9C1B6; --ink-deep:#131110;
+    --gold:#E76FA6; --gold-text:#F2A7C8;
+    --moss:#9AA888; --moss-soft:#737E66;
+    }
+  }
+  :root[data-theme="dark"] header.site-nav{background:rgba(30,27,23,0.92);}
+  :root[data-theme="dark"] .obj svg, :root[data-theme="dark"] .sec-doodle{color:var(--ink-soft);}
+  :root[data-theme="dark"] .obj:hover svg, :root[data-theme="dark"] .obj:focus-visible svg{color:var(--ink);}
+  :root[data-theme="dark"] .pi-thumb{background:var(--line);}
+  :root[data-theme="dark"] .pi-card{box-shadow:0 1px 2px rgba(0,0,0,0.3), 0 6px 16px -10px rgba(0,0,0,0.6);}
+  :root[data-theme="dark"] .landscape .ground{stroke:var(--line-strong);}
+  :root[data-theme="dark"] img{filter:brightness(0.92);}
+
+  /* ================= TURKOS PALETT (från Jennys Figma-skiss) =================
+     Vit bakgrund, gråskala #FFFFFF–#242424 och turkos #CDF9FD–#051E1F.
+     Kontrast mot vitt: brödtext 15,5:1, sekundär text 9,9:1, accenttext 8:1,
+     stor accent 7:1. I mörkt läge används de mörkaste turkosa stegen som yta. */
+  :root{
+    --b100:#FFFFFF; --b200:#FFFFFF; --b300:#D6D6D6; --b400:#AFAFAF; --b500:#898989;
+    --b600:#656565; --b700:#434343; --b800:#343434; --b900:#242424; --b1000:#1B1B1B;
+    --surface:#F4FEFF; --paper:#FFFFFF; --line:#D6D6D6; --line-strong:#AFAFAF; --hover:#42B1B8;
+    --heading:#242424; --ink:#242424; --neutral:#434343; --ink-deep:#123E41;
+    --gold:#216266; --gold-text:#194F52;
+    --tint:#CDF9FD; --tint-strong:#53DBE4; --flower:#656565;
+  }
+  header.site-nav{background:rgba(205,249,253,0.94);}
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --surface:#0E2C2E; --paper:#051E1F; --line:#123E41; --line-strong:#216266; --hover:#42B1B8;
+    --heading:#F0FDFE; --ink:#E6F4F5; --neutral:#B9CFD1; --ink-deep:#020F10;
+    --gold:#53DBE4; --gold-text:#8AE8EE; --tint:#123E41; --flower:#4F8A8E;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme:dark;
+      --surface:#0E2C2E; --paper:#051E1F; --line:#123E41; --line-strong:#216266; --hover:#42B1B8;
+      --heading:#F0FDFE; --ink:#E6F4F5; --neutral:#B9CFD1; --ink-deep:#020F10;
+      --gold:#53DBE4; --gold-text:#8AE8EE; --tint:#123E41; --flower:#4F8A8E;
+    }
+  }
+  :root[data-theme="dark"] header.site-nav{background:rgba(5,30,31,0.94);}
+  :root[data-theme="dark"] img{filter:none;}
+  #kontakt .smallcaps, .case-cta .smallcaps{color:#53DBE4;}
+  #kontakt .contact-links a:hover, .case-cta a:hover{color:#CDF9FD;}
+  .pi-card:hover, .pi-card:focus-visible{border-color:var(--hover);}
+
+  /* ---------- BLOMMOR ----------
+     Bilderna används som mask, så linjerna får färg från --flower och byter
+     färg automatiskt i mörkt läge. Rent dekorativa. */
+  .flower{
+    position:absolute; pointer-events:none; z-index:0;
+    background:var(--flower);
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-size:contain; mask-size:contain;
+  }
+  .flower.left{top:0; left:0; width:clamp(120px,16vw,250px); aspect-ratio:700/827;
+    -webkit-mask-image:url("bilder/blommor-vanster.webp"); mask-image:url("bilder/blommor-vanster.webp"); -webkit-mask-position:top left; mask-position:top left;}
+  .flower.right{bottom:0; right:0; width:clamp(120px,16vw,250px); aspect-ratio:700/1006;
+    -webkit-mask-image:url("bilder/blommor-hoger.webp"); mask-image:url("bilder/blommor-hoger.webp"); -webkit-mask-position:bottom right; mask-position:bottom right;}
+  .hero-stage, .case-page > *:not(.flower){position:relative; z-index:1;}
+  .case-page{position:relative; overflow:hidden;}
+
+  /* ---------- NAMNET I SKRIVSTIL ---------- */
+  .hero-script{
+    display:block; font-family:'Alex Brush', 'Segoe Script', cursive; font-weight:400;
+    font-size:clamp(2.4rem,5vw,3.4rem); line-height:1.1; color:var(--heading); margin:0 0 0.6rem;
+  }
+
+  /* ---------- KOPIERA-KNAPPAR ---------- */
+  .copy-btn{
+    display:inline-grid; place-items:center; width:34px; height:34px; margin:0 0.2rem 0 -0.5rem;
+    border:0; border-radius:10px; background:transparent; color:inherit; cursor:pointer; vertical-align:middle;
+    transition:background-color 160ms ease;
+  }
+  .copy-btn svg{width:18px; height:18px; grid-area:1/1;}
+  .copy-btn .i-ok{display:none;}
+  .copy-btn:hover{background:rgba(255,255,255,0.14);}
+  .copy-btn:focus-visible{outline:1.5px solid #CDF9FD; outline-offset:2px;}
+  .copy-btn.is-copied{background:#53DBE4; color:#051E1F;}
+  .copy-btn.is-copied .i-copy{display:none;}
+  .copy-btn.is-copied .i-ok{display:block;}
+
+  .case-page .flower{opacity:0.72;}
+  .case-page .flower.left{width:clamp(90px,11vw,170px);}
+  .case-page .flower.right{width:clamp(90px,11vw,170px); bottom:-1rem;}
+  @media (max-width:760px){ .case-page .flower.left, .case-page .flower.right{width:70px;} }
+
+  /* ---------- HOVER-FIXAR ----------
+     1) Inga dubbla understrykningar: kort och föremål har redan egen markering.
+     2) Alla sex föremål rör sig vid hover, även de som har en grundlutning. */
+  .obj:hover, .obj:focus-visible, .pi-card:hover, .pi-card:focus-visible{text-decoration:none;}
+  .hero-objects.left .obj:hover svg, .hero-objects.left .obj:focus-visible svg,
+  .hero-objects.right .obj:hover svg, .hero-objects.right .obj:focus-visible svg{
+    transform:translateY(-5px) rotate(-7deg);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-objects.left .obj:hover svg, .hero-objects.left .obj:focus-visible svg,
+    .hero-objects.right .obj:hover svg, .hero-objects.right .obj:focus-visible svg{transform:none;}
+  }
+
+  /* ---------- SIDHUVUD: namnet i vänstra hörnet, menyn till höger ---------- */
+  header.site-nav{display:flex; align-items:center; justify-content:space-between; gap:1rem 2rem; flex-wrap:wrap; text-align:left; padding:1.1rem 2.2rem;}
+  .nav-name{margin:0; white-space:nowrap;}
+  nav.nav-links{justify-content:flex-end; align-items:center; row-gap:0.4rem;}
+  nav.nav-links a:first-child{margin-left:0;}
+  @media (max-width:860px){
+    header.site-nav{flex-direction:column; align-items:flex-start; gap:0.5rem; padding:0.9rem 1.2rem;}
+    nav.nav-links{justify-content:flex-start; gap:0.35rem 0;}
+    nav.nav-links a{margin:0 1.1rem 0 0;}
+  }
+
+  /* ---------- Freshly: före/efter och annoterade vyer ---------- */
+  .case-more h4{font-family:var(--font-display); font-size:1.35rem; font-weight:500; margin:2.4rem 0 0.6rem;}
+  .case-more p{margin:0 0 1rem;}
+  .case-duo{display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; align-items:start;}
+  .case-duo figcaption{grid-column:1 / -1;}
+  .case-figure a.zoom{display:block; border-radius:8px; overflow:hidden; border:1px solid var(--line); cursor:zoom-in; background:#fff;}
+  .case-figure a.zoom img{width:100%; height:auto; display:block;}
+  .case-figure a.zoom:hover{border-color:var(--hover);}
+  .case-figure a.zoom:focus-visible{outline:1.5px solid var(--accent); outline-offset:3px;}
+  @media (max-width:760px){ .case-duo{grid-template-columns:1fr;} }
+
+  /* Länkar till designsystemet */
+  .case-live{margin:1.2rem 0 0; display:flex; flex-wrap:wrap; gap:0.8rem;}
+  .case-live a{display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--font-meta); font-size:0.82rem; font-weight:500; letter-spacing:0.03em;
+    color:var(--accent); border:1.5px solid var(--accent); border-radius:999px; padding:0.6rem 1.2rem; text-decoration:none;}
+  .case-live a:hover{background:var(--tint); text-decoration:none;}
+  .case-live a.ghost{border-color:var(--line-strong); color:var(--ink-soft);}
+  .case-live a:focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+  .case-figure img{height:auto;}
+</style>
+</head>
+<body>
+<a href="#innehall" class="skip-link">Hoppa till innehåll</a>
+
+<header class="site-nav">
+  <a href="index.html" class="nav-name">Jenny Kliushnik</a>
+  <nav class="nav-links" aria-label="Huvudnavigation">
+    <a href="index.html#om-mig">Om mig</a>
+    <a href="index.html#projekt">Projekt</a>
+    <a href="index.html#kompetens">Kompetens</a>
+    <a href="index.html#erfarenhet">Bakgrund</a>
+    <a href="index.html#kontakt">Kontakt</a>
+    <a href="en/case-freshly.html" class="lang-switch" lang="en" hreflang="en" title="English"><svg class="flag" viewBox="0 0 60 30" aria-hidden="true" focusable="false"><clipPath id="uk-s"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="uk-t"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#uk-s)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-t)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg><span class="vh">English</span></a>
+    <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false" title="Mörkt läge" hidden><svg class="ico moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 14.6c-1 .4-2.1.6-3.2.6-4.6 0-8.2-3.7-8.2-8.2 0-1.2.2-2.3.7-3.3C5.2 4.9 2.8 8.2 2.9 12.1c.1 5 4.2 9 9.2 9 3.4 0 6.3-1.9 7.4-6.5z"/><path d="M17 4.2l.4 1.2 1.2.4-1.2.4-.4 1.2-.4-1.2-1.2-.4 1.2-.4z"/></svg><svg class="ico sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.2c2.8-.1 4.9 2 4.9 4.8s-2.1 4.9-4.9 4.9-4.8-2.2-4.8-4.9 2-4.7 4.8-4.8z"/><path d="M12 2.3v2M12 19.8v2M2.3 12h2M19.8 12h2M5.1 5.1l1.4 1.4M17.5 17.5l1.4 1.4M5.1 18.9l1.5-1.4M17.4 6.6l1.5-1.5"/></svg><span class="vh">Mörkt läge</span></button>
+  </nav>
+</header>
+
+<main id="innehall">
+  <section class="case-page">
+    <p class="case-back"><a href="index.html#projekt">← Alla projekt</a></p>
+    <article class="case">
+      <div class="wide">
+        <div class="case-intro">
+          <span class="smallcaps case-kicker">Individuell slutuppgift, UI-designkursen · Uppdrag från entreprenör</span>
+          <h3>Freshly</h3>
+          <p class="case-dek">En entreprenör ville konkurrera med foodora Market och Mathem Express: matvaror levererade av cyklister från "dark stores" inom tio minuter. Mitt uppdrag var att ta en researchers lågupplösta skisser till en färdig, motiverad UI-design.</p>
+          <p class="case-result"><span>Resultat</span>Fem vyer och ett designsystem som en utvecklare kan bygga en MVP från, med Recipe Bundle som beslutsgenväg: alla ingredienser i ett klick, totalpriset uppdaterat i realtid.</p>
+        </div>
+
+        <figure class="case-figure case-figure-wide">
+          <a href="bilder/freshly-vyer.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-vyer.webp" alt="Fem skärmar ur Freshly-appen: startsida med måltidspaket, produktsida för avokado, receptsida för pasta carbonara med kryssrutor för ingredienser och totalpris, temat Italienska klassiker och en översikt med måltidspaket, kategorier och filter" width="1800" height="789"></a>
+          <figcaption>De fem vyerna i den uppdaterade, tillgängliga versionen: startsida, produktsida, recept, tema och översikt.</figcaption>
+        </figure>
+
+        <div class="measure">
+          <div class="case-body">
+            <p>Uppdraget kom med ett skarpt affärsvillkor: en genomsnittlig order behövde nå 150 kr för att gå runt. En anlitad user researcher hade redan tagit fram lågupplösta wireframes över tre huvudflöden — leveransadress, kärnupplevelsen och varukorgen — men tagit jobbet så långt hen kände sig bekväm med. Mitt uppdrag var att ta över därifrån: applicera ett UI-lager, motivera varje designval, och leverera en design en utvecklare kunde bygga en MVP från.</p>
+          </div>
+        </div>
+
+        <figure class="case-figure case-figure-wide">
+          <a href="bilder/freshly-wireframes.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-wireframes.webp" alt="Researcherns lågupplösta wireframes i tre flöden: leveransadress, kärnupplevelsen och varukorgen, med en handritad skiss av adressflödet" width="1800" height="1013"></a>
+          <figcaption>Utgångsläget: researcherns lågupplösta wireframes för leveransadress, kärnupplevelsen och varukorgen. Härifrån tog jag över.</figcaption>
+        </figure>
+
+        <div class="measure">
+          <div class="stat-line">
+            <div class="stat"><div class="num">5</div><div class="lbl">Designade vyer</div></div>
+            <div class="stat"><div class="num">150 kr</div><div class="lbl">Break even per order</div></div>
+            <div class="stat"><div class="num">10 min</div><div class="lbl">Leveranslöfte</div></div>
+          </div>
+
+          <div class="role-note">
+            <span class="smallcaps">Min roll</span>
+            <p>Individuellt uppdrag — jag tog över efter en researchers lågupplösta wireframes och ansvarade själv för hela UI-designen: visuell riktning, designsystem, samtliga vyer (mobil och tablet) och den skriftliga motiveringen av varje designval.</p>
+          </div>
+
+          <div class="case-more">
+            <h4>Designprinciper bakom varje vy</h4>
+              <p><strong>Inverted pyramid:</strong> det viktigaste innehållet — ett färdigt måltidspaket för 150 kr — ligger överst på startsidan, eftersom användare skannar en skärm snarare än läser ord för ord. <strong>Hicks lag:</strong> färdiga måltidspaket erbjuds istället för ett öppet sortiment, vilket minskar antalet val och sänker beslutströttheten. <strong>Fitts lag:</strong> primära köpknappar är stora och placerade i tumzonen, både på mobil och tablet. <strong>Recognition over recall:</strong> kategorier kombinerar ikon och text. <strong>Chunking:</strong> ett 8pt-spacingsystem (8/16/24/32/48) skapar tydlig rytm mellan element som hör ihop och sektioner som inte gör det.</p>
+          </div>
+        </div>
+
+        <figure class="case-figure case-figure-wide case-duo">
+          <a href="bilder/freshly-start-annoterad.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-start-annoterad.webp" alt="Startsidan med annoteringar: inverted pyramid och skanning, Hicks lag och affärsmål, 8pt-system, chunking och bottennavigering" width="1600" height="1720"></a>
+          <a href="bilder/freshly-produkt-annoterad.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-produkt-annoterad.webp" alt="Produktsidan för avokado med annoteringar om bildhantering, accentfärg, pris med hög kontrast, dragspel för produktfakta och sektionen Liknande varor" width="1600" height="1511"></a>
+          <figcaption>Startsidan och produktsidan med mina annoteringar från rapporten. Klicka på en bild för att se den i full storlek.</figcaption>
+        </figure>
+
+        <div class="measure">
+          <div class="case-more">
+            <h4>Recipe Bundle — en beslutsgenväg</h4>
+              <p>Produktsidan för recept löser beslutströtthet genom att låta användaren lägga till alla ingredienser för ett recept med ett klick, med totalpriset uppdaterat i realtid när ingredienser väljs bort — full kostnadskontroll utan att behöva räkna själv.</p>
+            <h4>Adaptivitet: mobil till tablet</h4>
+              <p>På tablet flyttas navigeringen till en sidopanel för att utnyttja bredden och stödja tvåhands-användning, med ett multikolumn-layout istället för en lång, staplad rad. "Visa alla"-knappar placeras ute i kanterna, i tumzonen för hur man vanligtvis håller en tablet.</p>
+          </div>
+        </div>
+
+        <figure class="case-figure case-figure-wide">
+          <a href="bilder/freshly-tablet-annoterad.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-tablet-annoterad.webp" alt="Tabletversionen av startsidan med sidopanel för navigering, måltider och kategorier, med annoteringar" width="1600" height="1440"></a>
+          <figcaption>Tabletversionen: navigeringen flyttar till en sidopanel och innehållet får fler kolumner.</figcaption>
+        </figure>
+
+        <div class="measure">
+          <div class="case-more">
+            <h4>Designsystem</h4>
+              <p>Primärfärg #3ACF88 (färskhet, energi) och accent #FC499E (favoriter och kampanjer, utan att konkurrera med köpknapparna), typsnittet Inter för hög läsbarhet på alla skärmstorlekar, och en spacing-skala i fem steg. Målet: att en annan designer eller utvecklare enkelt ska kunna ta över och bygga vidare.</p>
+          </div>
+        </div>
+
+        <figure class="case-figure case-figure-wide">
+          <a href="bilder/freshly-designsystem.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-designsystem.webp" alt="Översikt över Freshlys designsystem: logotyp, färgpalett, typografi med Inter, spacing och grid, komponenter som knappar och produktkort, tre mobilskärmar med annoteringar, tabletvy och sju UX-principer" width="1800" height="2405"></a>
+          <figcaption>Designsystemet i översikt: färger, typografi, spacing, komponenter, mobil- och tabletvyer och de UX-principer designen bygger på — i den uppdaterade, tillgängliga versionen.</figcaption>
+        </figure>
+        <p class="case-live" style="max-width:var(--measure);margin-left:auto;margin-right:auto"><a href="freshly-designsystem.html">Se hela designsystemet <span aria-hidden="true">→</span></a><a href="freshly-designsystem.pdf" class="ghost" download>Ladda ner som PDF</a></p>
+
+        <div class="measure">
+          <div class="case-more">
+            <h4>AI i designprocessen</h4>
+              <p>AI användes i flera konkreta steg och redovisades öppet i rapporten: Gemini för att generera namn- och logotypförslag, ChatGPT för att föreslå en färgpalett som förmedlar färskhet, Claude för att generera ett komplett designsystem utifrån gränssnittets komponenter, och Claude igen för en heuristisk granskning av den färdiga designen. Förslag som inte höll måttet — t.ex. en logotyp som inte fungerade i appens gränssnitt — förkastades medvetet.</p>
+          </div>
+
+          <div class="insight">
+            <span class="smallcaps">Vad jag hade gjort annorlunda</span>
+            <p>Med mer tid hade jag velat rita fler skärmar för ett komplett användarflöde hela vägen till checkout, arbetat vidare med tillgänglighetsanpassningen, och investerat mer tid i ett striktare komponentbibliotek.</p>
+          </div>
+        </div>
+
+        <div class="measure">
+          <div class="case-more">
+            <h4>Vidareutveckling: en tillgänglig version</h4>
+            <p>Efter kursen gick jag tillbaka till Freshly och gjorde två av sakerna jag skrev ovan: ett komplett flöde hela vägen till betalning, och tillgänglighet. Med designsystemet som grund rättade jag kontrasten så att all text klarar WCAG, gjorde om knappar, fält och kryssrutor till riktiga formulärelement och ritade korg, leverans och betalning.</p>
+            <p>I kassan döljs bottenmenyn så att fokus ligger på köpet, och dricksen till budet är frivillig och förvald till "Ingen" — ett förvalt tillägg på notan vore ett mörkt mönster.</p>
+          </div>
+        </div>
+
+        <figure class="case-figure case-figure-wide">
+          <a href="bilder/freshly-v2-kassa.webp" target="_blank" rel="noopener" class="zoom"><img loading="lazy" decoding="async" src="bilder/freshly-v2-kassa.webp" alt="Tre nya skärmar för köpflödet: korgen med tre varor och totalsumma 223 kronor, kassan med leveransadress och leveranstid, och betalningen med Swish, kort eller faktura och frivillig dricks" width="1338" height="957"></a>
+          <figcaption>Det nya köpflödet: korg, leverans och betalning.</figcaption>
+        </figure>
+        <p class="case-live" style="max-width:var(--measure);margin-left:auto;margin-right:auto"><a href="freshly-mockups.html">Se alla mockups <span aria-hidden="true">→</span></a><a href="freshly-mockups.pdf" class="ghost" download>Mockups som PDF</a></p>
+      </div>
+    </article>
+  </section>
+  <div class="case-cta">
+    <div class="measure">
+      <span class="smallcaps">Söker LIA i Stockholm, nov 2026 – apr 2027</span>
+      <p>Vill du veta mer om hur jag arbetar? Hör av dig på <a href="mailto:jenny.kliushnik@yh.nackademin.se">jenny.kliushnik@yh.nackademin.se</a> eller läs <a href="index.html#om-mig">mer om mig</a>.</p>
+    </div>
+    <footer class="site-footer">© 2026 Jenny Kliushnik · Stockholm, Sverige</footer>
+  </div>
+</main>
+
+<script>
+(function(){
+  var b=document.getElementById('theme-toggle'), d=document.documentElement; if(!b) return;
+  function sync(){ b.setAttribute('aria-pressed', d.getAttribute('data-theme')==='dark'?'true':'false'); }
+  b.hidden=false; sync();
+  b.addEventListener('click',function(){
+    var t=d.getAttribute('data-theme')==='dark'?'light':'dark';
+    d.setAttribute('data-theme',t);
+    try{localStorage.setItem('theme',t);}catch(e){}
+    sync();
+  });
+})();
+</script>
+</body>
+</html>
